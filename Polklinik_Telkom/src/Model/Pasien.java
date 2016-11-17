@@ -99,8 +99,14 @@ public class Pasien {
     public void setObat(Obat obat) {
         this.obat.add(obat);
     }
-    
-    
+
+    public String getKeluhan() {
+        return keluhan;
+    }
+
+    public String getDiagnosa() {
+        return diagnosa;
+    }
     
     
 }

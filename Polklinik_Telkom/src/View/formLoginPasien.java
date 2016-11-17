@@ -54,9 +54,9 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
         label_Login.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         label_Login.setText("Login");
 
-        jLabel_kdpas.setText("Kode Pasien");
+        jLabel_kdpas.setText("Kode Pasien :");
 
-        jLabel_pwd.setText("Password");
+        jLabel_pwd.setText("Password     :");
 
         TextField_kdpas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,16 +79,13 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
                 .addComponent(jButton_Kembali)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 122, Short.MAX_VALUE)
+                .addGap(0, 109, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel_kdpas)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel_pwd)
-                                .addGap(32, 32, 32)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel_kdpas)
+                            .addComponent(jLabel_pwd))
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TextField_kdpas, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
