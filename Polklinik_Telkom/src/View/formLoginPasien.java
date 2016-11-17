@@ -6,11 +6,17 @@
 package View;
 //import javax.swing.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+
 /**
  *
- * @author Ganis
+ * @author Ganis, Dhino
  */
-public class formLoginPasien extends javax.swing.JFrame {
+public class formLoginPasien extends javax.swing.JFrame implements ActionListener {
     
     /*
     setPreferredSize(new Dimention(1366,763));
@@ -36,10 +42,10 @@ public class formLoginPasien extends javax.swing.JFrame {
     private void initComponents() {
 
         label_Login = new javax.swing.JLabel();
-        jLabel_Nama = new javax.swing.JLabel();
-        jLabel_NIM = new javax.swing.JLabel();
-        TextField_nama = new javax.swing.JTextField();
-        jTextField_NIM = new javax.swing.JTextField();
+        jLabel_kdpas = new javax.swing.JLabel();
+        jLabel_pwd = new javax.swing.JLabel();
+        TextField_kdpas = new javax.swing.JTextField();
+        jTextField_pwd = new javax.swing.JTextField();
         jButton_OK = new javax.swing.JButton();
         jButton_Kembali = new javax.swing.JButton();
 
@@ -48,13 +54,13 @@ public class formLoginPasien extends javax.swing.JFrame {
         label_Login.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         label_Login.setText("Login");
 
-        jLabel_Nama.setText("Nama :");
+        jLabel_kdpas.setText("Kode Pasien");
 
-        jLabel_NIM.setText(" NIM   :");
+        jLabel_pwd.setText("Password");
 
-        TextField_nama.addActionListener(new java.awt.event.ActionListener() {
+        TextField_kdpas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField_namaActionPerformed(evt);
+                TextField_kdpasActionPerformed(evt);
             }
         });
 
@@ -68,99 +74,106 @@ public class formLoginPasien extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(124, 124, 124)
+                .addComponent(jButton_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton_Kembali)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 122, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(label_Login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(57, 57, 57))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel_NIM)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jTextField_NIM))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel_Nama)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(TextField_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(14, 14, 14))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton_Kembali)))
-                .addGap(126, 126, 126))
+                                .addComponent(jLabel_kdpas)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel_pwd)
+                                .addGap(32, 32, 32)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextField_kdpas, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(171, 171, 171))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(label_Login)
+                        .addGap(234, 234, 234))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(51, 51, 51)
                 .addComponent(label_Login)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextField_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_Nama))
+                    .addComponent(TextField_kdpas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_kdpas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_NIM)
-                    .addComponent(jTextField_NIM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_pwd)
+                    .addComponent(jTextField_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_Kembali)
                     .addComponent(jButton_OK))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TextField_namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_namaActionPerformed
+    private void TextField_kdpasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField_kdpasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TextField_namaActionPerformed
+    }//GEN-LAST:event_TextField_kdpasActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(formLoginPasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(formLoginPasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(formLoginPasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(formLoginPasien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new formLoginPasien().setVisible(true);
-            }
-        });
+    public JButton getjButton_Kembali() {
+        return jButton_Kembali;
     }
 
+    public JButton getjButton_OK() {
+        return jButton_OK;
+    }
+
+    public JTextField getTextField_kdpas() {
+        return TextField_kdpas;
+    }
+
+    public void setTextField_kdpas(JTextField TextField_kdpas) {
+        this.TextField_kdpas = TextField_kdpas;
+    }
+
+    public JTextField getjTextField_pwd() {
+        return jTextField_pwd;
+    }
+
+    public void setjTextField_pwd(JTextField jTextField_pwd) {
+        this.jTextField_pwd = jTextField_pwd;
+    }
+
+    public void addListener(ActionListener e) {
+        jButton_OK.addActionListener(e);
+        jButton_Kembali.addActionListener(e);
+    }
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TextField_nama;
+    private javax.swing.JTextField TextField_kdpas;
     private javax.swing.JButton jButton_Kembali;
     private javax.swing.JButton jButton_OK;
-    private javax.swing.JLabel jLabel_NIM;
-    private javax.swing.JLabel jLabel_Nama;
-    private javax.swing.JTextField jTextField_NIM;
+    private javax.swing.JLabel jLabel_kdpas;
+    private javax.swing.JLabel jLabel_pwd;
+    private javax.swing.JTextField jTextField_pwd;
     private javax.swing.JLabel label_Login;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if (source.equals(this.getjButton_OK())) {
+            String unm = this.getTextField_kdpas().getText();
+            String pwd = this.getjTextField_pwd().getText();
+            //cek db            
+        } else if (source.equals(this.getjButton_Kembali())) {
+            //tampilin halaman
+        }
+    }
 }
