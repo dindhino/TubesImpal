@@ -54,6 +54,13 @@ public class Test {
         
         p.viewJadwalPeriksa(p.getJadwal().get(0));
         System.out.println("");
+        
+        
+        System.out.print("Jadwal aja : ");
+        System.out.println(p.getJadwal().toString());
+        
+        System.out.print("toSting Jadwal : ");
+        System.out.println(p.getJadwal().toString());
     }
     
 }

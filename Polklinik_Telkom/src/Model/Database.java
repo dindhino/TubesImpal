@@ -106,4 +106,18 @@ public class Database {
         }
     }
 
+    public void editPasien(Pasien p) {
+        try {
+            String query = "update pasien set `keluhan` ='"
+                    + p.getKeluhan() + "', `diagnosa` ='"
+                    + p.getDiagnosa() + "', `Obat` ='"
+                    + p.getObat()+ "', `Jadwal` ='"
+                    + p.getJadwal() + "' where `kodePasien` = "
+                    + p.getKodePasien();
+            st.executeUpdate(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
 }

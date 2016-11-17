@@ -115,6 +115,14 @@ public class Admin {
     }
 
     public void viewJadwalPeriksa() {
-
+       for (Pasien p : pasien){
+           System.out.println("Nama Pasien: "+p.getNamaPasien());
+           for (Jadwal j : p.getJadwal()){
+                System.out.println("Nama Dokter: "+j.getDokter());
+                System.out.println("Shift: "+j.getShift());
+                System.out.println("Tanggal: "+j.getTanggal());
+                System.out.println("Hari: "+j.getHari());
+           }
+       }
     }
 }
