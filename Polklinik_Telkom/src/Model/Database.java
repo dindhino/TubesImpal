@@ -34,7 +34,6 @@ public class Database {
     }
 
     public void savePasien(Pasien p) {
-
         try {
 
             String query = "INSERT INTO `pasien`(`namaPasien`, `kodePasien`, `password`, `umur`) VALUES ("
@@ -120,4 +119,76 @@ public class Database {
         }
     }
     
+    public void deletePasien(Pasien p){
+        try {
+            String query = "delete from pasien where `kodePasien` = " + p.getKodePasien();
+            st.executeQuery(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void Jadwal(Jadwal j){
+        try {
+            String query = "insert into `Jadwal` (`shift`, `tanggal`, `hari`) values ("
+                    + "'" + j.getShift() + "'"
+                    + "'" + j.getTanggal() + "'"
+                    + "'" + j.getHari() + "')";
+            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public void updateJadwal(Jadwal j, Pasien p) {
+        try {
+            String query = "update jadwal set shift ='"
+                    + j.getShift() + "' where kodePasien = "
+                    + p.getKodePasien();
+            st.executeUpdate(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void Dokter(Dokter d) {
+        try {
+
+            String query = "INSERT INTO `dokter`(`namaDokter`, `kodeDokter`, `password`, `alamat`) VALUES ("
+                    + "'" + d.getNamaDokter() + "',"
+                    + "'" + d.getKodeDokter() + "',"
+                    + "'" + d.getPassword() + "',"
+                    + "'" + d.getAlamat() + "')";
+            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void Obat(Obat ob) {
+        try {
+
+            String query = "INSERT INTO `obat`(`idObat`, `namaObat`, `jenis`, `harga`) VALUES ("
+                    + "'" + ob.getIdObat() + "',"
+                    + "'" + ob.getNamaObat() + "',"
+                    + "'" + ob.getJenis() + "',"
+                    + "'" + ob.getHarga() + "')";
+            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void Admin(Admin a) {
+        try {
+
+            String query = "INSERT INTO `admin`(`namaAdmin`, `kodeAdmin`, `password`) VALUES ("
+                    + "'" + a.getNamaAdmin() + "',"
+                    + "'" + a.getKodeAdmin() + "',"
+                    + "'" + a.getPassword() + "')";
+            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

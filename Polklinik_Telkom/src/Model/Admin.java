@@ -17,8 +17,10 @@ public class Admin {
     private String kodeAdmin;
     private String password;
     private ArrayList<Pasien> pasien;
+    private Database db;
 
-    public Admin(String namaAdmin, String kodeAdmin, String password, ArrayList<Pasien> pasien) {
+    public Admin(String namaAdmin, String kodeAdmin, String password) {
+        this.db = new Database();
         this.namaAdmin = namaAdmin;
         this.kodeAdmin = kodeAdmin;
         this.password = password;
@@ -80,16 +82,12 @@ public class Admin {
         }
     }
 
-    public void editDataPasien() {
-
+    public void editDataPasien(Pasien p) {
+        db.editPasien(p);
     }
 
     public void deleteDataPasien(Pasien pas) {
-        for (Pasien p : pasien) {
-            if (p == pas) {
-                pasien.remove(pas);
-            }
-        }
+        db.deletePasien(pas);
     }
 
     public void viewShiftJadwal() {
@@ -111,7 +109,7 @@ public class Admin {
     }
 
     public void createShiftJadwal(Pasien pasien) {
-
+        db.saveJadwal(pasien);
     }
 
     public void viewJadwalPeriksa() {
