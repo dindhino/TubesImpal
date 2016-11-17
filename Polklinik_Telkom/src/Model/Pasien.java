@@ -107,6 +107,16 @@ public class Pasien {
     public String getDiagnosa() {
         return diagnosa;
     }
+
+    public void setDiagnosa(String diagnosa) {
+        this.diagnosa = diagnosa;
+    }
+
+    public void setKeluhan(String keluhan) {
+        this.keluhan = keluhan;
+    }
     
+    
+            
     
 }

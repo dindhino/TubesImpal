@@ -68,4 +68,34 @@ public class Dokter {
         this.pasien.add(pasien);
     }
 
+    public void viewDataPasien(){
+        for (Pasien p : pasien) {
+            System.out.print("Nama  : "+p.getNamaPasien());
+            for (Jadwal j : p.getJadwal()){
+                System.out.println("Shift: "+j.getShift());
+            }
+        }
+    }
+    
+    public void viewPasien(){
+        for (Pasien p : pasien) {
+            System.out.println("Nama  : "+p.getNamaPasien());
+            System.out.println("Umur  : "+p.getUmur());
+            System.out.println("Kode Pasien : "+p.getKodePasien());
+            System.out.println("Keluhan : "+p.getKeluhan());
+            System.out.println("Diagnosa : "+p.getDiagnosa());
+            System.out.println("Obat : "+p.getObat());
+            for (Jadwal j : p.getJadwal()){
+                System.out.println("Shift: "+j.getShift());
+            }
+        }
+    }
+    
+    public void inputDiagnosa(Pasien pasien, String diagnosa) {
+        pasien.setDiagnosa(diagnosa);
+    }
+    
+    public void inputKeluhan(Pasien pasien, String keluhan) {
+        pasien.setKeluhan(keluhan);
+    }
 }
