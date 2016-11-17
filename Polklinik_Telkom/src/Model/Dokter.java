@@ -19,8 +19,10 @@ public class Dokter {
     private String password;
     private String alamat;
     private ArrayList<Pasien> pasien;
+    private Database db;
 
     public Dokter(String namaDokter, String kodeDokter, String password, String alamat) {
+        this.db = new Database();
         this.namaDokter = namaDokter;
         this.kodeDokter = kodeDokter;
         this.password = password;
@@ -93,9 +95,23 @@ public class Dokter {
     
     public void inputDiagnosa(Pasien pasien, String diagnosa) {
         pasien.setDiagnosa(diagnosa);
+        db.saveDiagnosa(pasien);
     }
     
     public void inputKeluhan(Pasien pasien, String keluhan) {
         pasien.setKeluhan(keluhan);
+        db.saveKeluhan(pasien);
+    }
+    
+    public void viewJadwalPeriksa() {
+       for (Pasien p : pasien){
+           System.out.println("Nama Pasien: "+p.getNamaPasien());
+           for (Jadwal j : p.getJadwal()){
+                System.out.println("Nama Dokter: "+j.getDokter());
+                System.out.println("Shift: "+j.getShift());
+                System.out.println("Tanggal: "+j.getTanggal());
+                System.out.println("Hari: "+j.getHari());
+           }
+       }
     }
 }
