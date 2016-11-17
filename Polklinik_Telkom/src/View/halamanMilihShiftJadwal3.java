@@ -5,11 +5,17 @@
  */
 package View;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+
 /**
  *
  * @author Dhino
  */
-public class halamanMilihShiftJadwal3 extends javax.swing.JFrame {
+public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form halamanMilihShiftJadwal3
@@ -205,39 +211,53 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_OKActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(halamanMilihShiftJadwal3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(halamanMilihShiftJadwal3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(halamanMilihShiftJadwal3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(halamanMilihShiftJadwal3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    public JButton getjButton_LogOut() {
+        return jButton_LogOut;
+    }
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new halamanMilihShiftJadwal3().setVisible(true);
-            }
-        });
+    public JButton getjButton_MelihatShiftDokter() {
+        return jButton_MelihatShiftDokter;
+    }
+
+    public JButton getjButton_OK() {
+        return jButton_OK;
+    }
+
+    public JButton getjButton_kembali() {
+        return jButton_kembali;
+    }
+
+    public void setjLabel_DokterText(JLabel jLabel_DokterText) {
+        this.jLabel_DokterText = jLabel_DokterText;
+    }
+
+    public void setjLabel_NamaPasien(JLabel jLabel_NamaPasien) {
+        this.jLabel_NamaPasien = jLabel_NamaPasien;
+    }
+
+    public void setjLabel_jamtext(JLabel jLabel_jamtext) {
+        this.jLabel_jamtext = jLabel_jamtext;
+    }
+
+    public void setjLabel_shifttext(JLabel jLabel_shifttext) {
+        this.jLabel_shifttext = jLabel_shifttext;
+    }
+
+    public JTextArea getjTextArea1() {
+        return jTextArea1;
+    }
+
+    public void setjTextArea1(JTextArea jTextArea1) {
+        this.jTextArea1 = jTextArea1;
+    }
+
+    
+    
+    public void addListener(ActionListener e) {
+        jButton_kembali.addActionListener(e);
+        jButton_LogOut.addActionListener(e);
+        jButton_MelihatShiftDokter.addActionListener(e);
+        jButton_OK.addActionListener(e);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -259,4 +279,9 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

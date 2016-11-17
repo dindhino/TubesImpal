@@ -38,10 +38,10 @@ public class Database {
         try {
 
             String query = "INSERT INTO `pasien`(`namaPasien`, `kodePasien`, `password`, `umur`) VALUES ("
-                    + "'" + p.getNamaPasien()+ "',"
-                    + "'" + p.getKodePasien()+ "',"
-                    + "'" + p.getPassword()+ "',"
-                    + "'" + p.getUmur()+ "')";
+                    + "'" + p.getNamaPasien() + "',"
+                    + "'" + p.getKodePasien() + "',"
+                    + "'" + p.getPassword() + "',"
+                    + "'" + p.getUmur() + "')";
             st.execute(query, Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -73,5 +73,37 @@ public class Database {
         }
     }
 
-    
+    public void saveDiagnosa(Pasien p) {
+        try {
+            String query = "update pasien set diagnosa ='"
+                    + p.getDiagnosa() + "' where kodePasien = "
+                    + p.getKodePasien();
+            st.executeUpdate(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void saveObat(Pasien p) {
+        try {
+            String query = "update pasien set obat ='"
+                    + p.getObat() + "' where kodePasien = "
+                    + p.getKodePasien();
+            st.executeUpdate(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void saveJadwal(Pasien p) {
+        try {
+            String query = "update pasien set jadwal ='"
+                    + p.getJadwal() + "' where kodePasien = "
+                    + p.getKodePasien();
+            st.executeUpdate(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
