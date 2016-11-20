@@ -13,17 +13,27 @@ import java.util.ArrayList;
  * @author Dhino
  */
 public class Jadwal {
-
+    
+    private String kodeJadwal;
     private String shift;
     private String hari;
     private String tanggal;
     private ArrayList<Dokter> dokter;
 
-    public Jadwal(String shift, String hari, String tanggal) {
+    public Jadwal(String kodeJadwal,String shift, String hari, String tanggal) {
+        this.kodeJadwal = kodeJadwal;
         this.shift = shift;
         this.hari = hari;
         this.tanggal = tanggal;
         this.dokter = new ArrayList<>();
+    }
+
+    public String getKodeJadwal() {
+        return kodeJadwal;
+    }
+
+    public void setKodeJadwal(String kodeJadwal) {
+        this.kodeJadwal = kodeJadwal;
     }
 
     public String getShift() {

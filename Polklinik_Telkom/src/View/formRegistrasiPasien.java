@@ -5,9 +5,12 @@
  */
 package View;
 
+import Model.Aplikasi;
+import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -16,11 +19,21 @@ import javax.swing.JTextField;
  */
 public class formRegistrasiPasien extends javax.swing.JFrame implements ActionListener {
 
+    Aplikasi model;
+    Pasien pasien;
     /**
      * Creates new form formRegistrasiPasien
      */
-    public formRegistrasiPasien() {
+    public formRegistrasiPasien(Aplikasi model) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Registasi Pasien");
+        
+        this.setVisible(true);
+        this.addListener(this);
+        
+        this.pasien = null;
     }
 
     /**
@@ -42,21 +55,26 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
         jLabel2 = new javax.swing.JLabel();
         jTextField_umur = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1_pwd = new javax.swing.JTextField();
+        jPassField1_pwd = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Registrasi");
 
+        jLabel_Nama.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_Nama.setText("Nama  :");
 
+        jLabel_NIM.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_NIM.setText("NIM   :");
 
+        jButton_OK.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_OK.setText("Register");
 
+        jButton_Kembali.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton_Kembali.setText("Kembali");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Umur  :");
 
         jTextField_umur.addActionListener(new java.awt.event.ActionListener() {
@@ -65,43 +83,53 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Password :");
+
+        jPassField1_pwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPassField1_pwdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(550, 550, 550)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel_NIM)
+                                .addComponent(jLabel_Nama)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextField_Nama)
+                                .addComponent(jTextFiel_NIM)
+                                .addComponent(jTextField_umur, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPassField1_pwd)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addGap(37, 37, 37)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_Kembali)
-                            .addComponent(jButton_OK))
-                        .addGap(162, 162, 162))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel_NIM)
-                            .addComponent(jLabel_Nama)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFiel_NIM, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                            .addComponent(jTextField_Nama)
-                            .addComponent(jTextField_umur)
-                            .addComponent(jTextField1_pwd))
-                        .addGap(133, 133, 133))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(164, 164, 164))))
+                            .addComponent(jButton_OK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)))
+                .addGap(573, 573, 573))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(204, 204, 204)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Nama)
                     .addComponent(jTextField_Nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -112,16 +140,16 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPassField1_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField_umur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(jButton_OK)
+                .addComponent(jButton_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_Kembali)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addComponent(jButton_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         pack();
@@ -130,6 +158,10 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
     private void jTextField_umurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_umurActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_umurActionPerformed
+
+    private void jPassField1_pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPassField1_pwdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPassField1_pwdActionPerformed
 
     public JButton getjButton_Kembali() {
         return jButton_Kembali;
@@ -164,12 +196,14 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
     }
 
     public JTextField getjTextField1_pwd() {
-        return jTextField1_pwd;
+        return jPassField1_pwd;
     }
 
-    public void setjTextField1_pwd(JTextField jTextField1_pwd) {
-        this.jTextField1_pwd = jTextField1_pwd;
+    public void setjPassField1_pwd(JPasswordField jPassField1_pwd) {
+        this.jPassField1_pwd = jPassField1_pwd;
     }
+
+    
 
     
     public void addListener(ActionListener e) {
@@ -185,8 +219,8 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel_NIM;
     private javax.swing.JLabel jLabel_Nama;
+    private javax.swing.JPasswordField jPassField1_pwd;
     private javax.swing.JTextField jTextFiel_NIM;
-    private javax.swing.JTextField jTextField1_pwd;
     private javax.swing.JTextField jTextField_Nama;
     private javax.swing.JTextField jTextField_umur;
     // End of variables declaration//GEN-END:variables
@@ -200,9 +234,13 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
             String nim = this.getjTextFiel_NIM().getText();
             String pwd = this.getjTextField1_pwd().getText();
             int umur = Integer.parseInt(this.getjTextField_umur().getText());
-            //cek db            
+            pasien = new Pasien(nama, "P"+nim, pwd, umur);
+            model.getDb().savePasien(pasien);
+            new PoliklinikTelkom(model);//belon
+            this.dispose();
         } else if (source.equals(this.getjButton_Kembali())) {
-            //tampilin halaman
+            new PoliklinikTelkom(model);
+            this.dispose();
         }
     }
 }

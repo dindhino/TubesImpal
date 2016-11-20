@@ -6,6 +6,8 @@
 package View;
 //import javax.swing.*;
 
+import Model.Aplikasi;
+import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -25,11 +27,22 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
     frame.pack();
     */
         
+    Aplikasi model;
+    Pasien pasien;
+    
     /**
      * Creates new form formLoginPasien
      */
-    public formLoginPasien() {
+    public formLoginPasien(Aplikasi model) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Login Pasien");
+
+        this.setVisible(true);
+        this.addListener(this);
+        
+        this.pasien = null;
     }
 
     /**
@@ -170,7 +183,8 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
             String pwd = this.getjTextField_pwd().getText();
             //cek db            
         } else if (source.equals(this.getjButton_Kembali())) {
-            //tampilin halaman
+            new PoliklinikTelkom(model);
+            this.dispose();
         }
     }
 }
