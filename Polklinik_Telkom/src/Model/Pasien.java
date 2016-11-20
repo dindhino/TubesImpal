@@ -23,6 +23,19 @@ public class Pasien {
     private ArrayList<Obat> obat;
     private ArrayList<Jadwal> jadwal;
 
+    public Pasien() {
+        this.namaPasien = "";
+        this.kodePasien = "";
+        this.password = "";
+        this.umur = 0;
+        this.obat = new ArrayList<>();
+        this.jadwal = new ArrayList<>();
+        this.keluhan = "";
+        this.diagnosa = "";
+    }
+    
+    
+
     public Pasien(String namaPasien, String kodePasien, String password, int umur) {
         this.namaPasien = namaPasien;
         this.kodePasien = kodePasien;
