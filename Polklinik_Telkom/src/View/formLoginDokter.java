@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.Admin;
 import Model.Aplikasi;
 import Model.Database;
 import Model.Dokter;
@@ -23,6 +24,7 @@ public class formLoginDokter extends javax.swing.JFrame implements ActionListene
 
     Aplikasi model;
     Dokter dokter;
+    Admin admin;
 
     /**
      * Creates new form formLoginDokter
@@ -37,6 +39,7 @@ public class formLoginDokter extends javax.swing.JFrame implements ActionListene
         this.addListener(this);
 
         this.dokter = null;
+        this.admin = null;
     }
 
     /**
@@ -174,14 +177,16 @@ public class formLoginDokter extends javax.swing.JFrame implements ActionListene
         if (source.equals(this.getjButton_OK())) {
             String unm = this.getjTextField_KodeAdok().getText();
             String pwd = this.getjPasswordField_PassDok().getText();
-            //ngecek di db
-            dokter = model.getDb().getDokter(unm);
-            System.out.println(dokter.getKodeDokter());
+            dokter = model.getDb().getDokter(unm, pwd);
+            admin = model.getDb().getAdmin(unm, pwd);
             if (dokter != null) {
                 new halamanAwalDokter(model, dokter);
                 this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Gagal cupus");
+            } else if (admin != null) {
+                new halamanAwalAdmin(model, admin);
+                this.dispose();
+            }else {
+                JOptionPane.showMessageDialog(this, "Kode atau Password Salah");
             }
         } else if (source.equals(this.getjButton_Kembali())) {
             new PoliklinikTelkom(model);

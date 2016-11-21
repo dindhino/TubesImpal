@@ -5,17 +5,39 @@
  */
 package View;
 
+import Model.Aplikasi;
+import Model.Dokter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Dhino
  */
-public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame {
-
+public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implements ActionListener {
+    Aplikasi model;
+    Dokter dokter;
     /**
      * Creates new form halamanLiatShiftJadwal
      */
-    public halamanViewJadwalPeriksaDokter() {
+    public halamanViewJadwalPeriksaDokter(Aplikasi model, Dokter dokter) {
         initComponents();
+        this.model = model;
+        this.dokter = dokter;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman View Jadwal Periksa");
+        this.setjLabel_NamaDokter(dokter.getNamaDokter());
+        this.setVisible(true);
+        this.addListener(this);
+    }
+
+    public void addListener(ActionListener e) {
+        jButton_LogOut.addActionListener(e);
+        jButton_MelihatJadwalPeriksa.addActionListener(e);
+        jButton_MenginputDiagnosa.addActionListener(e);
+        jButton_MenginputObat.addActionListener(e);
     }
 
     /**
@@ -142,41 +164,27 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(halamanViewJadwalPeriksaDokter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(halamanViewJadwalPeriksaDokter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(halamanViewJadwalPeriksaDokter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(halamanViewJadwalPeriksaDokter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new halamanViewJadwalPeriksaDokter().setVisible(true);
-            }
-        });
+    public JButton getjButton_LogOut() {
+        return jButton_LogOut;
     }
+
+    public JButton getjButton_MelihatJadwalPeriksa() {
+        return jButton_MelihatJadwalPeriksa;
+    }
+
+    public JButton getjButton_MenginputDiagnosa() {
+        return jButton_MenginputDiagnosa;
+    }
+
+    public JButton getjButton_MenginputObat() {
+        return jButton_MenginputObat;
+    }
+
+    public void setjLabel_NamaDokter(String jLabel_NamaDokter) {
+        this.jLabel_NamaDokter.setText(jLabel_NamaDokter);
+    }
+   
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_LogOut;
@@ -190,4 +198,23 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
+            new halamanViewJadwalPeriksaDokter(model, dokter);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MenginputDiagnosa())) {
+            new formInputDiagnosa1(model, dokter);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MenginputObat())) {
+            new formInputObat1(model, dokter);
+            this.dispose();
+        }
+    }
 }

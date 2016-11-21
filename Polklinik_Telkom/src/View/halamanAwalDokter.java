@@ -12,6 +12,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -25,17 +26,6 @@ public class halamanAwalDokter extends javax.swing.JFrame implements ActionListe
     Aplikasi model;
     Database db;
     Dokter dokter;
-    
-    public halamanAwalDokter(Aplikasi model) {
-        this.model = model;
-        this.dokter = null;
-        initComponents();
-        this.setLocationRelativeTo(null);
-        this.setTitle("Halaman Awal Dokter");
-
-        this.setVisible(true);
-        //this.addListener(this);
-    }
 
     public halamanAwalDokter(Aplikasi model, Dokter dokter){
         initComponents();
@@ -43,9 +33,10 @@ public class halamanAwalDokter extends javax.swing.JFrame implements ActionListe
         this.dokter = dokter;
         this.setLocationRelativeTo(null);
         this.setTitle("Halaman Awal Dokter");
-
+        this.setjLabel_NamaDokter(dokter.getNamaDokter());
+        this.setjLabel_Welkom("Selamat Datang " + dokter.getNamaDokter());
         this.setVisible(true);
-        //this.addListener(this);
+        this.addListener(this);
     }
     
     public void addListener(ActionListener e) {
@@ -66,6 +57,11 @@ public class halamanAwalDokter extends javax.swing.JFrame implements ActionListe
         return jButton_LogOut;
     }
 
+    public void setjLabel_Welkom(String jLabel_Welkom) {
+        this.jLabel_Welkom.setText(jLabel_Welkom);
+    }
+
+    
     public void setjButton_LogOut(JButton jButton_LogOut) {
         this.jButton_LogOut = jButton_LogOut;
     }
@@ -92,6 +88,10 @@ public class halamanAwalDokter extends javax.swing.JFrame implements ActionListe
 
     public void setjButton_MenginputObat(JButton jButton_MenginputObat) {
         this.jButton_MenginputObat = jButton_MenginputObat;
+    }
+    
+    public void setjLabel_NamaDokter(String jLabel_NamaDokter) {    
+        this.jLabel_NamaDokter.setText(jLabel_NamaDokter);
     }
 //@SuppressWarnings("unchecked");
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -215,10 +215,6 @@ public class halamanAwalDokter extends javax.swing.JFrame implements ActionListe
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -242,8 +238,14 @@ public class halamanAwalDokter extends javax.swing.JFrame implements ActionListe
             new PoliklinikTelkom(model);
             this.dispose();
         } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
-            new halamanViewJadwalPeriksaDokter();
+            new halamanViewJadwalPeriksaDokter(model, dokter);
             this.dispose();
-        } 
+        } else if (source.equals(this.getjButton_MenginputDiagnosa())) {
+            new formInputDiagnosa1(model, dokter);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MenginputObat())) {
+            new formInputObat1(model, dokter);
+            this.dispose();
+        }
     }
 }

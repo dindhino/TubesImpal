@@ -191,6 +191,48 @@ public class Database {
         }
         return p;
     }
+    
+    public Dokter getDokter(String kodeDokter, String pwd) {
+        Dokter p = null;
+        try {
+            String query = "SELECT * FROM `dokter` WHERE `kodeDokter` = " + "'" + kodeDokter + "' and `password`='" + pwd + "'";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                p = new Dokter(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return p;
+    }
+    
+    public Admin getAdmin(String kodeDokter, String pwd) {
+        Admin p = null;
+        try {
+            String query = "SELECT * FROM `admin` WHERE `kodeAdmin` = " + "'" + kodeDokter + "' and `password`='" + pwd + "'";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                p = new Admin(rs.getString(1), rs.getString(2), rs.getString(3));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return p;
+    }
+    
+    public Pasien getPasien(String kodeDokter, String pwd) {
+        Pasien p = null;
+        try {
+            String query = "SELECT * FROM `pasien` WHERE `kodePasien` = " + "'" + kodeDokter + "' and `password`='" + pwd + "'";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                p = new Pasien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return p;
+    }
 
     public Jadwal getJadwal(String kodeJadwal) {
         Jadwal j = null;

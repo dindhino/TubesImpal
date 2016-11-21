@@ -23,17 +23,6 @@ public class halamanAwalPasien extends javax.swing.JFrame implements ActionListe
     /**
      * Creates new form halamanAwalPasien
      */
-    public halamanAwalPasien(Aplikasi model) {
-        initComponents();
-        this.model = model;
-        this.setLocationRelativeTo(null);
-        this.setTitle("Halaman Awal Pasien");
-        
-        this.setVisible(true);
-        this.addListener(this);
-        
-        this.pasien = null;
-    }
 
     halamanAwalPasien(Aplikasi model, Pasien pasien) {
         initComponents();
@@ -41,6 +30,7 @@ public class halamanAwalPasien extends javax.swing.JFrame implements ActionListe
         this.setLocationRelativeTo(null);
         this.setTitle("Halaman Awal Pasien");
         this.setjLabel_NamaPasien(pasien.getNamaPasien());
+        this.setjLabel_Welkom("Selamat Datang "+ pasien.getNamaPasien());
         this.setVisible(true);
         this.addListener(this);
         
@@ -165,6 +155,9 @@ public class halamanAwalPasien extends javax.swing.JFrame implements ActionListe
         this.jLabel_NamaPasien.setText(jLabel_NamaPasien);
     }
 
+    public void setjLabel_Welkom(String jLabel_Welkom) {
+        this.jLabel_Welkom.setText(jLabel_Welkom);
+    }
     
     public JButton getjButton_LogOut() {
         return jButton_LogOut;

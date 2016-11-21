@@ -3,6 +3,9 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1366, 768]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -27,66 +30,58 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel_foto" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel_NamaAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jPanel_foto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel_Admin" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel_NamaAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel_Admin" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="293" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel_membuatShiftDokter" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel_KodePasienText" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
-                                          <Component id="jXDatePicker1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel_membuatShiftDokter" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel_KodePasienText" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="jXDatePicker1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jTextField1_Hari" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                              </Group>
-                          </Group>
-                          <Component id="jButton_DeleteDataPasien" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
-                          <Component id="jLabel_MengelolaDataPasien" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton_MelihatShiftDokter" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
-                          <Component id="jButton_MengelolaShiftDokter" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
-                          <Component id="jLabel_MengelolaDataPasien1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Component id="jButton_LogOut" min="-2" pref="89" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jButton_ViewDataPasien" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
-                                  <Component id="jButton_EditDataPasien" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel_shift" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_tanggal" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_kodePasien" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_namaDokter" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_hari" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jButton_DeleteDataPasien" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                  <Component id="jLabel_MengelolaDataPasien" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton_MelihatShiftDokter" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                  <Component id="jButton_MengelolaShiftDokter" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                  <Component id="jLabel_MengelolaDataPasien1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="jButton_LogOut" min="-2" pref="89" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jButton_ViewDataPasien" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                          <Component id="jButton_EditDataPasien" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel_shift" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_tanggal" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_kodePasien" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_namaDokter" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_hari" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jButton_MelihatJadwalPeriksa" min="-2" pref="238" max="-2" attributes="0"/>
-                      <EmptySpace pref="569" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
+                      <Component id="jButton_simpan" min="-2" pref="238" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                       <Component id="jButton_kembali" min="-2" pref="238" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="309" max="-2" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="455" max="-2" attributes="0"/>
-                  <Component id="jButton_simpan" min="-2" pref="238" max="-2" attributes="0"/>
-                  <EmptySpace pref="673" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace pref="416" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -142,8 +137,11 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButton_MelihatShiftDokter" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton_MelihatJadwalPeriksa" min="-2" pref="41" max="-2" attributes="0"/>
-                      <EmptySpace pref="116" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButton_MelihatJadwalPeriksa" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="jButton_simpan" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="jButton_kembali" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -153,25 +151,16 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_hari" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField1_Hari" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel_shift" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton_kembali" min="-2" pref="41" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                   </Group>
               </Group>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="621" max="32767" attributes="0"/>
-                  <Component id="jButton_simpan" min="-2" pref="41" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -330,11 +319,6 @@
         <Property name="text" type="java.lang.String" value="Hari :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel_shift">
       <Properties>
         <Property name="text" type="java.lang.String" value="Shift :"/>
@@ -375,6 +359,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_simpanActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1_Hari">
     </Component>
   </SubComponents>
 </Form>

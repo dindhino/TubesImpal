@@ -5,18 +5,37 @@
  */
 package View;
 
+import Model.Admin;
+import Model.Aplikasi;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Ganis
  */
-public class halamanAwalAdmin extends javax.swing.JFrame {
-
+public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListener {
+    Aplikasi model;
+    Admin admin;
     /**
      * Creates new form halamanAwalAdmin
      */
-    public halamanAwalAdmin() {
+    public halamanAwalAdmin(Aplikasi model, Admin admin) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman Awal Admin");
+        this.setjLabel_NamaAdmin(admin.getNamaAdmin());
+        this.setjLabel_Welkom("Selamat Datang " + admin.getNamaAdmin());
+        this.setVisible(true);
+        this.addListener(this);
+
+        this.setjLabel_NamaAdmin(admin.getNamaAdmin());
+        this.admin = null;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -178,40 +197,52 @@ public class halamanAwalAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(halamanAwalAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(halamanAwalAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(halamanAwalAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(halamanAwalAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new halamanAwalAdmin().setVisible(true);
-            }
-        });
+    public JButton getjButton_DeleteDataPasien() {
+        return jButton_DeleteDataPasien;
     }
+
+    public JButton getjButton_EditDataPasien() {
+        return jButton_EditDataPasien;
+    }
+
+    public JButton getjButton_LogOut() {
+        return jButton_LogOut;
+    }
+
+    public void setjLabel_NamaAdmin(String jLabel_NamaAdmin) {
+        this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
+    }
+
+    public void setjLabel_Welkom(String jLabel_Welkom) {
+        this.jLabel_Welkom.setText(jLabel_Welkom);
+    }
+    
+
+    public JButton getjButton_MelihatJadwalPeriksa() {
+        return jButton_MelihatJadwalPeriksa;
+    }
+
+    public JButton getjButton_MelihatShiftDokter() {
+        return jButton_MelihatShiftDokter;
+    }
+
+    public JButton getjButton_MengelolaShiftDokter() {
+        return jButton_MengelolaShiftDokter;
+    }
+
+    public JButton getjButton_ViewDataPasien() {
+        return jButton_ViewDataPasien;
+    }
+    
+    public void addListener(ActionListener e) {
+        jButton_DeleteDataPasien.addActionListener(e);
+        jButton_EditDataPasien.addActionListener(e);
+        jButton_LogOut.addActionListener(e);
+        jButton_MelihatJadwalPeriksa.addActionListener(e);
+        jButton_MelihatShiftDokter.addActionListener(e);
+        jButton_MengelolaShiftDokter.addActionListener(e);
+        jButton_ViewDataPasien.addActionListener(e);
+    }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_DeleteDataPasien;
@@ -231,4 +262,26 @@ public class halamanAwalAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        
+        if (source.equals(this.getjButton_DeleteDataPasien())) {
+            
+        } else if (source.equals(this.getjButton_EditDataPasien())) {
+            
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
+            
+        } else if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            
+        } else if (source.equals(this.getjButton_MengelolaShiftDokter())) {
+            
+        } else if (source.equals(this.getjButton_ViewDataPasien())) {
+            
+        }
+    }
 }

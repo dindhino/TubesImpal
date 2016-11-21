@@ -68,13 +68,13 @@ public class Aplikasi {
         this.listPasien.add(pasien);
     }
 
-    public Dokter getDokter(String kodeDokter) {
+    public Dokter getDokter(String kodeDokter, String pwd) {
         for (Dokter p : listDokter) {
-            if (p.getKodeDokter() == kodeDokter) {
+            if (p.getKodeDokter() == kodeDokter && p.getPassword() == pwd) {
                 return p;
             }
         }
-        Dokter p = db.getDokter(kodeDokter);
+        Dokter p = db.getDokter(kodeDokter, pwd);
         listDokter.add(p);
         return p;
     }

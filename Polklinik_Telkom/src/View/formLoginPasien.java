@@ -11,6 +11,7 @@ import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -191,12 +192,12 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
             String unm = this.getTextField_kdpas().getText();
             String pwd = this.getjPasswordField_Pass().getText();
             pasien = new Pasien();
-            pasien = model.getDb().getPasien(unm);
+            pasien = model.getDb().getPasien(unm,pwd);
             if (pasien != null) {
                 new halamanAwalPasien(model, pasien);
                 this.dispose();
             } else {
-                System.out.println("bakekok");
+                JOptionPane.showMessageDialog(this, "Kode atau Password Salah");
             }
             
         } else if (source.equals(this.getjButton_Kembali())) {
