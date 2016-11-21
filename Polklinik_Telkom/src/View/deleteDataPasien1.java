@@ -5,17 +5,34 @@
  */
 package View;
 
+import Model.Admin;
+import Model.Aplikasi;
+import Model.Pasien;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+
 /**
  *
  * @author Dhino
  */
-public class deleteDataPasien1 extends javax.swing.JFrame {
-
+public class deleteDataPasien1 extends javax.swing.JFrame implements ActionListener {
+    Aplikasi model;
+    Admin admin;
+    Pasien pasien;
     /**
      * Creates new form deleteDataPasien1
      */
-    public deleteDataPasien1() {
+    public deleteDataPasien1(Aplikasi model, Admin admin) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman Delete Data Pasien");
+        this.setjLabel_NamaAdmin(admin.getNamaAdmin());
+        this.setVisible(true);
+        this.addListener(this);
+        this.admin = admin;
+        this.pasien = null;
     }
 
     /**
@@ -42,9 +59,9 @@ public class deleteDataPasien1 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel_DataPAsien = new javax.swing.JLabel();
+        jButton1_Pilih = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         javax.swing.GroupLayout jPanel_foto5Layout = new javax.swing.GroupLayout(jPanel_foto5);
         jPanel_foto5.setLayout(jPanel_foto5Layout);
@@ -103,6 +120,8 @@ public class deleteDataPasien1 extends javax.swing.JFrame {
         jLabel_DataPAsien.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_DataPAsien.setText("DATA PASIEN");
 
+        jButton1_Pilih.setText("Pilih");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,13 +146,19 @@ public class deleteDataPasien1 extends javax.swing.JFrame {
                     .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_MengelolaDataPasien1))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel_DataPAsien))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel_DataPAsien))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(91, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1_Pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,23 +189,102 @@ public class deleteDataPasien1 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
+                        .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel_DataPAsien)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1_Pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getjButton1_Pilih() {
+        return jButton1_Pilih;
+    }
+
+    public JButton getjButton_DeleteDataPasien() {
+        return jButton_DeleteDataPasien;
+    }
+
+    public JButton getjButton_EditDataPasien() {
+        return jButton_EditDataPasien;
+    }
+
+    public JButton getjButton_LogOut() {
+        return jButton_LogOut;
+    }
+
+    public JButton getjButton_MelihatJadwalPeriksa() {
+        return jButton_MelihatJadwalPeriksa;
+    }
+
+    public JButton getjButton_MelihatShiftDokter() {
+        return jButton_MelihatShiftDokter;
+    }
+
+    public JButton getjButton_MengelolaShiftDokter() {
+        return jButton_MengelolaShiftDokter;
+    }
+
+    public JButton getjButton_ViewDataPasien() {
+        return jButton_ViewDataPasien;
+    }
+
+    public void setjLabel_NamaAdmin(String jLabel_NamaAdmin) {
+        this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
+    }
+    
+    public void addListener(ActionListener e) {
+        jButton_DeleteDataPasien.addActionListener(e);
+        jButton_EditDataPasien.addActionListener(e);
+        jButton_LogOut.addActionListener(e);
+        jButton_MelihatJadwalPeriksa.addActionListener(e);
+        jButton_MelihatShiftDokter.addActionListener(e);
+        jButton_MengelolaShiftDokter.addActionListener(e);
+        jButton_ViewDataPasien.addActionListener(e);
+        jButton1_Pilih.addActionListener(e);
+    }  
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        
+        if (source.equals(this.getjButton_DeleteDataPasien())) {
+            new deleteDataPasien1(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_EditDataPasien())) {
+            new editDataPasien1(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
+            new halamanViewJadwalPeriksaAdmin(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            new halamanLiatShiftJadwalAdmin(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MengelolaShiftDokter())) {
+            new halamanMembuatShiftJadwal(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_ViewDataPasien())) {
+            new viewDataPasien(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton1_Pilih())) {
+            new deleteDataPasien(model, admin, pasien);
+            this.dispose();
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1_Pilih;
     private javax.swing.JButton jButton_DeleteDataPasien;
     private javax.swing.JButton jButton_EditDataPasien;
     private javax.swing.JButton jButton_LogOut;
@@ -197,4 +301,5 @@ public class deleteDataPasien1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
 }

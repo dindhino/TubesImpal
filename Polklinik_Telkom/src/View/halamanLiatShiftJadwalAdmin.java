@@ -5,17 +5,31 @@
  */
 package View;
 
+import Model.Admin;
+import Model.Aplikasi;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+
 /**
  *
  * @author Dhino
  */
-public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame {
-
+public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements ActionListener {
+    Aplikasi model;
+    Admin admin;
     /**
      * Creates new form halamanLiatShiftJadwalAdmin
      */
-    public halamanLiatShiftJadwalAdmin() {
+    public halamanLiatShiftJadwalAdmin(Aplikasi model, Admin admin) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman View Shift Jadwal");
+        this.setjLabel_NamaDokter(admin.getNamaAdmin());
+        this.setVisible(true);
+        this.addListener(this);
+        this.admin = admin;
     }
 
     /**
@@ -178,7 +192,37 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    public JButton getjButton_DeleteDataPasien() {
+        return jButton_DeleteDataPasien;
+    }
+
+    public JButton getjButton_EditDataPasien() {
+        return jButton_EditDataPasien;
+    }
+
+    public JButton getjButton_LogOut() {
+        return jButton_LogOut;
+    }
+
+    public JButton getjButton_MelihatJadwalPeriksa() {
+        return jButton_MelihatJadwalPeriksa;
+    }
+
+    public JButton getjButton_MelihatShiftDokter() {
+        return jButton_MelihatShiftDokter;
+    }
+
+    public JButton getjButton_MengelolaShiftDokter() {
+        return jButton_MengelolaShiftDokter;
+    }
+
+    public JButton getjButton_ViewDataPasien() {
+        return jButton_ViewDataPasien;
+    }
+
+    public void setjLabel_NamaDokter(String jLabel_NamaDokter) {
+        this.jLabel_NamaDokter.setText(jLabel_NamaDokter);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_DeleteDataPasien;
@@ -197,4 +241,43 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    
+    public void addListener(ActionListener e) {
+        jButton_DeleteDataPasien.addActionListener(e);
+        jButton_EditDataPasien.addActionListener(e);
+        jButton_LogOut.addActionListener(e);
+        jButton_MelihatJadwalPeriksa.addActionListener(e);
+        jButton_MelihatShiftDokter.addActionListener(e);
+        jButton_MengelolaShiftDokter.addActionListener(e);
+        jButton_ViewDataPasien.addActionListener(e);
+    }  
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        
+        if (source.equals(this.getjButton_DeleteDataPasien())) {
+            new deleteDataPasien1(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_EditDataPasien())) {
+            new editDataPasien1(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
+            new halamanViewJadwalPeriksaAdmin(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            new halamanLiatShiftJadwalAdmin(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MengelolaShiftDokter())) {
+            new halamanMembuatShiftJadwal(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_ViewDataPasien())) {
+            new viewDataPasien(model, admin);
+            this.dispose();
+        }
+    }
+
 }

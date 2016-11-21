@@ -5,17 +5,35 @@
  */
 package View;
 
+import Model.Admin;
+import Model.Aplikasi;
+import Model.Pasien;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Dhino
  */
-public class viewDataPasien2 extends javax.swing.JFrame {
-
+public class viewDataPasien2 extends javax.swing.JFrame implements ActionListener {
+    Aplikasi model;
+    Admin admin;
+    Pasien pasien;
     /**
      * Creates new form viewDataPasien2
      */
-    public viewDataPasien2() {
+    public viewDataPasien2(Aplikasi model, Admin admin, Pasien pasien) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman View Data Pasien");
+        this.setjLabel_NamaAdmin(admin.getNamaAdmin());
+        this.setVisible(true);
+        this.addListener(this);
+        this.admin = admin;
+        this.pasien = pasien;
     }
 
     /**
@@ -258,7 +276,53 @@ public class viewDataPasien2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getjButton_DeleteDataPasien() {
+        return jButton_DeleteDataPasien;
+    }
+
+    public JButton getjButton_EditDataPasien() {
+        return jButton_EditDataPasien;
+    }
+
+    public JButton getjButton_LogOut() {
+        return jButton_LogOut;
+    }
+
+    public JButton getjButton_MelihatJadwalPeriksa() {
+        return jButton_MelihatJadwalPeriksa;
+    }
+
+    public JButton getjButton_MelihatShiftDokter() {
+        return jButton_MelihatShiftDokter;
+    }
+
+    public JButton getjButton_MengelolaShiftDokter() {
+        return jButton_MengelolaShiftDokter;
+    }
+
+    public JButton getjButton_ViewDataPasien() {
+        return jButton_ViewDataPasien;
+    }
+
+    public JButton getjButton_kembali() {
+        return jButton_kembali;
+    }
+
+    public void setjLabel_NamaAdmin(String jLabel_NamaAdmin) {
+        this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
+    }
    
+    public void addListener(ActionListener e) {
+        jButton_DeleteDataPasien.addActionListener(e);
+        jButton_EditDataPasien.addActionListener(e);
+        jButton_LogOut.addActionListener(e);
+        jButton_MelihatJadwalPeriksa.addActionListener(e);
+        jButton_MelihatShiftDokter.addActionListener(e);
+        jButton_MengelolaShiftDokter.addActionListener(e);
+        jButton_ViewDataPasien.addActionListener(e);
+        jButton_kembali.addActionListener(e);
+    }  
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_DeleteDataPasien;
@@ -292,4 +356,35 @@ public class viewDataPasien2 extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea_diagnosadokter;
     private javax.swing.JTextArea jTextArea_keluhan;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        
+        if (source.equals(this.getjButton_DeleteDataPasien())) {
+            new deleteDataPasien1(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_EditDataPasien())) {
+            new editDataPasien1(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
+            new halamanViewJadwalPeriksaAdmin(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            new halamanLiatShiftJadwalAdmin(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MengelolaShiftDokter())) {
+            new halamanMembuatShiftJadwal(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_ViewDataPasien())) {
+            new viewDataPasien(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_kembali())) {
+            new viewDataPasien(model, admin);
+            this.dispose();
+        }
+    }
 }

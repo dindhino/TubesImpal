@@ -7,6 +7,9 @@ package View;
 
 import Model.Admin;
 import Model.Aplikasi;
+import Model.Dokter;
+import Model.Jadwal;
+import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -33,7 +36,7 @@ public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListen
         this.addListener(this);
 
         this.setjLabel_NamaAdmin(admin.getNamaAdmin());
-        this.admin = null;
+        this.admin = admin;
     }
 
 
@@ -268,20 +271,26 @@ public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListen
         Object source = e.getSource();
         
         if (source.equals(this.getjButton_DeleteDataPasien())) {
-            
+            new deleteDataPasien1(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_EditDataPasien())) {
-            
+            new editDataPasien1(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_LogOut())) {
             new PoliklinikTelkom(model);
             this.dispose();
         } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
-            
+            new halamanViewJadwalPeriksaAdmin(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_MelihatShiftDokter())) {
-            
+            new halamanLiatShiftJadwalAdmin(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_MengelolaShiftDokter())) {
-            
+            new halamanMembuatShiftJadwal(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_ViewDataPasien())) {
-            
+            new viewDataPasien(model, admin);
+            this.dispose();
         }
     }
 }

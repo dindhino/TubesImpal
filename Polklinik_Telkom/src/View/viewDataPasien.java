@@ -5,17 +5,35 @@
  */
 package View;
 
+import Model.Admin;
+import Model.Aplikasi;
+import Model.Pasien;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Dhino
  */
-public class viewDataPasien extends javax.swing.JFrame {
-
+public class viewDataPasien extends javax.swing.JFrame implements ActionListener {
+    Aplikasi model;
+    Admin admin;
+    Pasien pasien;
     /**
      * Creates new form viewDataPasien
      */
-    public viewDataPasien() {
+    public viewDataPasien(Aplikasi model, Admin admin) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman View Data Pasien");
+        this.setjLabel_NamaAdmin(admin.getNamaAdmin());
+        this.setVisible(true);
+        this.addListener(this);
+        this.admin = admin;
+        this.pasien = null;
     }
 
     /**
@@ -42,9 +60,9 @@ public class viewDataPasien extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel_NamaAdmin1 = new javax.swing.JLabel();
+        jButton1_Pilih = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jLabel_NamaAdmin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_NamaAdmin.setText("Nama Admin");
@@ -103,11 +121,13 @@ public class viewDataPasien extends javax.swing.JFrame {
         jLabel_NamaAdmin1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_NamaAdmin1.setText("ADMIN");
 
+        jButton1_Pilih.setText("Pilih");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,16 +149,18 @@ public class viewDataPasien extends javax.swing.JFrame {
                     .addComponent(jLabel_MengelolaDataPasien1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel_DataPAsien))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addComponent(jLabel_DataPAsien))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1_Pilih, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
+                .addContainerGap(88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,22 +186,71 @@ public class viewDataPasien extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))
+                        .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel_DataPAsien)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1_Pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getjButton1_Pilih() {
+        return jButton1_Pilih;
+    }
+
+    public JButton getjButton_DeleteDataPasien() {
+        return jButton_DeleteDataPasien;
+    }
+
+    public JButton getjButton_EditDataPasien() {
+        return jButton_EditDataPasien;
+    }
+
+    public JButton getjButton_LogOut() {
+        return jButton_LogOut;
+    }
+
+    public JButton getjButton_MelihatJadwalPeriksa() {
+        return jButton_MelihatJadwalPeriksa;
+    }
+
+    public JButton getjButton_MelihatShiftDokter() {
+        return jButton_MelihatShiftDokter;
+    }
+
+    public JButton getjButton_MengelolaShiftDokter() {
+        return jButton_MengelolaShiftDokter;
+    }
+
+    public JButton getjButton_ViewDataPasien() {
+        return jButton_ViewDataPasien;
+    }
+
+    public void setjLabel_NamaAdmin(String jLabel_NamaAdmin) {
+        this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
+    }
+    
+    public void addListener(ActionListener e) {
+        jButton_DeleteDataPasien.addActionListener(e);
+        jButton_EditDataPasien.addActionListener(e);
+        jButton_LogOut.addActionListener(e);
+        jButton_MelihatJadwalPeriksa.addActionListener(e);
+        jButton_MelihatShiftDokter.addActionListener(e);
+        jButton_MengelolaShiftDokter.addActionListener(e);
+        jButton_ViewDataPasien.addActionListener(e);
+        jButton1_Pilih.addActionListener(e);
+    }  
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1_Pilih;
     private javax.swing.JButton jButton_DeleteDataPasien;
     private javax.swing.JButton jButton_EditDataPasien;
     private javax.swing.JButton jButton_LogOut;
@@ -192,12 +263,39 @@ public class viewDataPasien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_MengelolaDataPasien1;
     private javax.swing.JLabel jLabel_NamaAdmin;
     private javax.swing.JLabel jLabel_NamaAdmin1;
-    private javax.swing.JPanel jPanel_foto;
-    private javax.swing.JPanel jPanel_foto1;
-    private javax.swing.JPanel jPanel_foto2;
-    private javax.swing.JPanel jPanel_foto3;
     private javax.swing.JPanel jPanel_foto5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        
+        if (source.equals(this.getjButton_DeleteDataPasien())) {
+            new deleteDataPasien1(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_EditDataPasien())) {
+            new editDataPasien1(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
+            new halamanViewJadwalPeriksaAdmin(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            new halamanLiatShiftJadwalAdmin(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_MengelolaShiftDokter())) {
+            new halamanMembuatShiftJadwal(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton_ViewDataPasien())) {
+            new viewDataPasien(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton1_Pilih())) {
+            new viewDataPasien2(model, admin, pasien);
+            this.dispose();
+        }
+    }
 }

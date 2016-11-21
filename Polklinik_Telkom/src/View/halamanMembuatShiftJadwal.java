@@ -11,6 +11,7 @@ import Model.Jadwal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -32,10 +33,14 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         this.admin = admin;
         this.setLocationRelativeTo(null);
         this.setTitle("Halaman Membuat Shift Jadwal");
-
+        this.setjLabel_NamaAdmin(admin.getNamaAdmin());
         this.setVisible(true);
         this.addListener(this);
         
+    }
+
+    halamanMembuatShiftJadwal(Aplikasi model, Admin admin, Jadwal jadwal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -279,6 +284,12 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_simpanActionPerformed
 
+    public void setjLabel_NamaAdmin(String jLabel_NamaAdmin) {
+        this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
+    }
+
+    
+    
     public JButton getjButton_DeleteDataPasien() {
         return jButton_DeleteDataPasien;
     }
@@ -360,25 +371,33 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         Object source = e.getSource();
         
         if (source.equals(this.getjButton_DeleteDataPasien())) {
-            
+            new deleteDataPasien1(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_EditDataPasien())) {
-            
+            new editDataPasien1(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_LogOut())) {
             new PoliklinikTelkom(model);
             this.dispose();
         } else if (source.equals(this.getjButton_MelihatJadwalPeriksa())) {
-            
+            new halamanViewJadwalPeriksaAdmin(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_MelihatShiftDokter())) {
-            
+            new halamanLiatShiftJadwalAdmin(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_MengelolaShiftDokter())) {
-            
+            new halamanMembuatShiftJadwal(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_ViewDataPasien())) {
-            
+            new viewDataPasien(model, admin);
+            this.dispose();
         } else if (source.equals(this.getjButton_kembali())) {
             new halamanAwalAdmin(model, admin);
             this.dispose();
         } else if (source.equals(this.getjButton_simpan())) {
-            
+            //save dulu
+            new halamanAwalAdmin(model, admin);
+            this.dispose();
         }
     }
 }
