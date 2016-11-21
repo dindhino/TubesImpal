@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2016 at 01:33 AM
+-- Generation Time: Nov 21, 2016 at 07:21 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.37
 
@@ -33,6 +33,13 @@ CREATE TABLE `admin` (
   `Pasien` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`namaAdmin`, `kodeAdmin`, `password`, `Pasien`) VALUES
+('Dindin Dhino Alamsyah', 'Admin1', 'teuing', '');
+
 -- --------------------------------------------------------
 
 --
@@ -44,8 +51,15 @@ CREATE TABLE `dokter` (
   `kodeDokter` varchar(15) NOT NULL,
   `password` varchar(32) NOT NULL,
   `alamat` text NOT NULL,
-  `Pasien` text NOT NULL
+  `Pasien` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dokter`
+--
+
+INSERT INTO `dokter` (`namaDokter`, `kodeDokter`, `password`, `alamat`, `Pasien`) VALUES
+('AN', 'DOKTER1', 'bakekok', 'jayapura', NULL);
 
 -- --------------------------------------------------------
 
@@ -54,11 +68,19 @@ CREATE TABLE `dokter` (
 --
 
 CREATE TABLE `jadwal` (
+  `kodeJadwal` varchar(15) NOT NULL,
   `shift` varchar(15) NOT NULL,
   `hari` varchar(7) NOT NULL,
   `tanggal` date NOT NULL,
-  `Dokter` text NOT NULL
+  `Dokter` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jadwal`
+--
+
+INSERT INTO `jadwal` (`kodeJadwal`, `shift`, `hari`, `tanggal`, `Dokter`) VALUES
+('JADWAL1', '09.00-12.00', 'Selasa', '2016-11-22', NULL);
 
 -- --------------------------------------------------------
 
@@ -73,6 +95,13 @@ CREATE TABLE `obat` (
   `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `obat`
+--
+
+INSERT INTO `obat` (`idObat`, `namaObat`, `jenis`, `harga`) VALUES
+('OBAT1', 'Obeha', 'puyer', 5000);
+
 -- --------------------------------------------------------
 
 --
@@ -84,11 +113,57 @@ CREATE TABLE `pasien` (
   `kodePasien` varchar(15) NOT NULL,
   `password` varchar(32) NOT NULL,
   `umur` int(11) NOT NULL,
-  `keluhan` text NOT NULL,
-  `diagnosa` text NOT NULL,
-  `Obat` text NOT NULL,
-  `Jadwal` text NOT NULL
+  `keluhan` text,
+  `diagnosa` text,
+  `Obat` text,
+  `Jadwal` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pasien`
+--
+
+INSERT INTO `pasien` (`namaPasien`, `kodePasien`, `password`, `umur`, `keluhan`, `diagnosa`, `Obat`, `Jadwal`) VALUES
+('Anggie Nastiti', 'P1301142100', 'anggie', 20, NULL, NULL, NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`kodeAdmin`),
+  ADD UNIQUE KEY `kodeAdmin` (`kodeAdmin`);
+
+--
+-- Indexes for table `dokter`
+--
+ALTER TABLE `dokter`
+  ADD PRIMARY KEY (`kodeDokter`),
+  ADD UNIQUE KEY `kodeDokter` (`kodeDokter`);
+
+--
+-- Indexes for table `jadwal`
+--
+ALTER TABLE `jadwal`
+  ADD PRIMARY KEY (`kodeJadwal`),
+  ADD UNIQUE KEY `kodeJadwal` (`kodeJadwal`);
+
+--
+-- Indexes for table `obat`
+--
+ALTER TABLE `obat`
+  ADD PRIMARY KEY (`idObat`),
+  ADD UNIQUE KEY `idObat` (`idObat`);
+
+--
+-- Indexes for table `pasien`
+--
+ALTER TABLE `pasien`
+  ADD PRIMARY KEY (`kodePasien`),
+  ADD UNIQUE KEY `kodePasien` (`kodePasien`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
