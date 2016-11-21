@@ -182,7 +182,7 @@ public class formRegistrasiDokterAdmin extends javax.swing.JFrame implements Act
             String nama = this.getjTextField_Nama().getText();
             String alamat = this.getjTextField_Alamat().getText();
             String pwd = this.getjPasswordField_Dokter().getText();
-            dokter = new Dokter(nama, ("DOKTER"+model.getListDokter().size()+1), pwd, alamat);
+            dokter = new Dokter(nama, ("DOKTER"+(model.getDb().countDokter()+1)), pwd, alamat);
             model.getDb().saveDokter(dokter);
             new PoliklinikTelkom(model); //belon
             this.dispose();

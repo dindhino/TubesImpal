@@ -47,6 +47,16 @@ public class Database {
         }
     }
 
+    public void saveKeluhan(Pasien p) {
+        try {
+            String query = "UPDATE `pasien` set `keluhan`='" + p.getKeluhan()
+                    + "' where `kodePasien`='" + p.getKodePasien() + "'";
+            st.executeQuery(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void saveDokter(Dokter p) {
         try {
 
@@ -64,7 +74,7 @@ public class Database {
     public Pasien getPasien(String kodePasien) {
         Pasien p = null;
         try {
-            String query = "SELECT * FROM `pasien` WHERE `kodePasien` = " + kodePasien;
+            String query = "SELECT * FROM `pasien` WHERE `kodePasien` = " + "'" + kodePasien + "'";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 p = new Pasien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
@@ -75,22 +85,11 @@ public class Database {
         return p;
     }
 
-    public void saveKeluhan(Pasien p) {
-        try {
-            String query = "update pasien set keluhan ='"
-                    + p.getKeluhan() + "' where kodePasien = "
-                    + p.getKodePasien();
-            st.executeUpdate(query);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public void saveDiagnosa(Pasien p) {
         try {
             String query = "update pasien set diagnosa ='"
-                    + p.getDiagnosa() + "' where kodePasien = "
-                    + p.getKodePasien();
+                    + p.getDiagnosa() + "' where kodePasien = '"
+                    + p.getKodePasien() + "'";
             st.executeUpdate(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -100,8 +99,8 @@ public class Database {
     public void saveObat(Pasien p) {
         try {
             String query = "update pasien set obat ='"
-                    + p.getObat() + "' where kodePasien = "
-                    + p.getKodePasien();
+                    + p.getObat() + "' where kodePasien = '"
+                    + p.getKodePasien() + "'";
             st.executeUpdate(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -111,8 +110,8 @@ public class Database {
     public void saveJadwal(Pasien p) {
         try {
             String query = "update pasien set jadwal ='"
-                    + p.getJadwal() + "' where kodePasien = "
-                    + p.getKodePasien();
+                    + p.getJadwal() + "' where kodePasien = '"
+                    + p.getKodePasien() + "'";
             st.executeUpdate(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -125,8 +124,8 @@ public class Database {
                     + p.getKeluhan() + "', `diagnosa` ='"
                     + p.getDiagnosa() + "', `Obat` ='"
                     + p.getObat() + "', `Jadwal` ='"
-                    + p.getJadwal() + "' where `kodePasien` = "
-                    + p.getKodePasien();
+                    + p.getJadwal() + "' where `kodePasien` = '"
+                    + p.getKodePasien() + "'";
             st.executeUpdate(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -135,7 +134,7 @@ public class Database {
 
     public void deletePasien(Pasien p) {
         try {
-            String query = "delete from pasien where `kodePasien` = " + p.getKodePasien();
+            String query = "delete from pasien where `kodePasien` = " + "'" + p.getKodePasien() + "'";
             st.executeQuery(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -148,7 +147,7 @@ public class Database {
                     + "'" + j.getShift() + "'"
                     + "'" + j.getTanggal() + "'"
                     + "'" + j.getHari() + "')";
-            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+            st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -157,8 +156,8 @@ public class Database {
     public void updateJadwal(Jadwal j, Pasien p) {
         try {
             String query = "update jadwal set shift ='"
-                    + j.getShift() + "' where kodePasien = "
-                    + p.getKodePasien();
+                    + j.getShift() + "' where kodePasien = '"
+                    + p.getKodePasien() + "'";
             st.executeUpdate(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -173,7 +172,7 @@ public class Database {
                     + "'" + d.getKodeDokter() + "',"
                     + "'" + d.getPassword() + "',"
                     + "'" + d.getAlamat() + "')";
-            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+            st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -182,7 +181,7 @@ public class Database {
     public Dokter getDokter(String kodeDokter) {
         Dokter p = null;
         try {
-            String query = "SELECT * FROM `dokter` WHERE `kodeDokter` = " + kodeDokter;
+            String query = "SELECT * FROM `dokter` WHERE `kodeDokter` = " + "'" + kodeDokter + "'";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 p = new Dokter(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
@@ -196,7 +195,7 @@ public class Database {
     public Jadwal getJadwal(String kodeJadwal) {
         Jadwal j = null;
         try {
-            String query = "SELECT * FROM `Jadwal` WHERE `kodeJadwal` = " + kodeJadwal;
+            String query = "SELECT * FROM `Jadwal` WHERE `kodeJadwal` = " + "'" + kodeJadwal + "'";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 j = new Jadwal(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
@@ -210,7 +209,7 @@ public class Database {
     public Obat getObat(String kodeObat) {
         Obat o = null;
         try {
-            String query = "SELECT * FROM `Obat` WHERE `kodeObat` = " + kodeObat;
+            String query = "SELECT * FROM `Obat` WHERE `kodeObat` = " + "'" + kodeObat + "'";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 o = new Obat(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
@@ -224,7 +223,7 @@ public class Database {
     public Admin getAdmin(String kodeAdmin) {
         Admin a = null;
         try {
-            String query = "SELECT * FROM `Admin` WHERE `kodeAdmin` = " + kodeAdmin;
+            String query = "SELECT * FROM `Admin` WHERE `kodeAdmin` = " + "'" + kodeAdmin + "'";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 a = new Admin(rs.getString(1), rs.getString(2), rs.getString(3));
@@ -243,7 +242,7 @@ public class Database {
                     + "'" + ob.getNamaObat() + "',"
                     + "'" + ob.getJenis() + "',"
                     + "'" + ob.getHarga() + "')";
-            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+            st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -256,9 +255,23 @@ public class Database {
                     + "'" + a.getNamaAdmin() + "',"
                     + "'" + a.getKodeAdmin() + "',"
                     + "'" + a.getPassword() + "')";
-            st.execute(query, Statement.RETURN_GENERATED_KEYS);
+            st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public int countDokter() {
+        int count = 0;
+        try {
+            String query = "Select count(*) from `dokter`";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
     }
 }

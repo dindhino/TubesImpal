@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 public class formLoginDokter extends javax.swing.JFrame implements ActionListener {
 
     Aplikasi model;
-    Database db;
     Dokter dokter;
 
     /**
@@ -176,7 +175,7 @@ public class formLoginDokter extends javax.swing.JFrame implements ActionListene
             String unm = this.getjTextField_KodeAdok().getText();
             String pwd = this.getjPasswordField_PassDok().getText();
             //ngecek di db
-            dokter = db.getDokter(unm);
+            dokter = model.getDb().getDokter(unm);
             System.out.println(dokter.getKodeDokter());
             if (dokter != null) {
                 new halamanAwalDokter(model, dokter);

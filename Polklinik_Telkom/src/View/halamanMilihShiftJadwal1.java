@@ -5,6 +5,9 @@
  */
 package View;
 
+import Model.Aplikasi;
+import Model.Jadwal;
+import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -15,12 +18,22 @@ import javax.swing.JTable;
  * @author Dhino
  */
 public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements ActionListener {
-
+    Aplikasi model;
+    Pasien pasien;
+    Jadwal jadwal;
     /**
      * Creates new form halamanMilihShiftJadwal
      */
-    public halamanMilihShiftJadwal1() {
+    public halamanMilihShiftJadwal1(Aplikasi model, Pasien pasien) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman Milih Shift Jadwal");
+
+        this.setVisible(true);
+        this.addListener(this);
+
+        this.pasien = null;
     }
 
     /**
@@ -40,6 +53,7 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_shiftDokter = new javax.swing.JTable();
         jLabel_shiftDokter = new javax.swing.JLabel();
+        jButton_Pilih = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,28 +96,33 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
         jLabel_shiftDokter.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_shiftDokter.setText("SHIFT DOKTER");
 
+        jButton_Pilih.setText("Pilih");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton_Pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_NamaPasien)
-                            .addComponent(jLabel_Pasien)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 966, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_shiftDokter))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jPanel_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_NamaPasien)
+                                    .addComponent(jLabel_Pasien)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 966, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_shiftDokter))))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -127,8 +146,10 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
                         .addGap(98, 98, 98)
                         .addComponent(jLabel_shiftDokter)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,15 +170,23 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
     public void setjTable_shiftDokter(JTable jTable_shiftDokter) {
         this.jTable_shiftDokter = jTable_shiftDokter;
     }
+
+    public JButton getjButton_Pilih() {
+        return jButton_Pilih;
+    }
+    
+    
     
     public void addListener(ActionListener e) {
         jButton_LogOut.addActionListener(e);
         jButton_MelihatShiftDokter.addActionListener(e);
+        jButton_Pilih.addActionListener(e);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_LogOut;
     private javax.swing.JButton jButton_MelihatShiftDokter;
+    private javax.swing.JButton jButton_Pilih;
     private javax.swing.JLabel jLabel_NamaPasien;
     private javax.swing.JLabel jLabel_Pasien;
     private javax.swing.JLabel jLabel_shiftDokter;
@@ -168,6 +197,15 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object source = e.getSource();
+
+        if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            //do nothing
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_Pilih())) {
+            
+        }
     }
 }

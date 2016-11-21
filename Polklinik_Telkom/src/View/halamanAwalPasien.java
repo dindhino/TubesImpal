@@ -10,6 +10,8 @@ import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,7 +40,7 @@ public class halamanAwalPasien extends javax.swing.JFrame implements ActionListe
         this.model = model;
         this.setLocationRelativeTo(null);
         this.setTitle("Halaman Awal Pasien");
-        
+        this.setjLabel_NamaPasien(pasien.getNamaPasien());
         this.setVisible(true);
         this.addListener(this);
         
@@ -159,6 +161,11 @@ public class halamanAwalPasien extends javax.swing.JFrame implements ActionListe
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setjLabel_NamaPasien(String jLabel_NamaPasien) {
+        this.jLabel_NamaPasien.setText(jLabel_NamaPasien);
+    }
+
+    
     public JButton getjButton_LogOut() {
         return jButton_LogOut;
     }
@@ -185,6 +192,14 @@ public class halamanAwalPasien extends javax.swing.JFrame implements ActionListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object source = e.getSource();
+
+        if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            new halamanMilihShiftJadwal1(model, pasien);
+            this.dispose();
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        }
     }
 }
