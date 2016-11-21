@@ -19,7 +19,7 @@ public class Dokter {
     private String password;
     private String alamat;
     private ArrayList<Pasien> pasien;
-    private Database db;
+    public Database db;
 
     public Dokter(String namaDokter, String kodeDokter, String password, String alamat) {
         this.db = new Database();

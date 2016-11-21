@@ -46,15 +46,15 @@ public class Database {
             ex.printStackTrace();
         }
     }
-    
+
     public void saveDokter(Dokter p) {
         try {
 
-            String query = "INSERT INTO `dokter`(`namDokter`, `kodeDokter`, `password`, `alamat`) VALUES ("
-                    + "'" + p.getNamaDokter()+ "',"
-                    + "'" + p.getKodeDokter()+ "',"
+            String query = "INSERT INTO `dokter`(`namaDokter`, `kodeDokter`, `password`, `alamat`) VALUES ("
+                    + "'" + p.getNamaDokter() + "',"
+                    + "'" + p.getKodeDokter() + "',"
                     + "'" + p.getPassword() + "',"
-                    + "'" + p.getAlamat()+ "')";
+                    + "'" + p.getAlamat() + "')";
             st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -182,7 +182,7 @@ public class Database {
     public Dokter getDokter(String kodeDokter) {
         Dokter p = null;
         try {
-            String query = "SELECT * FROM `Dokter` WHERE `kodeDokter` = " + kodeDokter;
+            String query = "SELECT * FROM `dokter` WHERE `kodeDokter` = " + kodeDokter;
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 p = new Dokter(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));

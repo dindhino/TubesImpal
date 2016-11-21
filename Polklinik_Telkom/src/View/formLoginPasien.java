@@ -11,6 +11,7 @@ import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 
@@ -58,17 +59,19 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
         jLabel_kdpas = new javax.swing.JLabel();
         jLabel_pwd = new javax.swing.JLabel();
         TextField_kdpas = new javax.swing.JTextField();
-        jTextField_pwd = new javax.swing.JTextField();
         jButton_OK = new javax.swing.JButton();
         jButton_Kembali = new javax.swing.JButton();
+        jPasswordField_Pass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        label_Login.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        label_Login.setText("Login");
+        label_Login.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        label_Login.setText("LogIn");
 
+        jLabel_kdpas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_kdpas.setText("Kode Pasien :");
 
+        jLabel_pwd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_pwd.setText("Password     :");
 
         TextField_kdpas.addActionListener(new java.awt.event.ActionListener() {
@@ -86,45 +89,49 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(jButton_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jButton_Kembali)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 109, Short.MAX_VALUE)
+                .addGap(516, 516, 516)
+                .addComponent(label_Login)
+                .addGap(0, 787, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(429, 429, 429)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel_kdpas)
                             .addComponent(jLabel_pwd))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextField_kdpas, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(171, 171, 171))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(label_Login)
-                        .addGap(234, 234, 234))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(TextField_kdpas, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPasswordField_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(455, 455, 455)
+                        .addComponent(jButton_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(169, 169, 169)
                 .addComponent(label_Login)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextField_kdpas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_kdpas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_pwd)
-                    .addComponent(jTextField_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_kdpas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_pwd))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TextField_kdpas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPasswordField_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_Kembali)
-                    .addComponent(jButton_OK))
-                .addContainerGap(107, Short.MAX_VALUE))
+                    .addComponent(jButton_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,13 +157,15 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
         this.TextField_kdpas = TextField_kdpas;
     }
 
-    public JTextField getjTextField_pwd() {
-        return jTextField_pwd;
+    public JPasswordField getjPasswordField_Pass() {
+        return jPasswordField_Pass;
     }
 
-    public void setjTextField_pwd(JTextField jTextField_pwd) {
-        this.jTextField_pwd = jTextField_pwd;
+    public void setjPasswordField_Pass(JPasswordField jPasswordField_Pass) {
+        this.jPasswordField_Pass = jPasswordField_Pass;
     }
+    
+    
 
     public void addListener(ActionListener e) {
         jButton_OK.addActionListener(e);
@@ -170,7 +179,7 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
     private javax.swing.JButton jButton_OK;
     private javax.swing.JLabel jLabel_kdpas;
     private javax.swing.JLabel jLabel_pwd;
-    private javax.swing.JTextField jTextField_pwd;
+    private javax.swing.JPasswordField jPasswordField_Pass;
     private javax.swing.JLabel label_Login;
     // End of variables declaration//GEN-END:variables
 
@@ -180,8 +189,16 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
 
         if (source.equals(this.getjButton_OK())) {
             String unm = this.getTextField_kdpas().getText();
-            String pwd = this.getjTextField_pwd().getText();
-            //cek db            
+            String pwd = this.getjPasswordField_Pass().getText();
+            pasien = new Pasien();
+            pasien = model.getDb().getPasien(unm);
+            if (pasien != null) {
+                new halamanAwalPasien(model, pasien);
+                this.dispose();
+            } else {
+                System.out.println("bakekok");
+            }
+            
         } else if (source.equals(this.getjButton_Kembali())) {
             new PoliklinikTelkom(model);
             this.dispose();
