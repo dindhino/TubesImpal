@@ -11,6 +11,7 @@ import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 /**
@@ -18,9 +19,11 @@ import javax.swing.JTable;
  * @author Dhino
  */
 public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements ActionListener {
+
     Aplikasi model;
     Pasien pasien;
     Jadwal jadwal;
+
     /**
      * Creates new form halamanMilihShiftJadwal
      */
@@ -29,11 +32,11 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
         this.model = model;
         this.setLocationRelativeTo(null);
         this.setTitle("Halaman Milih Shift Jadwal");
-
+        this.setjLabel_NamaPasien(pasien.getNamaPasien());
         this.setVisible(true);
         this.addListener(this);
-
-        this.pasien = null;
+        this.jadwal=null;
+        this.pasien = pasien;
     }
 
     /**
@@ -174,9 +177,11 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
     public JButton getjButton_Pilih() {
         return jButton_Pilih;
     }
-    
-    
-    
+
+    public void setjLabel_NamaPasien(String jLabel_NamaPasien) {
+        this.jLabel_NamaPasien.setText(jLabel_NamaPasien);
+    }
+
     public void addListener(ActionListener e) {
         jButton_LogOut.addActionListener(e);
         jButton_MelihatShiftDokter.addActionListener(e);
@@ -205,7 +210,8 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
             new PoliklinikTelkom(model);
             this.dispose();
         } else if (source.equals(this.getjButton_Pilih())) {
-            
+            new halamanMilihShiftJadwal2(model, pasien);
+            this.dispose();
         }
     }
 }

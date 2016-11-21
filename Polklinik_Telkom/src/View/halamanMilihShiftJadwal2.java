@@ -5,22 +5,36 @@
  */
 package View;
 
+import Model.Aplikasi;
+import Model.Pasien;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 /**
  *
  * @author Dhino
  */
-public class halamanMilihShiftJadwal2 extends javax.swing.JFrame {
-
+public class halamanMilihShiftJadwal2 extends javax.swing.JFrame implements ActionListener {
+    Aplikasi model;
+    Pasien pasien;
+    
     /**
      * Creates new form halamanMilihShiftJadwal2
      */
-    public halamanMilihShiftJadwal2() {
+    public halamanMilihShiftJadwal2(Aplikasi model, Pasien pasien) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman Milih Shift Jadwal");
+        this.setjLabel_NamaPasien(pasien.getNamaPasien());
+        this.setVisible(true);
+        this.addListener(this);
+        this.pasien = pasien;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,6 +163,10 @@ public class halamanMilihShiftJadwal2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setjLabel_NamaPasien(String jLabel_NamaPasien) {
+        this.jLabel_NamaPasien.setText(jLabel_NamaPasien);
+    }
+    
     public JButton getjButton_Kembali() {
         return jButton_Kembali;
     }
@@ -193,4 +211,24 @@ public class halamanMilihShiftJadwal2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            new halamanMilihShiftJadwal1(model, pasien);
+            this.dispose();
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_ok())) {
+            //savedulu
+            new halamanMilihShiftJadwal3(model, pasien);
+            this.dispose();
+        } else if (source.equals(this.getjButton_Kembali())) {
+            new halamanMilihShiftJadwal1(model, pasien);
+            this.dispose();
+        }
+    }
 }

@@ -5,6 +5,8 @@
  */
 package View;
 
+import Model.Aplikasi;
+import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -16,13 +18,22 @@ import javax.swing.JTextArea;
  * @author Dhino
  */
 public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements ActionListener {
-
+    Aplikasi model;
+    Pasien pasien;
     /**
      * Creates new form halamanMilihShiftJadwal3
      */
-    public halamanMilihShiftJadwal3() {
+    public halamanMilihShiftJadwal3(Aplikasi model, Pasien pasien) {
         initComponents();
+        this.model = model;
+        this.setLocationRelativeTo(null);
+        this.setTitle("Halaman Milih Shift Jadwal");
+        this.setjLabel_NamaPasien(pasien.getNamaPasien());
+        this.setVisible(true);
+        this.addListener(this);
+        this.pasien = pasien;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,8 +242,8 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
         this.jLabel_DokterText = jLabel_DokterText;
     }
 
-    public void setjLabel_NamaPasien(JLabel jLabel_NamaPasien) {
-        this.jLabel_NamaPasien = jLabel_NamaPasien;
+    public void setjLabel_NamaPasien(String jLabel_NamaPasien) {
+        this.jLabel_NamaPasien.setText(jLabel_NamaPasien);
     }
 
     public void setjLabel_jamtext(JLabel jLabel_jamtext) {
@@ -250,7 +261,6 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
     public void setjTextArea1(JTextArea jTextArea1) {
         this.jTextArea1 = jTextArea1;
     }
-
     
     
     public void addListener(ActionListener e) {
@@ -282,6 +292,21 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Object source = e.getSource();
+
+        if (source.equals(this.getjButton_MelihatShiftDokter())) {
+            new halamanMilihShiftJadwal1(model, pasien);
+            this.dispose();
+        } else if (source.equals(this.getjButton_LogOut())) {
+            new PoliklinikTelkom(model);
+            this.dispose();
+        } else if (source.equals(this.getjButton_OK())) {
+            //savedulu
+            new halamanAwalPasien(model, pasien);
+            this.dispose();
+        } else if (source.equals(this.getjButton_kembali())) {
+            new halamanMilihShiftJadwal1(model, pasien);
+            this.dispose();
+        }
     }
 }
