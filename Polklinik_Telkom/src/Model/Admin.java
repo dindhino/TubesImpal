@@ -24,7 +24,7 @@ public class Admin {
         this.namaAdmin = namaAdmin;
         this.kodeAdmin = kodeAdmin;
         this.password = password;
-        this.pasien = pasien;
+        this.pasien = new ArrayList<>();
     }
 
     public String getKodeAdmin() {

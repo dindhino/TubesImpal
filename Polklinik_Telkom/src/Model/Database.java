@@ -46,6 +46,16 @@ public class Database {
             ex.printStackTrace();
         }
     }
+    
+    public void updatePasienAdm(Admin a, Pasien p) {
+        try {
+
+            String query = "UPDATE `admin` set `Pasien` = '" + p.toString() + "' where `kodeAdmin` = '" + a.getKodeAdmin() + "'";
+            st.execute(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void saveKeluhan(Pasien p) {
         try {

@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.Admin;
 import Model.Aplikasi;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
@@ -236,6 +237,9 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
             int umur = Integer.parseInt(this.getjTextField_umur().getText());
             pasien = new Pasien(nama, "P"+nim, pwd, umur);
             model.getDb().savePasien(pasien);
+            Admin adm = model.getDb().getAdmin("ADMIN1");
+            adm.setPasien(pasien);
+            model.getDb().updatePasienAdm(adm, pasien);
             new PoliklinikTelkom(model);//belon
             this.dispose();
         } else if (source.equals(this.getjButton_Kembali())) {
