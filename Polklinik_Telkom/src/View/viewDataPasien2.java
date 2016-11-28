@@ -7,6 +7,7 @@ package View;
 
 import Model.Admin;
 import Model.Aplikasi;
+import Model.Jadwal;
 import Model.Obat;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
@@ -36,6 +37,7 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
         this.setTitle("Halaman View Data Pasien");
         this.setjLabel_NamaAdmin(admin.getNamaAdmin());
         this.setjLabel_namatext(pasien.getNamaPasien());
+        this.setjLabel_kodepasientext(pasien.getKodePasien());
         this.setjLabel_shifttext(pasien);
         this.setjLabel_umurtext(pasien.getUmur());
         this.setjTextArea_keluhan(pasien.getKeluhan());
@@ -336,7 +338,10 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
     }
 
     public void setjLabel_shifttext(Pasien pasien) {
-        //mirip sama si resep oat
+        String s = "";
+        for(Jadwal j : pasien.getJadwal()){
+            s += j.getShift() + ", ";
+        }
     }
 
     public JLabel getjLabel_umurtext() {
@@ -374,6 +379,16 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
     public void setjTextArea_keluhan(String jTextArea_keluhan) {
         this.jTextArea_keluhan.setText(jTextArea_keluhan);
     }
+
+    public JLabel getjLabel_kodepasientext() {
+        return jLabel_kodepasientext;
+    }
+
+    public void setjLabel_kodepasientext(String jLabel_kodepasientext) {
+        this.jLabel_kodepasientext.setText(jLabel_kodepasientext);
+    }
+    
+    
 
     public void addListener(ActionListener e) {
         jButton_DeleteDataPasien.addActionListener(e);

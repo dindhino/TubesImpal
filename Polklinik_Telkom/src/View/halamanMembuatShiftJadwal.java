@@ -7,21 +7,35 @@ package View;
 
 import Model.Admin;
 import Model.Aplikasi;
+import Model.Dokter;
 import Model.Jadwal;
+import Model.Database;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import org.jdesktop.swingx.JXDatePicker;
 
 /**
  *
  * @author Dhino
  */
 public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements ActionListener {
-    
+
     Aplikasi model;
+    Dokter dokter;
     Admin admin;
     Jadwal jadwal;
+    Database db;
 
     /**
      * Creates new form membuatShiftJadwal
@@ -36,11 +50,8 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         this.setjLabel_NamaAdmin(admin.getNamaAdmin());
         this.setVisible(true);
         this.addListener(this);
-        
-    }
-
-    halamanMembuatShiftJadwal(Aplikasi model, Admin admin, Jadwal jadwal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.dokter = null;
+        this.db = null;
     }
 
     /**
@@ -64,19 +75,17 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         jButton_MengelolaShiftDokter = new javax.swing.JButton();
         jButton_MelihatShiftDokter = new javax.swing.JButton();
         jButton_MelihatJadwalPeriksa = new javax.swing.JButton();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
-        jLabel_namaDokter = new javax.swing.JLabel();
         jLabel_membuatShiftDokter = new javax.swing.JLabel();
         jLabel_kodePasien = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel_KodePasienText = new javax.swing.JLabel();
         jLabel_tanggal = new javax.swing.JLabel();
-        jLabel_hari = new javax.swing.JLabel();
         jLabel_shift = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton_kembali = new javax.swing.JButton();
         jButton_simpan = new javax.swing.JButton();
-        jTextField1_Hari = new javax.swing.JTextField();
+        jTextField_kodedokter = new javax.swing.JTextField();
+        jLabel_hari = new javax.swing.JLabel();
+        jTextField_hari = new javax.swing.JTextField();
+        jTextField_tanggal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -125,20 +134,12 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         jButton_MelihatJadwalPeriksa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton_MelihatJadwalPeriksa.setText("Melihat Jadwal Periksa");
 
-        jLabel_namaDokter.setText("Nama Dokter :");
-
         jLabel_membuatShiftDokter.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_membuatShiftDokter.setText("Membuat Shift Dokter");
 
-        jLabel_kodePasien.setText("Kode Pasien :");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel_KodePasienText.setText("jLabel4");
+        jLabel_kodePasien.setText("Kode Dokter :");
 
         jLabel_tanggal.setText("Tanggal :");
-
-        jLabel_hari.setText("Hari :");
 
         jLabel_shift.setText("Shift :");
 
@@ -160,6 +161,14 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
             }
         });
 
+        jLabel_hari.setText("Hari :");
+
+        jTextField_tanggal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_tanggalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,74 +185,81 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
                                 .addComponent(jLabel_Admin)
                                 .addGap(293, 293, 293)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel_membuatShiftDokter)
-                                    .addComponent(jLabel_KodePasienText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField_kodedokter, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField1_Hari, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                        .addComponent(jTextField_tanggal, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField_hari, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))))))
                     .addComponent(jButton_DeleteDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_MengelolaDataPasien)
                     .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_MengelolaDataPasien1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156)
+                        .addComponent(jButton_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton_kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton_ViewDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_MengelolaDataPasien))
                         .addGap(144, 144, 144)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_shift)
+                            .addComponent(jLabel_hari)
                             .addComponent(jLabel_tanggal)
                             .addComponent(jLabel_kodePasien)
-                            .addComponent(jLabel_namaDokter)
-                            .addComponent(jLabel_hari)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156)
-                        .addComponent(jButton_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(jButton_kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(112, 112, 112)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel_shift))))
                 .addContainerGap(416, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jPanel_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel_Admin)
+                                .addGap(23, 23, 23)
+                                .addComponent(jPanel_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabel_membuatShiftDokter)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel_NamaAdmin)
-                        .addGap(42, 42, 42)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_namaDokter)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_kodePasien)
-                    .addComponent(jLabel_KodePasienText))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel_Admin)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(92, 92, 92)
+                                        .addComponent(jLabel_membuatShiftDokter)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel_NamaAdmin)
+                                .addGap(42, 42, 42)))
+                        .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_kodePasien))
+                    .addComponent(jTextField_kodedokter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addComponent(jLabel_MengelolaDataPasien)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton_ViewDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_tanggal)
+                            .addComponent(jTextField_tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_hari)
+                            .addComponent(jTextField_hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton_ViewDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_DeleteDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,18 +274,8 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
                             .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_tanggal)
-                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_hari)
-                            .addComponent(jTextField1_Hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_shift)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel_shift)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -284,12 +290,14 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_simpanActionPerformed
 
+    private void jTextField_tanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_tanggalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_tanggalActionPerformed
+
     public void setjLabel_NamaAdmin(String jLabel_NamaAdmin) {
         this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
     }
 
-    
-    
     public JButton getjButton_DeleteDataPasien() {
         return jButton_DeleteDataPasien;
     }
@@ -322,8 +330,32 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         return jButton_kembali;
     }
 
+    public JComboBox<String> getjComboBox2() {
+        return jComboBox2;
+    }
+
+    public JTextField getjTextField_hari() {
+        return jTextField_hari;
+    }
+
+    public void setjTextField_hari(JTextField jTextField_hari) {
+        this.jTextField_hari = jTextField_hari;
+    }
+
     public JButton getjButton_simpan() {
         return jButton_simpan;
+    }
+
+    public JTextField getjTextField_kodedokter() {
+        return jTextField_kodedokter;
+    }
+
+    public void setjTextField_kodedokter(JTextField jTextField_kodedokter) {
+        this.jTextField_kodedokter = jTextField_kodedokter;
+    }
+
+    public JTextField getjTextField_tanggal() {
+        return jTextField_tanggal;
     }
 
     public void addListener(ActionListener e) {
@@ -336,7 +368,7 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
         jButton_ViewDataPasien.addActionListener(e);
         jButton_kembali.addActionListener(e);
         jButton_simpan.addActionListener(e);
-    }  
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_DeleteDataPasien;
@@ -348,28 +380,26 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
     private javax.swing.JButton jButton_ViewDataPasien;
     private javax.swing.JButton jButton_kembali;
     private javax.swing.JButton jButton_simpan;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel_Admin;
-    private javax.swing.JLabel jLabel_KodePasienText;
     private javax.swing.JLabel jLabel_MengelolaDataPasien;
     private javax.swing.JLabel jLabel_MengelolaDataPasien1;
     private javax.swing.JLabel jLabel_NamaAdmin;
     private javax.swing.JLabel jLabel_hari;
     private javax.swing.JLabel jLabel_kodePasien;
     private javax.swing.JLabel jLabel_membuatShiftDokter;
-    private javax.swing.JLabel jLabel_namaDokter;
     private javax.swing.JLabel jLabel_shift;
     private javax.swing.JLabel jLabel_tanggal;
     private javax.swing.JPanel jPanel_foto;
-    private javax.swing.JTextField jTextField1_Hari;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private javax.swing.JTextField jTextField_hari;
+    private javax.swing.JTextField jTextField_kodedokter;
+    private javax.swing.JTextField jTextField_tanggal;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        
+
         if (source.equals(this.getjButton_DeleteDataPasien())) {
             new deleteDataPasien1(model, admin);
             this.dispose();
@@ -396,8 +426,32 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
             this.dispose();
         } else if (source.equals(this.getjButton_simpan())) {
             //save dulu
-            new halamanAwalAdmin(model, admin);
-            this.dispose();
+            String kodedokter = this.getjTextField_kodedokter().getText();
+            Dokter dok = null;
+            dok = model.getDb().getDokter(kodedokter);
+
+            if (dok != null) {
+//                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+//                String formatted = format1.format(this.getjXDatePicker1().getDate());
+//                System.out.println(formatted);
+                Jadwal jadwalnew = new Jadwal("JADWAL" + (model.getDb().countJadwal() + 1),
+                        this.getjComboBox2().getItemAt(this.getjComboBox2().getSelectedIndex()),
+                        this.getjTextField_hari().getText(),
+                        this.getjTextField_tanggal().getText());
+                model.getDb().saveNewJadwal(jadwalnew);
+
+                new halamanAwalAdmin(model, admin);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Kode dokter tidak ditemukan");
+            }
+
+            //this.getjXDatePicker1().setFormats("yyyy-MM-dd");                
+//                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+//                String formatted = format1.format(this.getjXDatePicker1().getEditor().getValue());
+//                System.out.println(formatted);
+//            this.getjXDatePicker1().setFormats("yyyy-MM-dd");
+//            System.out.println(this.getjXDatePicker1().getDate());
         }
     }
 }
