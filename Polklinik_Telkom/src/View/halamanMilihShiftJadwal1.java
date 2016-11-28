@@ -10,9 +10,11 @@ import Model.Jadwal;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,6 +39,16 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
         this.addListener(this);
         this.jadwal=null;
         this.pasien = pasien;
+        
+        DefaultTableModel dm = (DefaultTableModel) this.getjTable_shiftDokter().getModel();
+        Object rowData[] = new Object[3];
+        ArrayList<Jadwal> jdw = model.getDb().getAllJadwal();
+        for (int i=0; i<jdw.size() ;i++) {
+            rowData[0] = jdw.get(i).getShift();
+            rowData[1] = jdw.get(i).getHari();
+            rowData[2] = "DOKTER1";
+            dm.addRow(rowData);
+        }
     }
 
     /**
@@ -88,7 +100,7 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
 
             },
             new String [] {
-                "Shift", "Jam", "Dokter"
+                "Shift", "Hari", "Dokter"
             }
         ));
         jScrollPane1.setViewportView(jTable_shiftDokter);

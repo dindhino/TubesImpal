@@ -23,6 +23,13 @@ public class Obat {
         this.jenis = jenis;
         this.harga = harga;
     }
+    
+    public Obat(String idObat) {
+        this.idObat = idObat;
+        this.namaObat = null;
+        this.jenis = null;
+        this.harga = 0;
+    }
 
     public String getIdObat() {
         return idObat;

@@ -32,6 +32,11 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
         this.setVisible(true);
         this.addListener(this);
         this.pasien = pasien;
+        
+        this.setjLabel_DokterText("DOKTER1");
+        this.setjLabel_jamtext("Selasa");
+        this.setjLabel_shifttext("09.00-12.00");
+        this.setjTextArea1(pasien.getKeluhan());
     }
 
 
@@ -105,7 +110,7 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
 
         jLabel_shifttext.setText("jLabel2");
 
-        jLabel_jam.setText("Jam :");
+        jLabel_jam.setText("Hari    :");
 
         jLabel_dokter.setText("Dokter :");
 
@@ -238,30 +243,29 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
         return jButton_kembali;
     }
 
-    public void setjLabel_DokterText(JLabel jLabel_DokterText) {
-        this.jLabel_DokterText = jLabel_DokterText;
+    public void setjLabel_DokterText(String jLabel_DokterText) {
+        this.jLabel_DokterText.setText(jLabel_DokterText);
     }
 
     public void setjLabel_NamaPasien(String jLabel_NamaPasien) {
         this.jLabel_NamaPasien.setText(jLabel_NamaPasien);
     }
 
-    public void setjLabel_jamtext(JLabel jLabel_jamtext) {
-        this.jLabel_jamtext = jLabel_jamtext;
+    public void setjLabel_jamtext(String jLabel_jamtext) {
+        this.jLabel_jamtext.setText(jLabel_jamtext);
     }
 
-    public void setjLabel_shifttext(JLabel jLabel_shifttext) {
-        this.jLabel_shifttext = jLabel_shifttext;
+    public void setjLabel_shifttext(String jLabel_shifttext) {
+        this.jLabel_shifttext.setText(jLabel_shifttext);
     }
 
     public JTextArea getjTextArea1() {
         return jTextArea1;
     }
 
-    public void setjTextArea1(JTextArea jTextArea1) {
-        this.jTextArea1 = jTextArea1;
+    public void setjTextArea1(String jTextArea1) {
+        this.jTextArea1.setText(jTextArea1);
     }
-    
     
     public void addListener(ActionListener e) {
         jButton_kembali.addActionListener(e);

@@ -438,6 +438,7 @@ public class halamanMembuatShiftJadwal extends javax.swing.JFrame implements Act
                         this.getjComboBox2().getItemAt(this.getjComboBox2().getSelectedIndex()),
                         this.getjTextField_hari().getText(),
                         this.getjTextField_tanggal().getText());
+                jadwalnew.setDokter(dok);
                 model.getDb().saveNewJadwal(jadwalnew);
 
                 new halamanAwalAdmin(model, admin);

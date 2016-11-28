@@ -224,6 +224,8 @@ public class halamanMilihShiftJadwal2 extends javax.swing.JFrame implements Acti
             this.dispose();
         } else if (source.equals(this.getjButton_ok())) {
             //savedulu
+            pasien.setKeluhan(this.getjTextArea1().getText());
+            model.getDb().saveKeluhan(pasien);
             new halamanMilihShiftJadwal3(model, pasien);
             this.dispose();
         } else if (source.equals(this.getjButton_Kembali())) {

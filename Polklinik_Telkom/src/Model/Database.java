@@ -64,9 +64,8 @@ public class Database {
 
     public void saveKeluhan(Pasien p) {
         try {
-            String query = "UPDATE `pasien` set `keluhan`='" + p.getKeluhan()
-                    + "' where `kodePasien`='" + p.getKodePasien() + "'";
-            st.executeQuery(query);
+            String query = "UPDATE `pasien` set `keluhan` = '" + p.getKeluhan() + "' where `kodePasien` = '" + p.getKodePasien() + "'";
+            st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -126,11 +125,12 @@ public class Database {
         try {
 //            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 //            Date date = format.parse(j.getTanggal());
-            String query = "INSERT INTO `jadwal`(`kodeJadwal`, `tanggal`, `shift`, `hari`) VALUES ("
+            String query = "INSERT INTO `jadwal`(`kodeJadwal`, `tanggal`, `shift`, `hari`, `Dokter`) VALUES ("
                     + "'" + j.getKodeJadwal()+ "',"
                     + "'" + j.getTanggal() + "',"
                     + "'" + j.getShift() + "',"
-                    + "'" + j.getHari() + "')";
+                    + "'" + j.getHari()+ "',"
+                    + "'" + j.getDokter()+ "')";
             st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -166,18 +166,6 @@ public class Database {
         try {
             String query = "delete from pasien where `kodePasien` = " + "'" + p.getKodePasien() + "'";
             st.executeQuery(query);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void Jadwal(Jadwal j) {
-        try {
-            String query = "insert into `Jadwal` (`shift`, `tanggal`, `hari`) values ("
-                    + "'" + j.getShift() + "'"
-                    + "'" + j.getTanggal() + "'"
-                    + "'" + j.getHari() + "')";
-            st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -252,7 +240,7 @@ public class Database {
     
     public ArrayList<Dokter> getAllDokter() {
         Dokter p = null;
-        ArrayList<Dokter> dok = null;
+        ArrayList<Dokter> dok = new ArrayList<Dokter>();
         try {
             String query = "Select * from `Dokter`";
             ResultSet rs = st.executeQuery(query);
@@ -264,6 +252,25 @@ public class Database {
             ex.printStackTrace();
         }
         return dok;
+    }
+    
+    public ArrayList<Jadwal> getAllJadwal() {
+        Jadwal p = null;
+        ArrayList<Jadwal> jad = new ArrayList<Jadwal>();
+        Dokter dok = new Dokter();
+        try {
+            String query = "Select * from `Jadwal`";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                p = new Jadwal(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+//                dok = (Model.Dokter) rs.getObject(5);
+//                p.setDokter(dok);
+                jad.add(p);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return jad;
     }
     
     public Pasien getPasien(String kodeDokter, String pwd) {

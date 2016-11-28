@@ -116,6 +116,11 @@ public class Pasien {
     public void setObat(Obat obat) {
         this.obat.add(obat);
     }
+    
+    public void setidObat(String ID){
+        Obat obats = new Obat(ID);
+        this.obat.add(obats);
+    }
 
     public String getKeluhan() {
         return keluhan;

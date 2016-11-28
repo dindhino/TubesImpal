@@ -7,17 +7,24 @@ package View;
 
 import Model.Aplikasi;
 import Model.Dokter;
+import Model.Jadwal;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Ganis
  */
-public class formInputDiagnosa1 extends javax.swing.JFrame implements ActionListener {
+public class formInputDiagnosa1 extends javax.swing.JFrame implements ActionListener, MouseListener {
     Aplikasi model;
     Dokter dokter;
     Pasien pasien;
@@ -34,6 +41,18 @@ public class formInputDiagnosa1 extends javax.swing.JFrame implements ActionList
         this.setjLabel_NamaDokter1(dokter.getNamaDokter());
         this.setVisible(true);
         this.addListener(this);
+        
+        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+        Object rowData[] = new Object[3];
+        ArrayList<Pasien> pas = model.getDb().getAllPasien();
+        for (int i=0; i<pas.size() ;i++) {
+            for (int j=0; j<pas.get(i).getJadwal().size(); j++){
+                rowData[0] = pas.get(i).getJadwal().get(j).getShift();
+                rowData[1] = pas.get(i).getJadwal().get(j).getHari();
+                rowData[2] = pas.get(i).getJadwal().get(j).getDokter();
+                dm.addRow(rowData);
+            }
+        }
     }
 
     public void addListener(ActionListener e) {
@@ -42,6 +61,10 @@ public class formInputDiagnosa1 extends javax.swing.JFrame implements ActionList
         jButton_MenginputDiagnosa.addActionListener(e);
         jButton_MenginputObat.addActionListener(e);
         jButton1_pilih.addActionListener(e);
+    }
+    
+    public void addAdapter (MouseListener e) {
+        jTable1.addMouseListener(e);
     }
     
     /**
@@ -103,7 +126,7 @@ public class formInputDiagnosa1 extends javax.swing.JFrame implements ActionList
 
             },
             new String [] {
-                "Shit", "Jam", "Dokter"
+                "Shift", "Hari", "Dokter"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -209,6 +232,15 @@ public class formInputDiagnosa1 extends javax.swing.JFrame implements ActionList
     public JButton getjButton_MenginputObat() {
         return jButton_MenginputObat;
     }
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,5 +279,35 @@ public class formInputDiagnosa1 extends javax.swing.JFrame implements ActionList
             new formInputDiagnosa2(model, dokter, pasien);
             this.dispose();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        Object src = me.getSource();
+        if (src.equals(getjTable1())) {
+            int row = getjTable1().getSelectedRow();
+            String kodepasien = this.getjTable1().getModel().getValueAt(row, 0).toString();
+            this.pasien = model.getDb().getPasien(kodepasien);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

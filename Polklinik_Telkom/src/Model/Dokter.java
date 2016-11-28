@@ -21,6 +21,16 @@ public class Dokter {
     private ArrayList<Pasien> pasien;
     public Database db;
 
+    public Dokter() {
+        this.namaDokter = null;
+        this.kodeDokter = null;
+        this.password = null;
+        this.alamat = null;
+        this.pasien = new ArrayList<Pasien>();
+    }
+    
+    
+
     public Dokter(String namaDokter, String kodeDokter, String password, String alamat) {
         this.db = new Database();
         this.namaDokter = namaDokter;

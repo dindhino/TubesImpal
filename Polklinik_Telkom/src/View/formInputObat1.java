@@ -6,20 +6,27 @@
 package View;
 
 import Model.Aplikasi;
+import Model.Database;
 import Model.Dokter;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Dhino
  */
-public class formInputObat1 extends javax.swing.JFrame implements ActionListener {
+public class formInputObat1 extends javax.swing.JFrame implements ActionListener, MouseListener {
     Aplikasi model;
     Dokter dokter;
     Pasien pasien;
+    Database db;
     
     /**
      * Creates new form formInputObat1
@@ -42,6 +49,18 @@ public class formInputObat1 extends javax.swing.JFrame implements ActionListener
         jButton_MenginputDiagnosa.addActionListener(e);
         jButton_MenginputObat.addActionListener(e);
         jButton1_Pilih.addActionListener(e);
+        
+        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+        Object rowData[] = new Object[3];
+        ArrayList<Pasien> pas = model.getDb().getAllPasien();
+        for (int i=0; i<pas.size() ;i++) {
+            for (int j=0; j<pas.get(i).getJadwal().size(); j++){
+                rowData[0] = pas.get(i).getJadwal().get(j).getShift();
+                rowData[1] = pas.get(i).getJadwal().get(j).getHari();
+                rowData[2] = pas.get(i).getJadwal().get(j).getDokter();
+                dm.addRow(rowData);
+            }
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +121,7 @@ public class formInputObat1 extends javax.swing.JFrame implements ActionListener
 
             },
             new String [] {
-                "Shit", "Jam", "Dokter"
+                "Shift", "Hari", "Dokter"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -197,6 +216,14 @@ public class formInputObat1 extends javax.swing.JFrame implements ActionListener
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
+
    public void setjLabel_NamaDokter1(String jLabel_NamaDokter1) {
         this.jLabel_NamaDokter1.setText(jLabel_NamaDokter1);
     }
@@ -263,4 +290,34 @@ public class formInputObat1 extends javax.swing.JFrame implements ActionListener
             this.dispose();
         }
     }
+    
+    public void mouseClicked(MouseEvent me) {
+        Object src = me.getSource();
+        if (src.equals(getjTable1())) {
+            int row = getjTable1().getSelectedRow();
+            String kodepasien = this.getjTable1().getModel().getValueAt(row, 0).toString();
+            this.pasien = model.getDb().getPasien(kodepasien);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
