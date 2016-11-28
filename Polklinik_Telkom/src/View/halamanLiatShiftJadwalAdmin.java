@@ -7,17 +7,23 @@ package View;
 
 import Model.Admin;
 import Model.Aplikasi;
+import Model.Dokter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Dhino
  */
 public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements ActionListener {
+
     Aplikasi model;
     Admin admin;
+
     /**
      * Creates new form halamanLiatShiftJadwalAdmin
      */
@@ -30,6 +36,28 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
         this.setVisible(true);
         this.addListener(this);
         this.admin = admin;
+
+        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+        Object rowData[] = new Object[3];
+        ArrayList<Dokter> dok = model.getDb().getAllDokter();
+        if (dok == null) {
+            rowData[0] = " - ";
+            rowData[1] = " - ";
+            rowData[2] = " - ";
+            dm.addRow(rowData);
+        } else {
+            for (int i = 0; i < dok.size(); i++) {
+                for (int j = 0; j < dok.get(i).getPasien().size(); i++) {
+                    for (int k = 0; k < dok.get(i).getPasien().get(j).getJadwal().size(); i++) {
+                        rowData[0] = dok.get(i).getKodeDokter();
+                        rowData[1] = dok.get(i).getPasien().get(j).getJadwal().get(k).getShift();
+                        rowData[1] = dok.get(i).getPasien().get(j).getKodePasien();
+                        dm.addRow(rowData);
+                    }
+                }
+
+            }
+        }
     }
 
     /**
@@ -146,7 +174,7 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
                             .addComponent(jLabel_DataDokter)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1013, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,6 +252,11 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
         this.jLabel_NamaDokter.setText(jLabel_NamaDokter);
     }
 
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_DeleteDataPasien;
     private javax.swing.JButton jButton_EditDataPasien;
@@ -241,7 +274,7 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-    
+
     public void addListener(ActionListener e) {
         jButton_DeleteDataPasien.addActionListener(e);
         jButton_EditDataPasien.addActionListener(e);
@@ -250,12 +283,12 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
         jButton_MelihatShiftDokter.addActionListener(e);
         jButton_MengelolaShiftDokter.addActionListener(e);
         jButton_ViewDataPasien.addActionListener(e);
-    }  
-    
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        
+
         if (source.equals(this.getjButton_DeleteDataPasien())) {
             new deleteDataPasien1(model, admin);
             this.dispose();

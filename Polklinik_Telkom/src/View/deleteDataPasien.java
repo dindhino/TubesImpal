@@ -7,11 +7,15 @@ package View;
 
 import Model.Admin;
 import Model.Aplikasi;
+import Model.Jadwal;
+import Model.Obat;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -30,6 +34,13 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         this.setLocationRelativeTo(null);
         this.setTitle("Halaman Delete Data Pasien");
         this.setjLabel_NamaAdmin(admin.getNamaAdmin());
+        this.setjLabel_namatext(pasien.getNamaPasien());
+        this.setjLabel_kodepasientext(pasien.getKodePasien());
+        this.setjLabel_shifttext(pasien);
+        this.setjLabel_umurtext(pasien.getUmur());
+        this.setjTextArea_keluhan(pasien.getKeluhan());
+        this.setjTextArea_diagnosadokter(pasien.getDiagnosa());
+        this.setjTextArea_ResepObat(pasien.getObat());
         this.setVisible(true);
         this.addListener(this);
         this.admin = admin;
@@ -324,6 +335,71 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
     }
     
+      public JLabel getjLabel_namatext() {
+        return jLabel_namatext;
+    }
+
+    public void setjLabel_namatext(String jLabel_namatext) {
+        this.jLabel_namatext.setText(jLabel_namatext);
+    }
+
+    public JLabel getjLabel_shifttext() {
+        return jLabel_shifttext;
+    }
+
+    public void setjLabel_shifttext(Pasien pasien) {
+        String s = "";
+        for(Jadwal j : pasien.getJadwal()){
+            s += j.getShift() + ", ";
+        }
+    }
+
+    public JLabel getjLabel_umurtext() {
+        return jLabel_umurtext;
+    }
+
+    public void setjLabel_umurtext(int jLabel_umurtext) {
+        this.jLabel_umurtext.setText(Integer.toString(jLabel_umurtext));
+    }
+
+    public JTextArea getjTextArea_ResepObat() {
+        return jTextArea_ResepObat;
+    }
+
+    public void setjTextArea_ResepObat(ArrayList<Obat> obat) {
+        String yay = "";
+        for(int i =0; i <= obat.size();i++){
+            yay += obat.get(i).getNamaObat() +"\t";
+        }
+        this.jLabel_ResepObat.setText(yay);
+    }
+
+    public JTextArea getjTextArea_diagnosadokter() {
+        return jTextArea_diagnosadokter;
+    }
+
+    public void setjTextArea_diagnosadokter(String jTextArea_diagnosadokter) {
+        this.jTextArea_diagnosadokter.setText(jTextArea_diagnosadokter);
+    }
+
+    public JTextArea getjTextArea_keluhan() {
+        return jTextArea_keluhan;
+    }
+
+    public void setjTextArea_keluhan(String jTextArea_keluhan) {
+        this.jTextArea_keluhan.setText(jTextArea_keluhan);
+    }
+
+    public JLabel getjLabel_kodepasientext() {
+        return jLabel_kodepasientext;
+    }
+
+    public void setjLabel_kodepasientext(String jLabel_kodepasientext) {
+        this.jLabel_kodepasientext.setText(jLabel_kodepasientext);
+    }
+    
+    
+    
     public void addListener(ActionListener e) {
         jButton_DeleteDataPasien.addActionListener(e);
         jButton_EditDataPasien.addActionListener(e);
@@ -375,6 +451,8 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         Object source = e.getSource();
         
         if (source.equals(this.getjButton_DeleteDataPasien())) {
+            //DELETE
+            model.getDb().deletePasien(pasien);
             new deleteDataPasien1(model, admin);
             this.dispose();
         } else if (source.equals(this.getjButton_EditDataPasien())) {

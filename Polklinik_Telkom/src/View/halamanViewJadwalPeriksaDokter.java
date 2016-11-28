@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,6 +33,28 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implement
         this.setjLabel_NamaDokter(dokter.getNamaDokter());
         this.setVisible(true);
         this.addListener(this);
+        
+        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+        Object rowData[] = new Object[5];
+        if (dokter.getPasien().size() == 0) {
+            rowData[0] = " - ";
+            rowData[1] = " - ";
+            rowData[2] = " - ";
+            rowData[3] = " - ";
+            rowData[4] = " - ";
+            dm.addRow(rowData);
+        } else {
+            for (int i = 0; i < dokter.getPasien().size(); i++) {
+                for (int j = 0; j < dokter.getPasien().get(i).getJadwal().size(); j++) {
+                    rowData[0] = dokter.getPasien().get(i).getNamaPasien();
+                    rowData[1] = dokter.getPasien().get(i).getJadwal().get(j).getDokter();
+                    rowData[2] = dokter.getPasien().get(i).getJadwal().get(j).getShift();
+                    rowData[3] = dokter.getPasien().get(i).getJadwal().get(j).getTanggal();
+                    rowData[4] = dokter.getPasien().get(i).getJadwal().get(j).getHari();
+                    dm.addRow(rowData);
+                }
+            }
+        }
     }
 
     public void addListener(ActionListener e) {
@@ -97,7 +121,7 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implement
 
             },
             new String [] {
-                "Nama Pasien", "Nama Dokter", "Shift", "Tanggal Lahir"
+                "Nama Pasien", "Nama Dokter", "Shift", "Tanggal", "Hari"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -163,6 +187,14 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implement
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
+    public void setjTable1(JTable jTable1) {
+        this.jTable1 = jTable1;
+    }
 
     public JButton getjButton_LogOut() {
         return jButton_LogOut;

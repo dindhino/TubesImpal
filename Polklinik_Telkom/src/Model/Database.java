@@ -10,7 +10,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  *
@@ -112,6 +117,21 @@ public class Database {
                     + p.getObat() + "' where kodePasien = '"
                     + p.getKodePasien() + "'";
             st.executeUpdate(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void saveNewJadwal(Jadwal j) {
+        try {
+//            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+//            Date date = format.parse(j.getTanggal());
+            String query = "INSERT INTO `jadwal`(`kodeJadwal`, `tanggal`, `shift`, `hari`) VALUES ("
+                    + "'" + j.getKodeJadwal()+ "',"
+                    + "'" + j.getTanggal() + "',"
+                    + "'" + j.getShift() + "',"
+                    + "'" + j.getHari() + "')";
+            st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -230,6 +250,22 @@ public class Database {
         return p;
     }
     
+    public ArrayList<Dokter> getAllDokter() {
+        Dokter p = null;
+        ArrayList<Dokter> dok = null;
+        try {
+            String query = "Select * from `Dokter`";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                p = new Dokter(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                dok.add(p);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return dok;
+    }
+    
     public Pasien getPasien(String kodeDokter, String pwd) {
         Pasien p = null;
         try {
@@ -317,6 +353,20 @@ public class Database {
         int count = 0;
         try {
             String query = "Select count(*) from `dokter`";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return count;
+    }
+    
+    public int countJadwal() {
+        int count = 0;
+        try {
+            String query = "Select count(*) from `Jadwal`";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 count = rs.getInt(1);
