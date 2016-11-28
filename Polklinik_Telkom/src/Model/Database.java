@@ -326,4 +326,27 @@ public class Database {
         }
         return count;
     }
+    
+    public ArrayList<Pasien> getAllPasien() {
+        ArrayList<Pasien> a = null;
+        Pasien p = new Pasien(null, null, null, 0);
+        Jadwal j = new Jadwal(null, null, null, null);
+        Dokter d = new Dokter(null, null, null, null);
+        try {
+            String query = "select * from `Admin` join `Pasien` join `Jadwal` where `Pasien` = `kodePasien` and `kodeJadwal` = `Jadwal";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                j.setKodeJadwal(rs.getString("kodeJadwal"));
+                j.setShift(rs.getString("shift"));
+                j.setHari(rs.getString("hari"));
+                j.setTanggal(rs.getString("tanggal"));
+                d.setKodeDokter(rs.getString("kodeDokter"));
+                j.setDokter(d);
+                p.setJadwal(j);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return a;
+    }
 }

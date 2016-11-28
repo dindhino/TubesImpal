@@ -104,6 +104,10 @@ public class Pasien {
     public void setJadwal(ArrayList<Jadwal> jadwal) {
         this.jadwal = jadwal;
     }
+    
+    public void setJadwal(Jadwal jadwal) {
+        this.jadwal.add(jadwal);
+    }
 
     public ArrayList<Obat> getObat() {
         return obat;
