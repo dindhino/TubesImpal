@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2016 at 07:21 PM
+-- Generation Time: Nov 30, 2016 at 06:33 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.37
 
@@ -38,7 +38,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`namaAdmin`, `kodeAdmin`, `password`, `Pasien`) VALUES
-('Dindin Dhino Alamsyah', 'Admin1', 'teuing', '');
+('Dindin Dhino Alamsyah', 'Admin1', 'teuing', 'Model.Pasien@5d3fd37d');
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,11 @@ CREATE TABLE `jadwal` (
 --
 
 INSERT INTO `jadwal` (`kodeJadwal`, `shift`, `hari`, `tanggal`, `Dokter`) VALUES
-('JADWAL1', '09.00-12.00', 'Selasa', '2016-11-22', NULL);
+('JADWAL1', '09.00-12.00', 'Selasa', '2016-11-22', NULL),
+('JADWAL2', '09.00-12.00', 'Selasa', '2016-11-29', NULL),
+('JADWAL3', '13.00-15.00', 'Selasa', '2016-12-29', NULL),
+('JADWAL4', '13.00-15.00', 'Selasa', '2016-12-29', '[Model.Dokter@640c657f]'),
+('JADWAL5', '09.00-12.00', 'KAMIS', '2016-12-01', '[Model.Dokter@1ff08e62]');
 
 -- --------------------------------------------------------
 
@@ -124,7 +128,10 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`namaPasien`, `kodePasien`, `password`, `umur`, `keluhan`, `diagnosa`, `Obat`, `Jadwal`) VALUES
-('Anggie Nastiti', 'P1301142100', 'anggie', 20, NULL, NULL, NULL, NULL);
+('bakeok', 'P123', '321', 321, 'sakit eu', NULL, NULL, NULL),
+('indah', 'P1301140310', 'asda', 23, NULL, NULL, NULL, NULL),
+('Anggie Nastiti', 'P1301142100', 'anggie', 20, 'sakit perut pengen berak cuyy', NULL, NULL, NULL),
+('ganis', 'P1301144270', 'a', 72, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
