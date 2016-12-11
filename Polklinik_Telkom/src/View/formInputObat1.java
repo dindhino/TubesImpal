@@ -8,6 +8,7 @@ package View;
 import Model.Aplikasi;
 import Model.Database;
 import Model.Dokter;
+import Model.Jadwal;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Dhino
  */
-public class formInputObat1 extends javax.swing.JFrame implements ActionListener, MouseListener {
+public class formInputObat1 extends javax.swing.JFrame implements ActionListener {
     Aplikasi model;
     Dokter dokter;
     Pasien pasien;
@@ -41,6 +42,25 @@ public class formInputObat1 extends javax.swing.JFrame implements ActionListener
         this.setjLabel_NamaDokter1(dokter.getNamaDokter());
         this.setVisible(true);
         this.addListener(this);
+        
+        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+        Object rowData[] = new Object[3];
+        ArrayList<Jadwal> jad = model.getDb().getAllJadwal();
+        if (jad.size() == 0) {
+            rowData[0] = " - ";
+            rowData[1] = " - ";
+            rowData[2] = " - ";
+            dm.addRow(rowData);
+        } else {
+            for (int i = 0; i < jad.size(); i++) {
+                if ((jad.get(i).getKodeDokter().equals(dokter.getKodeDokter())) && jad.get(i).getKodePasien() != null) {
+                    rowData[0] = jad.get(i).getShift();
+                    rowData[1] = jad.get(i).getTanggal();
+                    rowData[2] = jad.get(i).getKodePasien();
+                    dm.addRow(rowData);
+                }
+            }
+        }
     }
 
     public void addListener(ActionListener e) {
@@ -50,17 +70,7 @@ public class formInputObat1 extends javax.swing.JFrame implements ActionListener
         jButton_MenginputObat.addActionListener(e);
         jButton1_Pilih.addActionListener(e);
         
-        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
-        Object rowData[] = new Object[3];
-        ArrayList<Pasien> pas = model.getDb().getAllPasien();
-        for (int i=0; i<pas.size() ;i++) {
-            for (int j=0; j<pas.get(i).getJadwal().size(); j++){
-                rowData[0] = pas.get(i).getJadwal().get(j).getShift();
-                rowData[1] = pas.get(i).getJadwal().get(j).getHari();
-                rowData[2] = pas.get(i).getJadwal().get(j).getDokter();
-                dm.addRow(rowData);
-            }
-        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,7 +131,7 @@ public class formInputObat1 extends javax.swing.JFrame implements ActionListener
 
             },
             new String [] {
-                "Shift", "Hari", "Dokter"
+                "Shift", "Tanggal", "Kode Pasien"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -285,39 +295,10 @@ public class formInputObat1 extends javax.swing.JFrame implements ActionListener
             new formInputObat1(model, dokter);
             this.dispose();
         } else if (source.equals(this.getjButton1_Pilih())) {
-            //get dulu
+            pasien = model.getDb().getPasien((String) this.getjTable1().getValueAt(this.getjTable1().getSelectedRow(), 2));
             new formInputObat2(model, dokter, pasien);
             this.dispose();
         }
-    }
-    
-    public void mouseClicked(MouseEvent me) {
-        Object src = me.getSource();
-        if (src.equals(getjTable1())) {
-            int row = getjTable1().getSelectedRow();
-            String kodepasien = this.getjTable1().getModel().getValueAt(row, 0).toString();
-            this.pasien = model.getDb().getPasien(kodepasien);
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

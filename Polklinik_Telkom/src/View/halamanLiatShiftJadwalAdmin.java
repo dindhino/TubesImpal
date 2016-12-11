@@ -8,6 +8,7 @@ package View;
 import Model.Admin;
 import Model.Aplikasi;
 import Model.Dokter;
+import Model.Jadwal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -39,23 +40,22 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
 
         DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
         Object rowData[] = new Object[3];
-        ArrayList<Dokter> dok = model.getDb().getAllDokter();
-        if (dok == null) {
+        ArrayList<Jadwal> jad = model.getDb().getAllJadwal();
+        if (jad == null) {
             rowData[0] = " - ";
             rowData[1] = " - ";
             rowData[2] = " - ";
             dm.addRow(rowData);
         } else {
-            for (int i = 0; i < dok.size(); i++) {
-                for (int j = 0; j < dok.get(i).getPasien().size(); i++) {
-                    for (int k = 0; k < dok.get(i).getPasien().get(j).getJadwal().size(); i++) {
-                        rowData[0] = dok.get(i).getKodeDokter();
-                        rowData[1] = dok.get(i).getPasien().get(j).getJadwal().get(k).getShift();
-                        rowData[1] = dok.get(i).getPasien().get(j).getKodePasien();
-                        dm.addRow(rowData);
-                    }
+            for (int i = 0; i < jad.size(); i++) {
+                rowData[0] = jad.get(i).getKodeDokter();
+                rowData[1] = jad.get(i).getShift();
+                if (jad.get(i).getKodePasien() != null) {
+                    rowData[2] = jad.get(i).getKodePasien();
+                } else {
+                    rowData[2] = "-";
                 }
-
+                dm.addRow(rowData);
             }
         }
     }

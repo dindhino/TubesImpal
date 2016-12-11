@@ -22,10 +22,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Dhino
  */
 public class deleteDataPasien1 extends javax.swing.JFrame implements ActionListener, MouseListener {
+
     Aplikasi model;
     Admin admin;
     Pasien pasien;
     Database db;
+
     /**
      * Creates new form deleteDataPasien1
      */
@@ -39,28 +41,28 @@ public class deleteDataPasien1 extends javax.swing.JFrame implements ActionListe
         this.addListener(this);
         this.admin = admin;
         this.pasien = null;
-        
-         DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
-        Object rowData[] = new Object[2];
-        if (admin.getPasien().size() == 0) {
-            rowData[0] = "MASIH";
-            rowData[1] = "KOSONG";
-            dm.addRow(rowData);
-        } else {
-            for (int i = 0; i < admin.getPasien().size(); i++) {
-                if (admin.getPasien().get(i).getJadwal().size() == 0) {
-                    rowData[0] = "MASIH";
-                    rowData[1] = "KOSONG";
-                    dm.addRow(rowData);
-                } else {
-                    for (int j = 0; j < admin.getPasien().get(i).getJadwal().size(); j++) {
-                        rowData[0] = admin.getPasien().get(i).getKodePasien();
-                        rowData[1] = admin.getPasien().get(i).getJadwal().get(j).getShift();
-                        dm.addRow(rowData);
-                    }
-                }
-            }
-        }
+
+//        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+//        Object rowData[] = new Object[2];
+//        if (admin.getPasien().size() == 0) {
+//            rowData[0] = "MASIH";
+//            rowData[1] = "KOSONG";
+//            dm.addRow(rowData);
+//        } else {
+//            for (int i = 0; i < admin.getPasien().size(); i++) {
+//                if (admin.getPasien().get(i).getJadwal().size() == 0) {
+//                    rowData[0] = "MASIH";
+//                    rowData[1] = "KOSONG";
+//                    dm.addRow(rowData);
+//                } else {
+//                    for (int j = 0; j < admin.getPasien().get(i).getJadwal().size(); j++) {
+//                        rowData[0] = admin.getPasien().get(i).getKodePasien();
+//                        rowData[1] = admin.getPasien().get(i).getJadwal().get(j).getShift();
+//                        dm.addRow(rowData);
+//                    }
+//                }
+//            }
+//        }
     }
 
     /**
@@ -275,11 +277,11 @@ public class deleteDataPasien1 extends javax.swing.JFrame implements ActionListe
     public void setjTable1(JTable jTable1) {
         this.jTable1 = jTable1;
     }
-    
-    public void addAdapter (MouseListener e) {
+
+    public void addAdapter(MouseListener e) {
         jTable1.addMouseListener(e);
     }
-    
+
     public void addListener(ActionListener e) {
         jButton_DeleteDataPasien.addActionListener(e);
         jButton_EditDataPasien.addActionListener(e);
@@ -289,12 +291,12 @@ public class deleteDataPasien1 extends javax.swing.JFrame implements ActionListe
         jButton_MengelolaShiftDokter.addActionListener(e);
         jButton_ViewDataPasien.addActionListener(e);
         jButton1_Pilih.addActionListener(e);
-    }  
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        
+
         if (source.equals(this.getjButton_DeleteDataPasien())) {
             new deleteDataPasien1(model, admin);
             this.dispose();
@@ -322,7 +324,7 @@ public class deleteDataPasien1 extends javax.swing.JFrame implements ActionListe
         }
     }
 
-    public void mouseClicked(MouseEvent me){
+    public void mouseClicked(MouseEvent me) {
         Object src = me.getSource();
         if (src.equals(getjTable1())) {
             int row = getjTable1().getSelectedRow();

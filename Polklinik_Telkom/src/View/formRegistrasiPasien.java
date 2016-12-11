@@ -10,7 +10,9 @@ import Model.Aplikasi;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -22,6 +24,7 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
 
     Aplikasi model;
     Pasien pasien;
+
     /**
      * Creates new form formRegistrasiPasien
      */
@@ -30,10 +33,10 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
         this.model = model;
         this.setLocationRelativeTo(null);
         this.setTitle("Registasi Pasien");
-        
+
         this.setVisible(true);
         this.addListener(this);
-        
+
         this.pasien = null;
     }
 
@@ -204,9 +207,6 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
         this.jPassField1_pwd = jPassField1_pwd;
     }
 
-    
-
-    
     public void addListener(ActionListener e) {
         jButton_OK.addActionListener(e);
         jButton_Kembali.addActionListener(e);
@@ -235,13 +235,24 @@ public class formRegistrasiPasien extends javax.swing.JFrame implements ActionLi
             String nim = this.getjTextFiel_NIM().getText();
             String pwd = this.getjTextField1_pwd().getText();
             int umur = Integer.parseInt(this.getjTextField_umur().getText());
-            pasien = new Pasien(nama, "P"+nim, pwd, umur);
-            model.getDb().savePasien(pasien);
-            Admin adm = model.getDb().getAdmin("ADMIN1");
-            adm.setPasien(pasien);
-            model.getDb().updatePasienAdm(adm, pasien);
-            new PoliklinikTelkom(model);//belon
-            this.dispose();
+            pasien = new Pasien(nama, "P" + nim, pwd, umur);
+            try {
+                model.getDb().regPasien(pasien);
+                JOptionPane.showMessageDialog(this, "Registrasi Pasien berhasil dengan Kode=" + pasien.getKodePasien() + " dan Password=" + pasien.getPassword());
+                new PoliklinikTelkom(model);
+                this.dispose();
+            } catch (NumberFormatException nf) {
+                JOptionPane.showMessageDialog(this, nf);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            } catch (StringIndexOutOfBoundsException sioob) {
+                JOptionPane.showMessageDialog(this, sioob);
+            } catch (NullPointerException np) {
+                JOptionPane.showMessageDialog(this, np);
+            } catch (Exception exc) {
+                JOptionPane.showMessageDialog(this, exc);
+            }
+
         } else if (source.equals(this.getjButton_Kembali())) {
             new PoliklinikTelkom(model);
             this.dispose();

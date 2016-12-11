@@ -40,27 +40,27 @@ public class editDataPasien1 extends javax.swing.JFrame implements ActionListene
         this.admin = admin;
         this.pasien = null;
         
-        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
-        Object rowData[] = new Object[2];
-        if (admin.getPasien().size() == 0) {
-            rowData[0] = "MASIH";
-            rowData[1] = "KOSONG";
-            dm.addRow(rowData);
-        } else {
-            for (int i = 0; i < admin.getPasien().size(); i++) {
-                if (admin.getPasien().get(i).getJadwal().size() == 0) {
-                    rowData[0] = "MASIH";
-                    rowData[1] = "KOSONG";
-                    dm.addRow(rowData);
-                } else {
-                    for (int j = 0; j < admin.getPasien().get(i).getJadwal().size(); j++) {
-                        rowData[0] = admin.getPasien().get(i).getKodePasien();
-                        rowData[1] = admin.getPasien().get(i).getJadwal().get(j).getShift();
-                        dm.addRow(rowData);
-                    }
-                }
-            }
-        }
+//        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+//        Object rowData[] = new Object[2];
+//        if (admin.getPasien().size() == 0) {
+//            rowData[0] = "MASIH";
+//            rowData[1] = "KOSONG";
+//            dm.addRow(rowData);
+//        } else {
+//            for (int i = 0; i < admin.getPasien().size(); i++) {
+//                if (admin.getPasien().get(i).getJadwal().size() == 0) {
+//                    rowData[0] = "MASIH";
+//                    rowData[1] = "KOSONG";
+//                    dm.addRow(rowData);
+//                } else {
+//                    for (int j = 0; j < admin.getPasien().get(i).getJadwal().size(); j++) {
+//                        rowData[0] = admin.getPasien().get(i).getKodePasien();
+//                        rowData[1] = admin.getPasien().get(i).getJadwal().get(j).getShift();
+//                        dm.addRow(rowData);
+//                    }
+//                }
+//            }
+//        }
     }
 
     /**

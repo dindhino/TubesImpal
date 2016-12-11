@@ -37,16 +37,16 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
         this.setjLabel_NamaPasien(pasien.getNamaPasien());
         this.setVisible(true);
         this.addListener(this);
-        this.jadwal=null;
+        this.jadwal = null;
         this.pasien = pasien;
-        
+
         DefaultTableModel dm = (DefaultTableModel) this.getjTable_shiftDokter().getModel();
         Object rowData[] = new Object[3];
         ArrayList<Jadwal> jdw = model.getDb().getAllJadwal();
-        for (int i=0; i<jdw.size() ;i++) {
+        for (int i = 0; i < jdw.size(); i++) {
             rowData[0] = jdw.get(i).getShift();
-            rowData[1] = jdw.get(i).getHari();
-            rowData[2] = "DOKTER1";
+            rowData[1] = jdw.get(i).getTanggal();
+            rowData[2] = jdw.get(i).getKodeDokter();
             dm.addRow(rowData);
         }
     }
@@ -100,7 +100,7 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
 
             },
             new String [] {
-                "Shift", "Hari", "Dokter"
+                "Shift", "Tanggal", "Dokter"
             }
         ));
         jScrollPane1.setViewportView(jTable_shiftDokter);
@@ -222,7 +222,11 @@ public class halamanMilihShiftJadwal1 extends javax.swing.JFrame implements Acti
             new PoliklinikTelkom(model);
             this.dispose();
         } else if (source.equals(this.getjButton_Pilih())) {
-            new halamanMilihShiftJadwal2(model, pasien);
+            jadwal = new Jadwal();
+            jadwal = model.getDb().getJadwal("JADWAL" + (this.getjTable_shiftDokter().getSelectedRow()+1));
+            jadwal.setKodePasien(pasien.getKodePasien());
+            model.getDb().pilihJadwal(jadwal, pasien);
+            new halamanMilihShiftJadwal2(model, pasien, jadwal);
             this.dispose();
         }
     }

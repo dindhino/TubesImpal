@@ -173,7 +173,7 @@
                 <Column editable="true" title="Nama Dokter" type="java.lang.Object"/>
                 <Column editable="true" title="Shift" type="java.lang.Object"/>
                 <Column editable="true" title="Tanggal" type="java.lang.Object"/>
-                <Column editable="true" title="Hari" type="java.lang.Object"/>
+                <Column editable="true" title="Kode Jadwal" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

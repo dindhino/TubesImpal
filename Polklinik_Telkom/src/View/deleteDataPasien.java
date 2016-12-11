@@ -40,7 +40,7 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         this.setjLabel_umurtext(pasien.getUmur());
         this.setjTextArea_keluhan(pasien.getKeluhan());
         this.setjTextArea_diagnosadokter(pasien.getDiagnosa());
-        this.setjTextArea_ResepObat(pasien.getObat());
+        this.setjTextArea_ResepObat(pasien.getKodeObat());
         this.setVisible(true);
         this.addListener(this);
         this.admin = admin;
@@ -348,10 +348,10 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
     }
 
     public void setjLabel_shifttext(Pasien pasien) {
-        String s = "";
-        for(Jadwal j : pasien.getJadwal()){
-            s += j.getShift() + ", ";
-        }
+//        String s = "";
+//        for(Jadwal j : pasien.getJadwal()){
+//            s += j.getShift() + ", ";
+//        }
     }
 
     public JLabel getjLabel_umurtext() {
@@ -366,12 +366,8 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         return jTextArea_ResepObat;
     }
 
-    public void setjTextArea_ResepObat(ArrayList<Obat> obat) {
-        String yay = "";
-        for(int i =0; i <= obat.size();i++){
-            yay += obat.get(i).getNamaObat() +"\t";
-        }
-        this.jLabel_ResepObat.setText(yay);
+    public void setjTextArea_ResepObat(String obat) {
+        this.jLabel_ResepObat.setText(obat);
     }
 
     public JTextArea getjTextArea_diagnosadokter() {

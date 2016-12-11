@@ -7,10 +7,12 @@ package View;
 
 import Model.Aplikasi;
 import Model.Dokter;
+import Model.Jadwal;
+import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,8 +21,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Dhino
  */
 public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implements ActionListener {
+
     Aplikasi model;
     Dokter dokter;
+    Pasien pasien;
+
     /**
      * Creates new form halamanLiatShiftJadwal
      */
@@ -33,10 +38,14 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implement
         this.setjLabel_NamaDokter(dokter.getNamaDokter());
         this.setVisible(true);
         this.addListener(this);
-        
+        this.pasien = null;
+
+        ArrayList<Jadwal> jad = new ArrayList<Jadwal>();
+        jad = model.getDb().getAllJadwal();
+
         DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
         Object rowData[] = new Object[5];
-        if (dokter.getPasien().size() == 0) {
+        if (jad.size() == 0) {
             rowData[0] = " - ";
             rowData[1] = " - ";
             rowData[2] = " - ";
@@ -44,13 +53,18 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implement
             rowData[4] = " - ";
             dm.addRow(rowData);
         } else {
-            for (int i = 0; i < dokter.getPasien().size(); i++) {
-                for (int j = 0; j < dokter.getPasien().get(i).getJadwal().size(); j++) {
-                    rowData[0] = dokter.getPasien().get(i).getNamaPasien();
-                    rowData[1] = dokter.getPasien().get(i).getJadwal().get(j).getDokter();
-                    rowData[2] = dokter.getPasien().get(i).getJadwal().get(j).getShift();
-                    rowData[3] = dokter.getPasien().get(i).getJadwal().get(j).getTanggal();
-                    rowData[4] = dokter.getPasien().get(i).getJadwal().get(j).getHari();
+            for (int i = 0; i < jad.size(); i++) {
+                if ((jad.get(i).getKodeDokter().equals(dokter.getKodeDokter()))) {
+                    if (jad.get(i).getKodePasien() != null) {
+                        pasien = model.getDb().getPasien(jad.get(i).getKodePasien());
+                        rowData[0] = pasien.getNamaPasien();
+                    } else {
+                        rowData[0] = "-";
+                    }
+                    rowData[1] = dokter.getNamaDokter();
+                    rowData[2] = jad.get(i).getShift();
+                    rowData[3] = jad.get(i).getTanggal();
+                    rowData[4] = jad.get(i).getKodeJadwal();
                     dm.addRow(rowData);
                 }
             }
@@ -121,7 +135,7 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implement
 
             },
             new String [] {
-                "Nama Pasien", "Nama Dokter", "Shift", "Tanggal", "Hari"
+                "Nama Pasien", "Nama Dokter", "Shift", "Tanggal", "Kode Jadwal"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -215,8 +229,7 @@ public class halamanViewJadwalPeriksaDokter extends javax.swing.JFrame implement
     public void setjLabel_NamaDokter(String jLabel_NamaDokter) {
         this.jLabel_NamaDokter.setText(jLabel_NamaDokter);
     }
-   
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_LogOut;

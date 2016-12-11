@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -33,17 +34,16 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
         initComponents();
         this.model = model;
         this.dokter = dokter;
-        this.pasien = null;
+        this.pasien = pasien;
         this.setLocationRelativeTo(null);
         this.setTitle("Halaman Input Diagnosa");
         this.setjLabel_NamaDokter(dokter.getNamaDokter());
         this.setjLabel_namatext(pasien.getNamaPasien());
-        this.setjLabel_kodepasientext(pasien.getKodePasien());
         this.setjLabel_umurtext(pasien.getUmur());
-        this.setjLabel_shifttext(pasien);
+        this.setjLabel_kodepasientext(pasien.getKodePasien());
         this.setjTextArea_keluhan(pasien.getKeluhan());
         this.setjTextArea_diagnosadokter(pasien.getDiagnosa());
-        this.setjTextArea_ResepObat(pasien.getObat());
+        this.setjTextArea_ResepObat(pasien.getKodeObat());
         this.setVisible(true);
         this.addListener(this);
     }
@@ -78,7 +78,6 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
         jLabel_nama = new javax.swing.JLabel();
         jLabel_Umur = new javax.swing.JLabel();
         jLabel_KodePasien = new javax.swing.JLabel();
-        jLabel_Shift = new javax.swing.JLabel();
         jLabel_Keluhan = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_keluhan = new javax.swing.JTextArea();
@@ -93,12 +92,10 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
         jLabel_namatext = new javax.swing.JLabel();
         jLabel_umurtext = new javax.swing.JLabel();
         jLabel_kodepasientext = new javax.swing.JLabel();
-        jLabel_shifttext = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel_Dokter = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jButton_MenginputObat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton_MenginputObat.setText("Menginput Obat");
@@ -132,8 +129,6 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
 
         jLabel_KodePasien.setText("Kode Pasien :");
 
-        jLabel_Shift.setText("Shift :");
-
         jLabel_Keluhan.setText("Keluhan");
 
         jTextArea_keluhan.setColumns(20);
@@ -161,8 +156,6 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
         jLabel_umurtext.setText("jLabel2");
 
         jLabel_kodepasientext.setText("jLabel3");
-
-        jLabel_shifttext.setText("jLabel4");
 
         jLabel_Dokter.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_Dokter.setText("DOKTER");
@@ -207,11 +200,9 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel_KodePasien)
                                     .addComponent(jLabel_Umur)
-                                    .addComponent(jLabel_nama)
-                                    .addComponent(jLabel_Shift))
+                                    .addComponent(jLabel_nama))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_shifttext)
                                     .addComponent(jLabel_namatext)
                                     .addComponent(jLabel_umurtext)
                                     .addComponent(jLabel_kodepasientext))))))
@@ -258,11 +249,7 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel_KodePasien)
                             .addComponent(jLabel_kodepasientext))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_Shift)
-                            .addComponent(jLabel_shifttext))
-                        .addGap(33, 33, 33)
+                        .addGap(56, 56, 56)
                         .addComponent(jLabel_Keluhan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,12 +325,8 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
         return jTextArea_ResepObat;
     }
 
-    public void setjTextArea_ResepObat(ArrayList<Obat> obat) {
-        String yay = "";
-        for(int i =0; i <= obat.size();i++){
-            yay += obat.get(i).getNamaObat() +"\t";
-        }
-        this.jLabel_ResepObat.setText(yay);
+    public void setjTextArea_ResepObat(String obat) {
+        this.jTextArea_ResepObat.setText(obat);
     }
 
     public JTextArea getjTextArea_diagnosadokter() {
@@ -370,16 +353,6 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
         this.jLabel_kodepasientext.setText(jLabel_kodepasientext);
     }
 
-    public JLabel getjLabel_shifttext() {
-        return jLabel_shifttext;
-    }
-
-    public void setjLabel_shifttext(Pasien pasien) {
-        String s = "";
-        for(Jadwal j : pasien.getJadwal()){
-            s += j.getShift() + ", ";
-        }
-    }
  
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -395,12 +368,10 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
     private javax.swing.JLabel jLabel_KodePasien;
     private javax.swing.JLabel jLabel_NamaDokter;
     private javax.swing.JLabel jLabel_ResepObat;
-    private javax.swing.JLabel jLabel_Shift;
     private javax.swing.JLabel jLabel_Umur;
     private javax.swing.JLabel jLabel_kodepasientext;
     private javax.swing.JLabel jLabel_nama;
     private javax.swing.JLabel jLabel_namatext;
-    private javax.swing.JLabel jLabel_shifttext;
     private javax.swing.JLabel jLabel_umurtext;
     private javax.swing.JPanel jPanel_foto;
     private javax.swing.JScrollPane jScrollPane1;
@@ -433,10 +404,10 @@ public class formInputDiagnosa2 extends javax.swing.JFrame implements ActionList
             new formInputDiagnosa1(model, dokter);
             this.dispose();
         } else if (source.equals(this.getjButton_OK())) {
-            //savedulu
             this.pasien.setDiagnosa(getjTextArea_diagnosadokter().getText());
-            model.getDb().savePasien(pasien);
+            model.getDb().inputDiagnosa(pasien);
             new formInputDiagnosa1(model, dokter);
+            JOptionPane.showMessageDialog(this, "Input diagnosa berhasil");
             this.dispose();
         }
     }

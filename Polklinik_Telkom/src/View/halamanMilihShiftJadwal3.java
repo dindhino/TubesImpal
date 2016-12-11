@@ -6,11 +6,13 @@
 package View;
 
 import Model.Aplikasi;
+import Model.Jadwal;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -20,10 +22,11 @@ import javax.swing.JTextArea;
 public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements ActionListener {
     Aplikasi model;
     Pasien pasien;
+    Jadwal jadwal;
     /**
      * Creates new form halamanMilihShiftJadwal3
      */
-    public halamanMilihShiftJadwal3(Aplikasi model, Pasien pasien) {
+    public halamanMilihShiftJadwal3(Aplikasi model, Pasien pasien, Jadwal jadwal) {
         initComponents();
         this.model = model;
         this.setLocationRelativeTo(null);
@@ -32,10 +35,10 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
         this.setVisible(true);
         this.addListener(this);
         this.pasien = pasien;
-        
-        this.setjLabel_DokterText("DOKTER1");
-        this.setjLabel_jamtext("Selasa");
-        this.setjLabel_shifttext("09.00-12.00");
+        this.jadwal = jadwal;
+        this.setjLabel_DokterText(jadwal.getKodeDokter());
+        this.setjLabel_jamtext(jadwal.getTanggal());
+        this.setjLabel_shifttext(jadwal.getShift());
         this.setjTextArea1(pasien.getKeluhan());
     }
 
@@ -110,9 +113,9 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
 
         jLabel_shifttext.setText("jLabel2");
 
-        jLabel_jam.setText("Hari    :");
+        jLabel_jam.setText("Tanggal  :");
 
-        jLabel_dokter.setText("Dokter :");
+        jLabel_dokter.setText("Dokter    :");
 
         jLabel_jamtext.setText("jLabel5");
 
@@ -305,7 +308,7 @@ public class halamanMilihShiftJadwal3 extends javax.swing.JFrame implements Acti
             new PoliklinikTelkom(model);
             this.dispose();
         } else if (source.equals(this.getjButton_OK())) {
-            //savedulu
+            JOptionPane.showMessageDialog(this, "Data sudah tersimpan");
             new halamanAwalPasien(model, pasien);
             this.dispose();
         } else if (source.equals(this.getjButton_kembali())) {

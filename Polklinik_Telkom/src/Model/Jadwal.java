@@ -33,6 +33,16 @@ public class Jadwal {
         this.kodePasien = kodePasien;
     }
 
+    public Jadwal() {
+        this.kodeJadwal = null;
+        this.shift = null;
+        this.tanggal = null;
+        this.kodeDokter = null;
+        this.kodePasien = null;
+    }
+    
+    
+
     public String getKodeJadwal() {
         return kodeJadwal;
     }

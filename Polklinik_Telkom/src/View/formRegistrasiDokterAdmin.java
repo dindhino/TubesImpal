@@ -9,7 +9,11 @@ import Model.Aplikasi;
 import Model.Dokter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -21,6 +25,7 @@ public class formRegistrasiDokterAdmin extends javax.swing.JFrame implements Act
 
     Aplikasi model;
     Dokter dokter;
+
     /**
      * Creates new form formRegistrasiDokterAdmin
      */
@@ -29,10 +34,10 @@ public class formRegistrasiDokterAdmin extends javax.swing.JFrame implements Act
         this.model = model;
         this.setLocationRelativeTo(null);
         this.setTitle("Registasi Dokter");
-        
+
         this.setVisible(true);
         this.addListener(this);
-        
+
         this.dokter = null;
     }
 
@@ -152,7 +157,7 @@ public class formRegistrasiDokterAdmin extends javax.swing.JFrame implements Act
     public void setjTextField_Alamat(JTextField jTextField_Alamat) {
         this.jTextField_Alamat = jTextField_Alamat;
     }
-    
+
     public void addListener(ActionListener e) {
         jButton_Register.addActionListener(e);
         jButton_Kembali.addActionListener(e);
@@ -173,19 +178,28 @@ public class formRegistrasiDokterAdmin extends javax.swing.JFrame implements Act
     public JTextField getjTextField_Nama() {
         return jTextField_Nama;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        
+
         if (source.equals(this.getjButton_Register())) {
             String nama = this.getjTextField_Nama().getText();
             String alamat = this.getjTextField_Alamat().getText();
             String pwd = this.getjPasswordField_Dokter().getText();
-            dokter = new Dokter(nama, ("DOKTER"+(model.getDb().countDokter()+1)), pwd, alamat);
-            model.getDb().saveDokter(dokter);
-            new PoliklinikTelkom(model); //belon
-            this.dispose();
+            dokter = new Dokter(nama, ("DOKTER" + (model.getDb().countDokter() + 1)), pwd, alamat);
+            try {
+                model.getDb().regDokter(dokter);
+                JOptionPane.showMessageDialog(this, "Registrasi Dokter berhasil dengan Kode=" + dokter.getKodeDokter() + " dan Password=" + dokter.getPassword());
+                new PoliklinikTelkom(model);
+                this.dispose();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            } catch (StringIndexOutOfBoundsException sioob) {
+                JOptionPane.showMessageDialog(this, sioob);
+            } catch (NullPointerException np) {
+                JOptionPane.showMessageDialog(this, np);
+            }
         } else if (source.equals(this.getjButton_Kembali())) {
             new PoliklinikTelkom(model);
             this.dispose();

@@ -12,6 +12,7 @@ import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -39,6 +40,9 @@ public class PoliklinikTelkom extends javax.swing.JFrame implements ActionListen
         this.pasien = null;
         this.dokter = null;
         this.admin = null;
+        
+        Admin foradmin = model.getDb().getAdmin();
+        this.setjLabel_foradmin("Admin: kode=" + foradmin.getKodeAdmin() + ", password=" + foradmin.getPassword());
     }
 
     /**
@@ -57,6 +61,7 @@ public class PoliklinikTelkom extends javax.swing.JFrame implements ActionListen
         jButton_LogPas = new javax.swing.JButton();
         jButton_LogAdDok = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel_foradmin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,6 +86,8 @@ public class PoliklinikTelkom extends javax.swing.JFrame implements ActionListen
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jLabel1.setText("POLIKLINIK TELKOM");
 
+        jLabel_foradmin.setText("admin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,6 +109,9 @@ public class PoliklinikTelkom extends javax.swing.JFrame implements ActionListen
                         .addGap(448, 448, 448)
                         .addComponent(jLabel1)))
                 .addContainerGap(412, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel_foradmin, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,12 +130,18 @@ public class PoliklinikTelkom extends javax.swing.JFrame implements ActionListen
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_LogAdDok, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_RegDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(285, 285, 285))
+                .addGap(256, 256, 256)
+                .addComponent(jLabel_foradmin)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setjLabel_foradmin(String jLabel_foradmin) {
+        this.jLabel_foradmin.setText(jLabel_foradmin);
+    }
+    
     public JButton getjButton_LogAdDok() {
         return jButton_LogAdDok;
     }
@@ -157,6 +173,7 @@ public class PoliklinikTelkom extends javax.swing.JFrame implements ActionListen
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel_LogSeb;
     private javax.swing.JLabel jLabel_Regis;
+    private javax.swing.JLabel jLabel_foradmin;
     // End of variables declaration//GEN-END:variables
 
     @Override

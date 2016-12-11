@@ -6,6 +6,7 @@
 package View;
 
 import Model.Aplikasi;
+import Model.Jadwal;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,11 +21,12 @@ import javax.swing.JTextArea;
 public class halamanMilihShiftJadwal2 extends javax.swing.JFrame implements ActionListener {
     Aplikasi model;
     Pasien pasien;
+    Jadwal jadwal;
     
     /**
      * Creates new form halamanMilihShiftJadwal2
      */
-    public halamanMilihShiftJadwal2(Aplikasi model, Pasien pasien) {
+    public halamanMilihShiftJadwal2(Aplikasi model, Pasien pasien, Jadwal jadwal) {
         initComponents();
         this.model = model;
         this.setLocationRelativeTo(null);
@@ -33,6 +35,7 @@ public class halamanMilihShiftJadwal2 extends javax.swing.JFrame implements Acti
         this.setVisible(true);
         this.addListener(this);
         this.pasien = pasien;
+        this.jadwal = jadwal;
     }
 
 
@@ -223,10 +226,9 @@ public class halamanMilihShiftJadwal2 extends javax.swing.JFrame implements Acti
             new PoliklinikTelkom(model);
             this.dispose();
         } else if (source.equals(this.getjButton_ok())) {
-            //savedulu
             pasien.setKeluhan(this.getjTextArea1().getText());
-            model.getDb().saveKeluhan(pasien);
-            new halamanMilihShiftJadwal3(model, pasien);
+            model.getDb().inputKeluhan(pasien);
+            new halamanMilihShiftJadwal3(model, pasien, jadwal);
             this.dispose();
         } else if (source.equals(this.getjButton_Kembali())) {
             new halamanMilihShiftJadwal1(model, pasien);

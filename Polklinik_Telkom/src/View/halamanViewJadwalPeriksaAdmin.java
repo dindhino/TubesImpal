@@ -37,28 +37,28 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
         this.addListener(this);
         this.admin = admin;
 
-        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
-        Object rowData[] = new Object[5];
-        if (admin.getPasien().size() == 0) {
-            rowData[0] = " - ";
-            rowData[1] = " - ";
-            rowData[2] = " - ";
-            rowData[3] = " - ";
-            rowData[4] = " - ";
-            dm.addRow(rowData);
-        } else {
-            for (int i = 0; i < admin.getPasien().size(); i++) {
-                for (int j = 0; j < admin.getPasien().get(i).getJadwal().size(); j++) {
-                    rowData[0] = admin.getPasien().get(i).getNamaPasien();
-                    rowData[1] = admin.getPasien().get(i).getJadwal().get(j).getDokter();
-                    rowData[2] = admin.getPasien().get(i).getJadwal().get(j).getShift();
-                    rowData[3] = admin.getPasien().get(i).getJadwal().get(j).getTanggal();
-                    rowData[4] = admin.getPasien().get(i).getJadwal().get(j).getHari();
-                    dm.addRow(rowData);
-                }
-
-            }
-        }
+//        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+//        Object rowData[] = new Object[5];
+//        if (admin.getPasien().size() == 0) {
+//            rowData[0] = " - ";
+//            rowData[1] = " - ";
+//            rowData[2] = " - ";
+//            rowData[3] = " - ";
+//            rowData[4] = " - ";
+//            dm.addRow(rowData);
+//        } else {
+//            for (int i = 0; i < admin.getPasien().size(); i++) {
+//                for (int j = 0; j < admin.getPasien().get(i).getJadwal().size(); j++) {
+//                    rowData[0] = admin.getPasien().get(i).getNamaPasien();
+//                    rowData[1] = admin.getPasien().get(i).getJadwal().get(j).getDokter();
+//                    rowData[2] = admin.getPasien().get(i).getJadwal().get(j).getShift();
+//                    rowData[3] = admin.getPasien().get(i).getJadwal().get(j).getTanggal();
+//                    rowData[4] = admin.getPasien().get(i).getJadwal().get(j).getHari();
+//                    dm.addRow(rowData);
+//                }
+//
+//            }
+//        }
 
     }
 

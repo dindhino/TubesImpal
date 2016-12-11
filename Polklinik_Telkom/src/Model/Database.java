@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,50 +31,33 @@ public class Database {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
-    public void regPasien(Pasien p) {
-        try {
-
-            String query = "INSERT INTO `pasien`(`namaPasien`, `kodePasien`, `password`, `umur`) VALUES ("
-                    + "'" + p.getNamaPasien() + "',"
-                    + "'" + p.getKodePasien() + "',"
-                    + "'" + p.getPassword() + "',"
-                    + "'" + p.getUmur() + "')";
-            st.execute(query);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public void regPasien(Pasien p) throws SQLException, StringIndexOutOfBoundsException, NumberFormatException, NullPointerException, Exception {
+        String query = "INSERT INTO `pasien`(`namaPasien`, `kodePasien`, `password`, `umur`) VALUES ("
+                + "'" + p.getNamaPasien() + "',"
+                + "'" + p.getKodePasien() + "',"
+                + "'" + p.getPassword() + "',"
+                + "'" + p.getUmur() + "')";
+        st.execute(query);
     }
 
-    public void regDokter(Dokter p) {
-        try {
-
-            String query = "INSERT INTO `dokter`(`namaDokter`, `kodeDokter`, `password`, `alamat`) VALUES ("
-                    + "'" + p.getNamaDokter() + "',"
-                    + "'" + p.getKodeDokter() + "',"
-                    + "'" + p.getPassword() + "',"
-                    + "'" + p.getAlamat() + "')";
-            st.execute(query);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public void regDokter(Dokter p) throws SQLException, StringIndexOutOfBoundsException, NullPointerException {
+        String query = "INSERT INTO `dokter`(`namaDokter`, `kodeDokter`, `password`, `alamat`) VALUES ("
+                + "'" + p.getNamaDokter() + "',"
+                + "'" + p.getKodeDokter() + "',"
+                + "'" + p.getPassword() + "',"
+                + "'" + p.getAlamat() + "')";
+        st.execute(query);
     }
 
-    public void saveNewJadwal(Jadwal j) {
-        try {
-//            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-//            Date date = format.parse(j.getTanggal());
-            String query = "INSERT INTO `jadwal`(`kodeJadwal`, `tanggal`, `shift`, `hari`, `Dokter`) VALUES ("
-                    + "'" + j.getKodeJadwal() + "',"
-                    + "'" + j.getTanggal() + "',"
-                    + "'" + j.getShift() + "',"
-                    + "'" + j.getKodeDokter() + "')";
-            st.execute(query);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public void saveNewJadwal(Jadwal j) throws SQLException, NullPointerException {
+        String query = "INSERT INTO `jadwal`(`kodeJadwal`, `tanggal`, `shift`, `kodeDokter`) VALUES ("
+                + "'" + j.getKodeJadwal() + "',"
+                + "'" + j.getTanggal() + "',"
+                + "'" + j.getShift() + "',"
+                + "'" + j.getKodeDokter() + "')";
+        st.execute(query);
     }
 
     public void newObat(Obat ob) {
@@ -224,6 +208,20 @@ public class Database {
         return p;
     }
 
+    public Admin getAdmin() {
+        Admin adm = null;
+        try {
+            String query = "Select * from `Admin`";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                adm = new Admin(rs.getString(2), rs.getString(1), rs.getString(3));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return adm;
+    }
+
     public Jadwal getJadwal(String kodeJadwal) {
         Jadwal j = null;
         try {
@@ -255,7 +253,7 @@ public class Database {
     public int countJadwal() {
         int count = 0;
         try {
-            String query = "Select count(*) from `Jadwal`";
+            String query = "Select count(*) from `jadwal`";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 count = rs.getInt(1);
@@ -315,7 +313,7 @@ public class Database {
     public Obat getObat(String kodeObat) {
         Obat o = null;
         try {
-            String query = "SELECT * FROM `Obat` WHERE `kodeObat` = " + "'" + kodeObat + "'";
+            String query = "SELECT * FROM `Obat` WHERE `idObat` = " + "'" + kodeObat + "'";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 o = new Obat(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
@@ -346,7 +344,7 @@ public class Database {
         Pasien p = null;
         ArrayList<Pasien> pas = new ArrayList<Pasien>();
         try {
-            String query = "Select * from `Obat`";
+            String query = "Select * from `Pasien`";
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 p = new Pasien(rs.getString(2), rs.getString(1), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7));

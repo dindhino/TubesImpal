@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -22,9 +23,11 @@ import javax.swing.JTextArea;
  * @author Dhino
  */
 public class formInputObat2 extends javax.swing.JFrame implements ActionListener {
+
     Aplikasi model;
     Dokter dokter;
     Pasien pasien;
+
     /**
      * Creates new form formInputObat2
      */
@@ -40,10 +43,9 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
         this.setjLabel_namatext(pasien.getNamaPasien());
         this.setjLabel_kodepasientext(pasien.getKodePasien());
         this.setjLabel_umurtext(pasien.getUmur());
-        this.setjLabel_shifttext(pasien);
         this.setjTextArea_keluhan(pasien.getKeluhan());
         this.setjTextArea_diagnosadokter(pasien.getDiagnosa());
-        this.setjTextArea_ResepObat(pasien.getObat());
+        this.setjTextArea_ResepObat(pasien.getKodeObat());
         this.setVisible(true);
         this.addListener(this);
     }
@@ -57,7 +59,6 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
         jButton_kembali.addActionListener(e);
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,8 +68,6 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel_Shift = new javax.swing.JLabel();
-        jLabel_shifttext = new javax.swing.JLabel();
         jLabel_kodepasientext = new javax.swing.JLabel();
         jLabel_KodePasien = new javax.swing.JLabel();
         jLabel_Umur = new javax.swing.JLabel();
@@ -95,11 +94,6 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
         jLabel_NamaDokter1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
-
-        jLabel_Shift.setText("Shift :");
-
-        jLabel_shifttext.setText("jLabel4");
 
         jLabel_kodepasientext.setText("jLabel3");
 
@@ -180,13 +174,9 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
                         .addGap(133, 133, 133)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_KodePasien)
-                                    .addComponent(jLabel_Shift))
+                                .addComponent(jLabel_KodePasien)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_shifttext)
-                                    .addComponent(jLabel_kodepasientext)))
+                                .addComponent(jLabel_kodepasientext))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel_Umur)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -243,12 +233,8 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel_kodepasientext)
-                                    .addComponent(jLabel_KodePasien))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel_Shift)
-                                    .addComponent(jLabel_shifttext))))
-                        .addGap(0, 25, Short.MAX_VALUE)))
+                                    .addComponent(jLabel_KodePasien))))
+                        .addGap(0, 48, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -316,15 +302,15 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
     public void setjLabel_NamaDokter(String jLabel_NamaDokter) {
         this.jLabel_NamaDokter.setText(jLabel_NamaDokter);
     }
-    
-           public JLabel getjLabel_namatext() {
+
+    public JLabel getjLabel_namatext() {
         return jLabel_namatext;
     }
 
     public void setjLabel_namatext(String jLabel_namatext) {
         this.jLabel_namatext.setText(jLabel_namatext);
     }
-    
+
     public JLabel getjLabel_umurtext() {
         return jLabel_umurtext;
     }
@@ -337,12 +323,8 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
         return jTextArea_ResepObat;
     }
 
-    public void setjTextArea_ResepObat(ArrayList<Obat> obat) {
-        String yay = "";
-        for(int i =0; i <= obat.size();i++){
-            yay += obat.get(i).getNamaObat() +"\t";
-        }
-        this.jLabel_ResepObat.setText(yay);
+    public void setjTextArea_ResepObat(String obat) {
+        this.jTextArea_ResepObat.setText(obat);
     }
 
     public JTextArea getjTextArea_diagnosadokter() {
@@ -364,21 +346,11 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
     public JLabel getjLabel_kodepasientext() {
         return jLabel_kodepasientext;
     }
-    
+
     public void setjLabel_kodepasientext(String jLabel_kodepasientext) {
         this.jLabel_kodepasientext.setText(jLabel_kodepasientext);
     }
 
-    public JLabel getjLabel_shifttext() {
-        return jLabel_shifttext;
-    }
-
-    public void setjLabel_shifttext(Pasien pasien) {
-        String s = "";
-        for(Jadwal j : pasien.getJadwal()){
-            s += j.getShift() + ", ";
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_LogOut;
@@ -393,12 +365,10 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
     private javax.swing.JLabel jLabel_NamaDokter;
     private javax.swing.JLabel jLabel_NamaDokter1;
     private javax.swing.JLabel jLabel_ResepObat;
-    private javax.swing.JLabel jLabel_Shift;
     private javax.swing.JLabel jLabel_Umur;
     private javax.swing.JLabel jLabel_kodepasientext;
     private javax.swing.JLabel jLabel_nama;
     private javax.swing.JLabel jLabel_namatext;
-    private javax.swing.JLabel jLabel_shifttext;
     private javax.swing.JLabel jLabel_umurtext;
     private javax.swing.JPanel jPanel_foto;
     private javax.swing.JScrollPane jScrollPane1;
@@ -429,11 +399,17 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
             new formInputObat1(model, dokter);
             this.dispose();
         } else if (source.equals(this.getjButton_Simpan())) {
-            //save dulu
-            this.pasien.setidObat(getjTextArea_diagnosadokter().getText());
-            model.getDb().savePasien(pasien);
-            new formInputObat1(model, dokter);
-            this.dispose();
+            Obat ob = model.getDb().getObat(getjTextArea_ResepObat().getText());
+            if (ob != null) {
+                this.pasien.setKodeObat(getjTextArea_ResepObat().getText());
+                model.getDb().inputObat(pasien);
+                JOptionPane.showMessageDialog(this, "Input obat berhasil");
+                new formInputObat1(model, dokter);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Obat tidak ditemukan");
+            }
+
         }
     }
 }

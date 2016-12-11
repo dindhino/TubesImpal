@@ -40,7 +40,7 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
         this.setjLabel_umurtext(pasien.getUmur());
         this.setjTextArea_keluhan(pasien.getKeluhan());
         this.setjTextArea_diagnosadokter(pasien.getDiagnosa());
-        this.setjTextArea_ResepObat(pasien.getObat());
+        this.setjTextArea_ResepObat(pasien.getKodeObat());
         this.setVisible(true);
         this.addListener(this);
         this.admin = admin;
@@ -374,12 +374,8 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
         return jTextArea_ResepObat;
     }
 
-    public void setjTextArea_ResepObat(ArrayList<Obat> obat) {
-        String yay = "";
-        for(int i =0; i <= obat.size();i++){
-            yay += obat.get(i).getNamaObat() +"\t";
-        }
-        this.jLabel_ResepObat.setText(yay);
+    public void setjTextArea_ResepObat(String obat) {
+        this.jLabel_ResepObat.setText(obat);
     }
 
     public JTextArea getjTextArea_diagnosadokter() {
@@ -492,7 +488,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
             //save dulu
             this.pasien.setDiagnosa(getjTextArea_diagnosadokter().getText());
             this.pasien.setKeluhan(getjTextArea_keluhan().getText());
-            this.pasien.getJadwal().get(selectedrow).setShift((String) getjComboBox_shift().getSelectedItem());
             model.getDb().editPasien(pasien);
             new editDataPasien1(model, admin);
             this.dispose();

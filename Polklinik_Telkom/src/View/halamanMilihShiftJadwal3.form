@@ -237,12 +237,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel_jam">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hari    :"/>
+        <Property name="text" type="java.lang.String" value="Tanggal  :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel_dokter">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Dokter :"/>
+        <Property name="text" type="java.lang.String" value="Dokter    :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel_jamtext">
