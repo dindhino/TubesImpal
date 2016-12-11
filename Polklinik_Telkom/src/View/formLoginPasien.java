@@ -192,7 +192,7 @@ public class formLoginPasien extends javax.swing.JFrame implements ActionListene
             String unm = this.getTextField_kdpas().getText();
             String pwd = this.getjPasswordField_Pass().getText();
             pasien = new Pasien();
-            pasien = model.getDb().getPasien(unm,pwd);
+            pasien = model.getDb().loginPasien(unm,pwd);
             if (pasien != null) {
                 new halamanAwalPasien(model, pasien);
                 this.dispose();

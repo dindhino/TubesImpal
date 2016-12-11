@@ -22,5 +22,5 @@ public class Main {
         Aplikasi model = new Aplikasi();
         new PoliklinikTelkom(model);
     }
-    
+
 }

@@ -24,8 +24,8 @@ public class Obat {
         this.harga = harga;
     }
     
-    public Obat(String idObat) {
-        this.idObat = idObat;
+    public Obat() {
+        this.idObat = null;
         this.namaObat = null;
         this.jenis = null;
         this.harga = 0;

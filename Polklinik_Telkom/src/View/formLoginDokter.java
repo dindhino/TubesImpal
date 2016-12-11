@@ -177,8 +177,8 @@ public class formLoginDokter extends javax.swing.JFrame implements ActionListene
         if (source.equals(this.getjButton_OK())) {
             String unm = this.getjTextField_KodeAdok().getText();
             String pwd = this.getjPasswordField_PassDok().getText();
-            dokter = model.getDb().getDokter(unm, pwd);
-            admin = model.getDb().getAdmin(unm, pwd);
+            dokter = model.getDb().loginDokter(unm, pwd);
+            admin = model.getDb().loginAdmin(unm, pwd);
             if (dokter != null) {
                 new halamanAwalDokter(model, dokter);
                 this.dispose();

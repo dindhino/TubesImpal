@@ -1,8 +1,5 @@
 package Model;
 
-
-import java.util.ArrayList;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,31 +17,36 @@ public class Pasien {
     private int umur;
     private String keluhan;
     private String diagnosa;
-    private ArrayList<Obat> obat;
-    private ArrayList<Jadwal> jadwal;
+    private String kodeObat;
 
     public Pasien() {
         this.namaPasien = "";
         this.kodePasien = "";
         this.password = "";
         this.umur = 0;
-        this.obat = new ArrayList<>();
-        this.jadwal = new ArrayList<>();
         this.keluhan = "";
         this.diagnosa = "";
+        this.kodeObat = "";
     }
-    
-    
 
     public Pasien(String namaPasien, String kodePasien, String password, int umur) {
         this.namaPasien = namaPasien;
         this.kodePasien = kodePasien;
         this.password = password;
         this.umur = umur;
-        this.obat = new ArrayList<>();
-        this.jadwal = new ArrayList<>();
         this.keluhan = "";
         this.diagnosa = "";
+        this.kodeObat = "";
+    }
+
+    public Pasien(String namaPasien, String kodePasien, String password, int umur, String keluhan, String diagnosa, String kodeObat) {
+        this.namaPasien = namaPasien;
+        this.kodePasien = kodePasien;
+        this.password = password;
+        this.umur = umur;
+        this.keluhan = keluhan;
+        this.diagnosa = diagnosa;
+        this.kodeObat = kodeObat;
     }
 
     public String getNamaPasien() {
@@ -79,51 +81,12 @@ public class Pasien {
         this.umur = umur;
     }
 
-    public void inputKeluhan(String keluhan) {
-        this.keluhan = keluhan;
-    }
-    
-    public void memilihShiftPenjadwalan(Jadwal yangdipilih) {
-        this.jadwal.add(yangdipilih);
-    }
-    
-    public void viewJadwalPeriksa(Jadwal jdw) {
-        System.out.println("Shift   : " + jdw.getShift());
-        System.out.println("Hari    : " + jdw.getHari());
-        System.out.println("Tanggal : " + jdw.getTanggal());
-        System.out.print("Dokter  : ");
-        for (Dokter d : jdw.getDokter()) {
-            System.out.print(d.getNamaDokter() + " ");
-        }
-    }
-
-    public ArrayList<Jadwal> getJadwal() {
-        return jadwal;
-    }
-
-    public void setJadwal(ArrayList<Jadwal> jadwal) {
-        this.jadwal = jadwal;
-    }
-    
-    public void setJadwal(Jadwal jadwal) {
-        this.jadwal.add(jadwal);
-    }
-
-    public ArrayList<Obat> getObat() {
-        return obat;
-    }
-
-    public void setObat(Obat obat) {
-        this.obat.add(obat);
-    }
-    
-    public void setidObat(String ID){
-        Obat obats = new Obat(ID);
-        this.obat.add(obats);
-    }
-
     public String getKeluhan() {
         return keluhan;
+    }
+
+    public void setKeluhan(String keluhan) {
+        this.keluhan = keluhan;
     }
 
     public String getDiagnosa() {
@@ -134,11 +97,12 @@ public class Pasien {
         this.diagnosa = diagnosa;
     }
 
-    public void setKeluhan(String keluhan) {
-        this.keluhan = keluhan;
+    public String getKodeObat() {
+        return kodeObat;
     }
-    
-    
-            
-    
+
+    public void setKodeObat(String kodeObat) {
+        this.kodeObat = kodeObat;
+    }
+
 }

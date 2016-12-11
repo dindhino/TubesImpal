@@ -1,8 +1,5 @@
 package Model;
 
-
-import java.util.ArrayList;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,19 +10,27 @@ import java.util.ArrayList;
  * @author Dhino
  */
 public class Jadwal {
-    
+
     private String kodeJadwal;
     private String shift;
-    private String hari;
     private String tanggal;
-    private ArrayList<Dokter> dokter;
+    private String kodeDokter;
+    private String kodePasien;
 
-    public Jadwal(String kodeJadwal,String shift, String hari, String tanggal) {
+    public Jadwal(String kodeJadwal, String shift, String tanggal, String kodeDokter) {
         this.kodeJadwal = kodeJadwal;
         this.shift = shift;
-        this.hari = hari;
         this.tanggal = tanggal;
-        this.dokter = new ArrayList<>();
+        this.kodeDokter = kodeDokter;
+        this.kodePasien = "";
+    }
+
+    public Jadwal(String kodeJadwal, String shift, String tanggal, String kodeDokter, String kodePasien) {
+        this.kodeJadwal = kodeJadwal;
+        this.shift = shift;
+        this.tanggal = tanggal;
+        this.kodeDokter = kodeDokter;
+        this.kodePasien = kodePasien;
     }
 
     public String getKodeJadwal() {
@@ -44,14 +49,6 @@ public class Jadwal {
         this.shift = shift;
     }
 
-    public String getHari() {
-        return hari;
-    }
-
-    public void setHari(String hari) {
-        this.hari = hari;
-    }
-
     public String getTanggal() {
         return tanggal;
     }
@@ -60,12 +57,20 @@ public class Jadwal {
         this.tanggal = tanggal;
     }
 
-    public ArrayList<Dokter> getDokter() {
-        return dokter;
+    public String getKodeDokter() {
+        return kodeDokter;
     }
 
-    public void setDokter(Dokter dokter) {
-        this.dokter.add(dokter);
+    public void setKodeDokter(String kodeDokter) {
+        this.kodeDokter = kodeDokter;
+    }
+
+    public String getKodePasien() {
+        return kodePasien;
+    }
+
+    public void setKodePasien(String kodePasien) {
+        this.kodePasien = kodePasien;
     }
 
 }
