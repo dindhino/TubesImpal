@@ -8,8 +8,11 @@ package View;
 import Model.Admin;
 import Model.Aplikasi;
 import Model.Dokter;
+import Model.Jadwal;
+import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -23,6 +26,8 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
 
     Aplikasi model;
     Admin admin;
+    Pasien pasien;
+    Dokter dokter;
 
     /**
      * Creates new form halamanViewJadwalPeriksaAdmin
@@ -36,30 +41,35 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
         this.setVisible(true);
         this.addListener(this);
         this.admin = admin;
+        this.pasien = null;
+        this.dokter = null;
 
-//        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
-//        Object rowData[] = new Object[5];
-//        if (admin.getPasien().size() == 0) {
-//            rowData[0] = " - ";
-//            rowData[1] = " - ";
-//            rowData[2] = " - ";
-//            rowData[3] = " - ";
-//            rowData[4] = " - ";
-//            dm.addRow(rowData);
-//        } else {
-//            for (int i = 0; i < admin.getPasien().size(); i++) {
-//                for (int j = 0; j < admin.getPasien().get(i).getJadwal().size(); j++) {
-//                    rowData[0] = admin.getPasien().get(i).getNamaPasien();
-//                    rowData[1] = admin.getPasien().get(i).getJadwal().get(j).getDokter();
-//                    rowData[2] = admin.getPasien().get(i).getJadwal().get(j).getShift();
-//                    rowData[3] = admin.getPasien().get(i).getJadwal().get(j).getTanggal();
-//                    rowData[4] = admin.getPasien().get(i).getJadwal().get(j).getHari();
-//                    dm.addRow(rowData);
-//                }
-//
-//            }
-//        }
+        ArrayList<Jadwal> jad = new ArrayList<Jadwal>();
+        jad = model.getDb().getAllJadwal();
 
+        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+        Object rowData[] = new Object[5];
+        if (jad.size() == 0) {
+            rowData[0] = " - ";
+            rowData[1] = " - ";
+            rowData[2] = " - ";
+            rowData[3] = " - ";
+            rowData[4] = " - ";
+            dm.addRow(rowData);
+        } else {
+            for (int i = 0; i < jad.size(); i++) {
+                if (jad.get(i).getKodePasien() != null) {
+                    pasien = model.getDb().getPasien(jad.get(i).getKodePasien());
+                    rowData[0] = pasien.getNamaPasien();
+                    dokter = model.getDb().getDokter(jad.get(i).getKodeDokter());
+                    rowData[1] = dokter.getNamaDokter();
+                    rowData[2] = jad.get(i).getShift();
+                    rowData[3] = jad.get(i).getTanggal();
+                    rowData[4] = jad.get(i).getKodeJadwal();
+                    dm.addRow(rowData);
+                }
+            }
+        }
     }
 
     /**
@@ -141,7 +151,7 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
 
             },
             new String [] {
-                "Nama Pasien", "Nama Dokter", "Shift", "Tanggal", "Hari"
+                "Nama Pasien", "Nama Dokter", "Shift", "Tanggal", "Kode Jadwal"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -22,14 +23,16 @@ import javax.swing.JTextArea;
  * @author Dhino
  */
 public class editDataPasien2 extends javax.swing.JFrame implements ActionListener {
+
     Aplikasi model;
     Admin admin;
     Pasien pasien;
     int selectedrow;
+
     /**
      * Creates new form editDataPasien2
      */
-    public editDataPasien2(Aplikasi model, Admin admin, Pasien pasien, int selectedrow) {
+    public editDataPasien2(Aplikasi model, Admin admin, Pasien pasien) {
         initComponents();
         this.model = model;
         this.setLocationRelativeTo(null);
@@ -72,7 +75,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
         jLabel_nama = new javax.swing.JLabel();
         jLabel_Umur = new javax.swing.JLabel();
         jLabel_KodePasien = new javax.swing.JLabel();
-        jLabel_Shift = new javax.swing.JLabel();
         jLabel_Keluhan = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_keluhan = new javax.swing.JTextArea();
@@ -85,7 +87,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
         jLabel_namatext = new javax.swing.JLabel();
         jLabel_umurtext = new javax.swing.JLabel();
         jLabel_kodepasientext = new javax.swing.JLabel();
-        jComboBox_shift = new javax.swing.JComboBox<>();
         jButton_Ubah = new javax.swing.JButton();
         jButton_kembali1 = new javax.swing.JButton();
 
@@ -141,8 +142,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
 
         jLabel_KodePasien.setText("Kode Pasien :");
 
-        jLabel_Shift.setText("Shift :");
-
         jLabel_Keluhan.setText("Keluhan");
 
         jTextArea_keluhan.setColumns(20);
@@ -167,13 +166,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
 
         jLabel_kodepasientext.setText("jLabel3");
 
-        jComboBox_shift.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "09.00-12.00", "13.00-15.00", "16.00-18.00" }));
-        jComboBox_shift.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_shiftActionPerformed(evt);
-            }
-        });
-
         jButton_Ubah.setText("Ubah");
 
         jButton_kembali1.setText("Kembali");
@@ -194,27 +186,36 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_ViewDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton_DeleteDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_MengelolaDataPasien)
+                            .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_MengelolaDataPasien1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel_foto5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton_ViewDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel_NamaAdmin)
+                                    .addComponent(jLabel_NamaAdmin1))
+                                .addGap(111, 111, 111)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jPanel_foto5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel_NamaAdmin)
-                                            .addComponent(jLabel_NamaAdmin1)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton_DeleteDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel_MengelolaDataPasien)
-                                    .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel_MengelolaDataPasien1))
-                                .addGap(186, 186, 186)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox_shift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel_kodepasientext))))
+                                        .addComponent(jLabel_nama)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel_namatext))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel_KodePasien)
+                                            .addGap(26, 26, 26)
+                                            .addComponent(jLabel_kodepasientext))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel_Umur)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel_umurtext))))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,17 +227,7 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
                         .addComponent(jLabel_DiagnosDokter)
                         .addComponent(jScrollPane2)
                         .addComponent(jLabel_ResepObat)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel_KodePasien)
-                                .addComponent(jLabel_Umur)
-                                .addComponent(jLabel_nama)
-                                .addComponent(jLabel_Shift))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel_namatext)
-                                .addComponent(jLabel_umurtext))))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -245,7 +236,21 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel_foto5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel_foto5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel_namatext)
+                                    .addComponent(jLabel_nama))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel_umurtext)
+                                    .addComponent(jLabel_Umur))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel_KodePasien)
+                                    .addComponent(jLabel_kodepasientext))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -263,13 +268,9 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_NamaAdmin1)
-                            .addComponent(jLabel_kodepasientext))
+                        .addComponent(jLabel_NamaAdmin1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_NamaAdmin)
-                            .addComponent(jComboBox_shift, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel_NamaAdmin)
                         .addGap(466, 466, 466)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,19 +281,7 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
                 .addContainerGap(100, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(53, 53, 53)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_nama)
-                        .addComponent(jLabel_namatext))
-                    .addGap(12, 12, 12)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_Umur)
-                        .addComponent(jLabel_umurtext))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel_KodePasien)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel_Shift)
-                    .addGap(33, 33, 33)
+                    .addGap(176, 176, 176)
                     .addComponent(jLabel_Keluhan)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,10 +298,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox_shiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_shiftActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_shiftActionPerformed
 
     public JButton getjButton_DeleteDataPasien() {
         return jButton_DeleteDataPasien;
@@ -353,7 +338,7 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
     public void setjLabel_NamaAdmin(String jLabel_NamaAdmin) {
         this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
     }
-    
+
     public JLabel getjLabel_namatext() {
         return jLabel_namatext;
     }
@@ -361,8 +346,8 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
     public void setjLabel_namatext(String jLabel_namatext) {
         this.jLabel_namatext.setText(jLabel_namatext);
     }
-    
-     public JLabel getjLabel_umurtext() {
+
+    public JLabel getjLabel_umurtext() {
         return jLabel_umurtext;
     }
 
@@ -375,7 +360,7 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
     }
 
     public void setjTextArea_ResepObat(String obat) {
-        this.jLabel_ResepObat.setText(obat);
+        this.jTextArea_ResepObat.setText(obat);
     }
 
     public JTextArea getjTextArea_diagnosadokter() {
@@ -402,14 +387,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
         this.jLabel_kodepasientext.setText(jLabel_kodepasientext);
     }
 
-    public JComboBox<String> getjComboBox_shift() {
-        return jComboBox_shift;
-    }
-
-    public void setjComboBox_shift(JComboBox<String> jComboBox_shift) {
-        this.jComboBox_shift = jComboBox_shift;
-    }
-   
     public void addListener(ActionListener e) {
         jButton_DeleteDataPasien.addActionListener(e);
         jButton_EditDataPasien.addActionListener(e);
@@ -420,7 +397,7 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
         jButton_ViewDataPasien.addActionListener(e);
         jButton_kembali1.addActionListener(e);
         jButton_Ubah.addActionListener(e);
-    }  
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_DeleteDataPasien;
@@ -432,7 +409,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
     private javax.swing.JButton jButton_Ubah;
     private javax.swing.JButton jButton_ViewDataPasien;
     private javax.swing.JButton jButton_kembali1;
-    private javax.swing.JComboBox<String> jComboBox_shift;
     private javax.swing.JLabel jLabel_DiagnosDokter;
     private javax.swing.JLabel jLabel_Keluhan;
     private javax.swing.JLabel jLabel_KodePasien;
@@ -441,7 +417,6 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
     private javax.swing.JLabel jLabel_NamaAdmin;
     private javax.swing.JLabel jLabel_NamaAdmin1;
     private javax.swing.JLabel jLabel_ResepObat;
-    private javax.swing.JLabel jLabel_Shift;
     private javax.swing.JLabel jLabel_Umur;
     private javax.swing.JLabel jLabel_kodepasientext;
     private javax.swing.JLabel jLabel_nama;
@@ -459,7 +434,7 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        
+
         if (source.equals(this.getjButton_DeleteDataPasien())) {
             new deleteDataPasien1(model, admin);
             this.dispose();
@@ -485,13 +460,19 @@ public class editDataPasien2 extends javax.swing.JFrame implements ActionListene
             new editDataPasien1(model, admin);
             this.dispose();
         } else if (source.equals(this.getjButton_Ubah())) {
-            //save dulu
+            pasien.setKeluhan(this.getjTextArea_keluhan().getText());
             this.pasien.setDiagnosa(getjTextArea_diagnosadokter().getText());
-            this.pasien.setKeluhan(getjTextArea_keluhan().getText());
-            model.getDb().editPasien(pasien);
-            new editDataPasien1(model, admin);
-            this.dispose();
+            Obat ob = model.getDb().getObat(getjTextArea_ResepObat().getText());
+            if (ob != null) {
+                this.pasien.setKodeObat(getjTextArea_ResepObat().getText());
+                model.getDb().inputObat(pasien);
+                model.getDb().editPasien(pasien);
+                new editDataPasien1(model, admin);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Obat tidak ditemukan");
+            }
         }
-            
+
     }
 }

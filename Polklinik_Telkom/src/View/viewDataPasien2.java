@@ -38,7 +38,6 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
         this.setjLabel_NamaAdmin(admin.getNamaAdmin());
         this.setjLabel_namatext(pasien.getNamaPasien());
         this.setjLabel_kodepasientext(pasien.getKodePasien());
-        this.setjLabel_shifttext(pasien);
         this.setjLabel_umurtext(pasien.getUmur());
         this.setjTextArea_keluhan(pasien.getKeluhan());
         this.setjTextArea_diagnosadokter(pasien.getDiagnosa());
@@ -75,8 +74,6 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
         jLabel_umurtext = new javax.swing.JLabel();
         jLabel_KodePasien = new javax.swing.JLabel();
         jLabel_kodepasientext = new javax.swing.JLabel();
-        jLabel_Shift = new javax.swing.JLabel();
-        jLabel_shifttext = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_keluhan = new javax.swing.JTextArea();
         jLabel_Keluhan = new javax.swing.JLabel();
@@ -90,7 +87,6 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
         jButton_kembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         javax.swing.GroupLayout jPanel_foto5Layout = new javax.swing.GroupLayout(jPanel_foto5);
         jPanel_foto5.setLayout(jPanel_foto5Layout);
@@ -144,10 +140,6 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
         jLabel_KodePasien.setText("Kode Pasien :");
 
         jLabel_kodepasientext.setText("jLabel3");
-
-        jLabel_Shift.setText("Shift :");
-
-        jLabel_shifttext.setText("jLabel4");
 
         jTextArea_keluhan.setColumns(20);
         jTextArea_keluhan.setRows(5);
@@ -213,11 +205,9 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel_KodePasien)
                                     .addComponent(jLabel_Umur)
-                                    .addComponent(jLabel_nama)
-                                    .addComponent(jLabel_Shift))
+                                    .addComponent(jLabel_nama))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_shifttext)
                                     .addComponent(jLabel_namatext)
                                     .addComponent(jLabel_umurtext)
                                     .addComponent(jLabel_kodepasientext))))))
@@ -260,11 +250,7 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
                             .addComponent(jLabel_KodePasien)
                             .addComponent(jLabel_kodepasientext)
                             .addComponent(jLabel_NamaAdmin))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_Shift)
-                            .addComponent(jLabel_shifttext))
-                        .addGap(33, 33, 33)
+                        .addGap(56, 56, 56)
                         .addComponent(jLabel_Keluhan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,17 +319,6 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
         this.jLabel_namatext.setText(jLabel_namatext);
     }
 
-    public JLabel getjLabel_shifttext() {
-        return jLabel_shifttext;
-    }
-
-    public void setjLabel_shifttext(Pasien pasien) {
-//        String s = "";
-//        for(Jadwal j : pasien.getJadwal()){
-//            s += j.getShift() + ", ";
-//        }
-    }
-
     public JLabel getjLabel_umurtext() {
         return jLabel_umurtext;
     }
@@ -357,7 +332,7 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
     }
 
     public void setjTextArea_ResepObat(String obat) {
-        this.jLabel_ResepObat.setText(obat);
+        this.jTextArea_ResepObat.setText(obat);
     }
 
     public JTextArea getjTextArea_diagnosadokter() {
@@ -415,12 +390,10 @@ public class viewDataPasien2 extends javax.swing.JFrame implements ActionListene
     private javax.swing.JLabel jLabel_NamaAdmin;
     private javax.swing.JLabel jLabel_NamaAdmin1;
     private javax.swing.JLabel jLabel_ResepObat;
-    private javax.swing.JLabel jLabel_Shift;
     private javax.swing.JLabel jLabel_Umur;
     private javax.swing.JLabel jLabel_kodepasientext;
     private javax.swing.JLabel jLabel_nama;
     private javax.swing.JLabel jLabel_namatext;
-    private javax.swing.JLabel jLabel_shifttext;
     private javax.swing.JLabel jLabel_umurtext;
     private javax.swing.JPanel jPanel_foto5;
     private javax.swing.JScrollPane jScrollPane1;

@@ -8,15 +8,13 @@ package View;
 import Model.Admin;
 import Model.Aplikasi;
 import Model.Database;
+import Model.Jadwal;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Dhino
  */
-public class viewDataPasien extends javax.swing.JFrame implements ActionListener, MouseListener {
+public class viewDataPasien extends javax.swing.JFrame implements ActionListener {
 
     Aplikasi model;
     Admin admin;
@@ -45,29 +43,24 @@ public class viewDataPasien extends javax.swing.JFrame implements ActionListener
         this.addListener(this);
         this.admin = admin;
         this.pasien = null;
-        //this.setSemuaPasien(db.getAllPasien());
 
-//        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
-//        Object rowData[] = new Object[2];
-//        if (admin.getPasien().size() == 0) {
-//            rowData[0] = "MASIH";
-//            rowData[1] = "KOSONG";
-//            dm.addRow(rowData);
-//        } else {
-//            for (int i = 0; i < admin.getPasien().size(); i++) {
-//                if (admin.getPasien().get(i).getJadwal().size() == 0) {
-//                    rowData[0] = "MASIH";
-//                    rowData[1] = "KOSONG";
-//                    dm.addRow(rowData);
-//                } else {
-//                    for (int j = 0; j < admin.getPasien().get(i).getJadwal().size(); j++) {
-//                        rowData[0] = admin.getPasien().get(i).getKodePasien();
-//                        rowData[1] = admin.getPasien().get(i).getJadwal().get(j).getShift();
-//                        dm.addRow(rowData);
-//                    }
-//                }
-//            }
-//        }
+        ArrayList<Jadwal> jadwal = model.getDb().getAllJadwal();
+
+        DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
+        Object rowData[] = new Object[2];
+        if (jadwal.size() == 0) {
+            rowData[0] = "MASIH";
+            rowData[1] = "KOSONG";
+            dm.addRow(rowData);
+        } else {
+            for (int i = 0; i < jadwal.size(); i++) {
+                if (jadwal.get(i).getKodePasien() != null) {
+                    rowData[0] = jadwal.get(i).getKodePasien();
+                    rowData[1] = jadwal.get(i).getShift();
+                    dm.addRow(rowData);
+                }
+            }
+        }
     }
 
     /**
@@ -147,7 +140,7 @@ public class viewDataPasien extends javax.swing.JFrame implements ActionListener
 
             },
             new String [] {
-                "Pasien", "Shift"
+                "Kode Pasien", "Shift"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -288,10 +281,10 @@ public class viewDataPasien extends javax.swing.JFrame implements ActionListener
         jButton_MengelolaShiftDokter.addActionListener(e);
         jButton_ViewDataPasien.addActionListener(e);
         jButton1_Pilih.addActionListener(e);
-        
+
     }
-    
-    public void addAdapter (MouseListener e) {
+
+    public void addAdapter(MouseListener e) {
         jTable1.addMouseListener(e);
     }
 
@@ -349,40 +342,10 @@ public class viewDataPasien extends javax.swing.JFrame implements ActionListener
             new viewDataPasien(model, admin);
             this.dispose();
         } else if (source.equals(this.getjButton1_Pilih())) {
-            //pilih pasien yang dipilih
+            pasien = model.getDb().getPasien((String) this.getjTable1().getValueAt(this.getjTable1().getSelectedRow(), 0));
             new viewDataPasien2(model, admin, pasien);
             this.dispose();
         }
     }
-    
-    @Override
-    public void mouseClicked(MouseEvent me){
-        Object src = me.getSource();
-        if (src.equals(getjTable1())) {
-            int row = getjTable1().getSelectedRow();
-            String kodepasien = this.getjTable1().getModel().getValueAt(row, 0).toString();
-            //nyari di database baru masukin ke variable pasien buat dipake di jbutton get jButton pilih
-            this.pasien = db.getPasien(kodepasien);
-        }
-    }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

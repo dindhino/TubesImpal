@@ -409,7 +409,6 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
             } else {
                 JOptionPane.showMessageDialog(this, "Obat tidak ditemukan");
             }
-
         }
     }
 }

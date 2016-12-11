@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -115,6 +114,16 @@ public class Database {
             ex.printStackTrace();
         }
     }
+    
+    public void deletePasienFromJadwal(Jadwal j) {
+        try {
+            String query = "update jadwal set kodePasien = NULL where kodeJadwal = '"
+                    + j.getKodeJadwal() + "'";
+            st.executeUpdate(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public Pasien loginPasien(String kodePasien, String pwd) {
         Pasien p = null;
@@ -160,7 +169,7 @@ public class Database {
     public void deletePasien(Pasien p) {
         try {
             String query = "delete from pasien where `kodePasien` = " + "'" + p.getKodePasien() + "'";
-            st.executeQuery(query);
+            st.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -8,13 +8,13 @@ package View;
 import Model.Admin;
 import Model.Aplikasi;
 import Model.Jadwal;
-import Model.Obat;
 import Model.Pasien;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -22,9 +22,11 @@ import javax.swing.JTextArea;
  * @author Dhino
  */
 public class deleteDataPasien extends javax.swing.JFrame implements ActionListener {
+
     Aplikasi model;
     Admin admin;
     Pasien pasien;
+
     /**
      * Creates new form deleteDataPasien
      */
@@ -36,7 +38,6 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         this.setjLabel_NamaAdmin(admin.getNamaAdmin());
         this.setjLabel_namatext(pasien.getNamaPasien());
         this.setjLabel_kodepasientext(pasien.getKodePasien());
-        this.setjLabel_shifttext(pasien);
         this.setjLabel_umurtext(pasien.getUmur());
         this.setjTextArea_keluhan(pasien.getKeluhan());
         this.setjTextArea_diagnosadokter(pasien.getDiagnosa());
@@ -77,8 +78,6 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_keluhan = new javax.swing.JTextArea();
         jLabel_Keluhan = new javax.swing.JLabel();
-        jLabel_Shift = new javax.swing.JLabel();
-        jLabel_shifttext = new javax.swing.JLabel();
         jLabel_kodepasientext = new javax.swing.JLabel();
         jLabel_umurtext = new javax.swing.JLabel();
         jLabel_namatext = new javax.swing.JLabel();
@@ -89,7 +88,6 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         jButton_kembali1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         javax.swing.GroupLayout jPanel_foto5Layout = new javax.swing.GroupLayout(jPanel_foto5);
         jPanel_foto5.setLayout(jPanel_foto5Layout);
@@ -153,10 +151,6 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
 
         jLabel_Keluhan.setText("Keluhan");
 
-        jLabel_Shift.setText("Shift :");
-
-        jLabel_shifttext.setText("jLabel4");
-
         jLabel_kodepasientext.setText("jLabel3");
 
         jLabel_umurtext.setText("jLabel2");
@@ -217,11 +211,9 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel_KodePasien)
                                     .addComponent(jLabel_Umur)
-                                    .addComponent(jLabel_nama)
-                                    .addComponent(jLabel_Shift))
+                                    .addComponent(jLabel_nama))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_shifttext)
                                     .addComponent(jLabel_namatext)
                                     .addComponent(jLabel_umurtext)
                                     .addComponent(jLabel_kodepasientext))))))
@@ -264,11 +256,7 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
                             .addComponent(jLabel_KodePasien)
                             .addComponent(jLabel_kodepasientext)
                             .addComponent(jLabel_NamaAdmin))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_Shift)
-                            .addComponent(jLabel_shifttext))
-                        .addGap(33, 33, 33)
+                        .addGap(56, 56, 56)
                         .addComponent(jLabel_Keluhan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,24 +322,13 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
     public void setjLabel_NamaAdmin(String jLabel_NamaAdmin) {
         this.jLabel_NamaAdmin.setText(jLabel_NamaAdmin);
     }
-    
-      public JLabel getjLabel_namatext() {
+
+    public JLabel getjLabel_namatext() {
         return jLabel_namatext;
     }
 
     public void setjLabel_namatext(String jLabel_namatext) {
         this.jLabel_namatext.setText(jLabel_namatext);
-    }
-
-    public JLabel getjLabel_shifttext() {
-        return jLabel_shifttext;
-    }
-
-    public void setjLabel_shifttext(Pasien pasien) {
-//        String s = "";
-//        for(Jadwal j : pasien.getJadwal()){
-//            s += j.getShift() + ", ";
-//        }
     }
 
     public JLabel getjLabel_umurtext() {
@@ -367,7 +344,7 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
     }
 
     public void setjTextArea_ResepObat(String obat) {
-        this.jLabel_ResepObat.setText(obat);
+        this.jTextArea_ResepObat.setText(obat);
     }
 
     public JTextArea getjTextArea_diagnosadokter() {
@@ -393,9 +370,7 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
     public void setjLabel_kodepasientext(String jLabel_kodepasientext) {
         this.jLabel_kodepasientext.setText(jLabel_kodepasientext);
     }
-    
-    
-    
+
     public void addListener(ActionListener e) {
         jButton_DeleteDataPasien.addActionListener(e);
         jButton_EditDataPasien.addActionListener(e);
@@ -406,7 +381,7 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
         jButton_ViewDataPasien.addActionListener(e);
         jButton_kembali1.addActionListener(e);
         jButton_Hapus.addActionListener(e);
-    }  
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_DeleteDataPasien;
@@ -426,12 +401,10 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
     private javax.swing.JLabel jLabel_NamaAdmin;
     private javax.swing.JLabel jLabel_NamaAdmin1;
     private javax.swing.JLabel jLabel_ResepObat;
-    private javax.swing.JLabel jLabel_Shift;
     private javax.swing.JLabel jLabel_Umur;
     private javax.swing.JLabel jLabel_kodepasientext;
     private javax.swing.JLabel jLabel_nama;
     private javax.swing.JLabel jLabel_namatext;
-    private javax.swing.JLabel jLabel_shifttext;
     private javax.swing.JLabel jLabel_umurtext;
     private javax.swing.JPanel jPanel_foto5;
     private javax.swing.JScrollPane jScrollPane1;
@@ -445,7 +418,7 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        
+
         if (source.equals(this.getjButton_DeleteDataPasien())) {
             //DELETE
             model.getDb().deletePasien(pasien);
@@ -473,7 +446,16 @@ public class deleteDataPasien extends javax.swing.JFrame implements ActionListen
             new deleteDataPasien1(model, admin);
             this.dispose();
         } else if (source.equals(this.getjButton_Hapus())) {
-            //save dulu
+            ArrayList<Jadwal> jad = model.getDb().getAllJadwal();
+            for (int i = 0; i < jad.size(); i++) {
+                if (jad.get(i).getKodePasien() != null) {
+                    if (jad.get(i).getKodePasien().equals(pasien.getKodePasien())) {
+                        model.getDb().deletePasienFromJadwal(jad.get(i));
+                    }
+                }
+            }
+            model.getDb().deletePasien(pasien);
+            JOptionPane.showMessageDialog(this, "Data berhasil di hapus");
             new deleteDataPasien1(model, admin);
             this.dispose();
         }
