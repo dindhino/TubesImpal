@@ -62,7 +62,6 @@ public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListen
         jButton_MelihatJadwalPeriksa = new javax.swing.JButton();
         jLabel_MengelolaDataPasien1 = new javax.swing.JLabel();
         jButton_MelihatShiftDokter = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel_Admin = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -173,13 +172,10 @@ public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListen
                         .addComponent(jLabel_Welkom)
                         .addGap(162, 162, 162))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(136, 136, 136)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(164, 164, 164))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGap(198, 198, 198)
                 .addComponent(jLabel_Welkom)
@@ -308,7 +304,6 @@ public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListen
     private javax.swing.JLabel jLabel_NamaAdmin;
     private javax.swing.JLabel jLabel_Welkom;
     private javax.swing.JPanel jPanel_foto;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
