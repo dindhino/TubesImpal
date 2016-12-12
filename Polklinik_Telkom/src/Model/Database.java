@@ -59,18 +59,13 @@ public class Database {
         st.execute(query);
     }
 
-    public void newObat(Obat ob) {
-        try {
-
+    public void newObat(Obat ob) throws SQLException, StringIndexOutOfBoundsException, NumberFormatException, NullPointerException {
             String query = "INSERT INTO `obat`(`idObat`, `namaObat`, `jenis`, `harga`) VALUES ("
                     + "'" + ob.getIdObat() + "',"
                     + "'" + ob.getNamaObat() + "',"
                     + "'" + ob.getJenis() + "',"
                     + "'" + ob.getHarga() + "')";
             st.execute(query);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
     }
 
     public void inputKeluhan(Pasien p) {
@@ -95,7 +90,7 @@ public class Database {
 
     public void inputObat(Pasien p) {
         try {
-            String query = "update pasien set obat ='"
+            String query = "update pasien set idobat ='"
                     + p.getKodeObat() + "' where kodePasien = '"
                     + p.getKodePasien() + "'";
             st.executeUpdate(query);
@@ -157,7 +152,7 @@ public class Database {
         try {
             String query = "update pasien set `keluhan` ='"
                     + p.getKeluhan() + "', `diagnosa` ='"
-                    + p.getDiagnosa() + "', `kodeObat` ='"
+                    + p.getDiagnosa() + "', `idObat` ='"
                     + p.getKodeObat() + "' where `kodePasien` = '"
                     + p.getKodePasien() + "'";
             st.executeUpdate(query);

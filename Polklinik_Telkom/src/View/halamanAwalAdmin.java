@@ -268,6 +268,15 @@ public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListen
     public JButton getjButton_ViewDataPasien() {
         return jButton_ViewDataPasien;
     }
+
+    public JButton getjButton1_addobat() {
+        return jButton1_addobat;
+    }
+
+    public JButton getjButton3_viewobat() {
+        return jButton3_viewobat;
+    }
+    
     
     public void addListener(ActionListener e) {
         jButton_DeleteDataPasien.addActionListener(e);
@@ -277,6 +286,8 @@ public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListen
         jButton_MelihatShiftDokter.addActionListener(e);
         jButton_MengelolaShiftDokter.addActionListener(e);
         jButton_ViewDataPasien.addActionListener(e);
+        jButton1_addobat.addActionListener(e);
+        jButton3_viewobat.addActionListener(e);
     }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -325,6 +336,12 @@ public class halamanAwalAdmin extends javax.swing.JFrame implements ActionListen
             this.dispose();
         } else if (source.equals(this.getjButton_ViewDataPasien())) {
             new viewDataPasien(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton1_addobat())) {
+            new halamanMembuatObat(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton3_viewobat())) {
+            new halamanViewObat(model, admin);
             this.dispose();
         }
     }

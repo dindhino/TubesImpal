@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2016 at 06:33 PM
+-- Generation Time: Dec 12, 2016 at 01:01 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.37
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `polikliniktelkom`
+-- Database: `polikliniktelkom_rev`
 --
 
 -- --------------------------------------------------------
@@ -27,18 +27,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
+  `kodeAdmin` varchar(25) NOT NULL,
   `namaAdmin` varchar(100) NOT NULL,
-  `kodeAdmin` varchar(15) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `Pasien` text NOT NULL
+  `password` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`namaAdmin`, `kodeAdmin`, `password`, `Pasien`) VALUES
-('Dindin Dhino Alamsyah', 'Admin1', 'teuing', 'Model.Pasien@5d3fd37d');
+INSERT INTO `admin` (`kodeAdmin`, `namaAdmin`, `password`) VALUES
+('ADMIN-1', 'Dindin Dhino Alamsyah', 'admin');
 
 -- --------------------------------------------------------
 
@@ -47,19 +46,19 @@ INSERT INTO `admin` (`namaAdmin`, `kodeAdmin`, `password`, `Pasien`) VALUES
 --
 
 CREATE TABLE `dokter` (
+  `kodeDokter` varchar(25) NOT NULL,
   `namaDokter` varchar(100) NOT NULL,
-  `kodeDokter` varchar(15) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `alamat` text NOT NULL,
-  `Pasien` text
+  `password` varchar(64) NOT NULL,
+  `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dokter`
 --
 
-INSERT INTO `dokter` (`namaDokter`, `kodeDokter`, `password`, `alamat`, `Pasien`) VALUES
-('AN', 'DOKTER1', 'bakekok', 'jayapura', NULL);
+INSERT INTO `dokter` (`kodeDokter`, `namaDokter`, `password`, `alamat`) VALUES
+('DOKTER1', 'Anggie Nastiti', 'anggie', 'Jayapura'),
+('DOKTER2', 'Dhino A', 'dhino', 'Bandung');
 
 -- --------------------------------------------------------
 
@@ -68,23 +67,24 @@ INSERT INTO `dokter` (`namaDokter`, `kodeDokter`, `password`, `alamat`, `Pasien`
 --
 
 CREATE TABLE `jadwal` (
-  `kodeJadwal` varchar(15) NOT NULL,
+  `kodeJadwal` varchar(25) NOT NULL,
   `shift` varchar(15) NOT NULL,
-  `hari` varchar(7) NOT NULL,
   `tanggal` date NOT NULL,
-  `Dokter` text
+  `kodeDokter` varchar(25) NOT NULL,
+  `kodePasien` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jadwal`
 --
 
-INSERT INTO `jadwal` (`kodeJadwal`, `shift`, `hari`, `tanggal`, `Dokter`) VALUES
-('JADWAL1', '09.00-12.00', 'Selasa', '2016-11-22', NULL),
-('JADWAL2', '09.00-12.00', 'Selasa', '2016-11-29', NULL),
-('JADWAL3', '13.00-15.00', 'Selasa', '2016-12-29', NULL),
-('JADWAL4', '13.00-15.00', 'Selasa', '2016-12-29', '[Model.Dokter@640c657f]'),
-('JADWAL5', '09.00-12.00', 'KAMIS', '2016-12-01', '[Model.Dokter@1ff08e62]');
+INSERT INTO `jadwal` (`kodeJadwal`, `shift`, `tanggal`, `kodeDokter`, `kodePasien`) VALUES
+('JADWAL1', '09.00-12.00', '2016-12-14', 'DOKTER1', 'P1301144270'),
+('JADWAL2', '13.00-15.00', '2016-12-14', 'DOKTER1', 'P1301144270'),
+('JADWAL3', '16.00-18.00', '2016-12-14', 'DOKTER1', NULL),
+('JADWAL4', '09.00-12.00', '2016-12-15', 'DOKTER2', NULL),
+('JADWAL5', '13.00-15.00', '2016-12-15', 'DOKTER2', NULL),
+('JADWAL6', '16.00-18.00', '2016-12-15', 'DOKTER2', NULL);
 
 -- --------------------------------------------------------
 
@@ -93,10 +93,10 @@ INSERT INTO `jadwal` (`kodeJadwal`, `shift`, `hari`, `tanggal`, `Dokter`) VALUES
 --
 
 CREATE TABLE `obat` (
-  `idObat` varchar(15) NOT NULL,
+  `idObat` varchar(25) NOT NULL,
   `namaObat` varchar(100) NOT NULL,
-  `jenis` varchar(20) NOT NULL,
-  `harga` int(11) NOT NULL
+  `jenis` varchar(64) NOT NULL,
+  `harga` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -104,7 +104,8 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`idObat`, `namaObat`, `jenis`, `harga`) VALUES
-('OBAT1', 'Obeha', 'puyer', 5000);
+('OBAT1', 'Ohbeha', 'puyer', 1000),
+('OBAT2', 'Wohoodz', 'cair', 5000);
 
 -- --------------------------------------------------------
 
@@ -113,25 +114,22 @@ INSERT INTO `obat` (`idObat`, `namaObat`, `jenis`, `harga`) VALUES
 --
 
 CREATE TABLE `pasien` (
+  `kodePasien` varchar(25) NOT NULL,
   `namaPasien` varchar(100) NOT NULL,
-  `kodePasien` varchar(15) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(64) NOT NULL,
   `umur` int(11) NOT NULL,
   `keluhan` text,
   `diagnosa` text,
-  `Obat` text,
-  `Jadwal` text
+  `idObat` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`namaPasien`, `kodePasien`, `password`, `umur`, `keluhan`, `diagnosa`, `Obat`, `Jadwal`) VALUES
-('bakeok', 'P123', '321', 321, 'sakit eu', NULL, NULL, NULL),
-('indah', 'P1301140310', 'asda', 23, NULL, NULL, NULL, NULL),
-('Anggie Nastiti', 'P1301142100', 'anggie', 20, 'sakit perut pengen berak cuyy', NULL, NULL, NULL),
-('ganis', 'P1301144270', 'a', 72, NULL, NULL, NULL, NULL);
+INSERT INTO `pasien` (`kodePasien`, `namaPasien`, `password`, `umur`, `keluhan`, `diagnosa`, `idObat`) VALUES
+('P1301140310', 'Nur Indah Puspa Idham', 'indah', 22, NULL, NULL, NULL),
+('P1301144270', 'Faza Ghassani', 'ganis', 20, 'sakit perut, mual-mual, panas, pusing, letih, lesu', 'HAMIL KU JURIG :(', 'OBAT2');
 
 --
 -- Indexes for dumped tables
@@ -156,7 +154,9 @@ ALTER TABLE `dokter`
 --
 ALTER TABLE `jadwal`
   ADD PRIMARY KEY (`kodeJadwal`),
-  ADD UNIQUE KEY `kodeJadwal` (`kodeJadwal`);
+  ADD UNIQUE KEY `kodeJadwal` (`kodeJadwal`),
+  ADD KEY `kodeDokter` (`kodeDokter`),
+  ADD KEY `kodePasien` (`kodePasien`);
 
 --
 -- Indexes for table `obat`
@@ -170,7 +170,25 @@ ALTER TABLE `obat`
 --
 ALTER TABLE `pasien`
   ADD PRIMARY KEY (`kodePasien`),
-  ADD UNIQUE KEY `kodePasien` (`kodePasien`);
+  ADD UNIQUE KEY `kodePasien` (`kodePasien`),
+  ADD KEY `idObat` (`idObat`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `jadwal`
+--
+ALTER TABLE `jadwal`
+  ADD CONSTRAINT `jadwal_ibfk_1` FOREIGN KEY (`kodeDokter`) REFERENCES `dokter` (`kodeDokter`),
+  ADD CONSTRAINT `jadwal_ibfk_2` FOREIGN KEY (`kodePasien`) REFERENCES `pasien` (`kodePasien`);
+
+--
+-- Constraints for table `pasien`
+--
+ALTER TABLE `pasien`
+  ADD CONSTRAINT `pasien_ibfk_1` FOREIGN KEY (`idObat`) REFERENCES `obat` (`idObat`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

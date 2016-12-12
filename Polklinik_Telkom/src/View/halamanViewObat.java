@@ -7,12 +7,13 @@ package View;
 
 import Model.Admin;
 import Model.Aplikasi;
-import Model.Dokter;
 import Model.Jadwal;
+import Model.Obat;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,42 +21,43 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Dhino
  */
-public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements ActionListener {
+public class halamanViewObat extends javax.swing.JFrame implements ActionListener {
 
     Aplikasi model;
     Admin admin;
 
     /**
-     * Creates new form halamanLiatShiftJadwalAdmin
+     * Creates new form halamanViewObat
      */
-    public halamanLiatShiftJadwalAdmin(Aplikasi model, Admin admin) {
+    public halamanViewObat(Aplikasi model, Admin admin) {
         initComponents();
         this.model = model;
         this.setLocationRelativeTo(null);
-        this.setTitle("Halaman View Shift Jadwal");
+        this.setTitle("Halaman View Obat");
         this.setjLabel_NamaDokter(admin.getNamaAdmin());
         this.setVisible(true);
         this.addListener(this);
         this.admin = admin;
 
+        ArrayList<Obat> ob = new ArrayList<Obat>();
+        ob = model.getDb().getAllObat();
+
         DefaultTableModel dm = (DefaultTableModel) this.getjTable1().getModel();
-        Object rowData[] = new Object[3];
-        ArrayList<Jadwal> jad = model.getDb().getAllJadwal();
-        if (jad == null) {
+        Object rowData[] = new Object[4];
+        if (ob.size() == 0) {
             rowData[0] = " - ";
             rowData[1] = " - ";
             rowData[2] = " - ";
+            rowData[3] = " - ";
             dm.addRow(rowData);
         } else {
-            for (int i = 0; i < jad.size(); i++) {
-                rowData[0] = jad.get(i).getKodeDokter();
-                rowData[1] = jad.get(i).getShift();
-                if (jad.get(i).getKodePasien() != null) {
-                    rowData[2] = jad.get(i).getKodePasien();
-                } else {
-                    rowData[2] = "-";
-                }
+            for (int i = 0; i < ob.size(); i++) {
+                rowData[0] = ob.get(i).getIdObat();
+                rowData[1] = ob.get(i).getNamaObat();
+                rowData[2] = ob.get(i).getJenis();
+                rowData[3] = ob.get(i).getHarga();
                 dm.addRow(rowData);
+
             }
         }
     }
@@ -69,27 +71,36 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton_MelihatShiftDokter = new javax.swing.JButton();
+        jLabel_NamaDokter = new javax.swing.JLabel();
+        jLabel_NamaDokter1 = new javax.swing.JLabel();
         jPanel_foto = new javax.swing.JPanel();
         jButton_LogOut = new javax.swing.JButton();
-        jLabel_NamaDokter1 = new javax.swing.JLabel();
-        jLabel_NamaDokter = new javax.swing.JLabel();
-        jLabel_DataDokter = new javax.swing.JLabel();
+        jLabel_MengelolaDataPasien = new javax.swing.JLabel();
+        jButton_DeleteDataPasien = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel_MengelolaDataPasien = new javax.swing.JLabel();
-        jButton_ViewDataPasien = new javax.swing.JButton();
         jButton_EditDataPasien = new javax.swing.JButton();
-        jButton_DeleteDataPasien = new javax.swing.JButton();
-        jLabel_MengelolaDataPasien1 = new javax.swing.JLabel();
-        jButton_MengelolaShiftDokter = new javax.swing.JButton();
-        jButton_MelihatShiftDokter = new javax.swing.JButton();
+        jLabel_DataPAsien = new javax.swing.JLabel();
+        jButton_ViewDataPasien = new javax.swing.JButton();
         jButton_MelihatJadwalPeriksa = new javax.swing.JButton();
+        jButton_MengelolaShiftDokter = new javax.swing.JButton();
+        jLabel_MengelolaDataPasien1 = new javax.swing.JLabel();
         jButton1_addobat = new javax.swing.JButton();
         jButton3_viewobat = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
+        setPreferredSize(new java.awt.Dimension(1366, 769));
+
+        jButton_MelihatShiftDokter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton_MelihatShiftDokter.setText("Melihat Shift Dokter");
+
+        jLabel_NamaDokter.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_NamaDokter.setText("Nama Admin");
+
+        jLabel_NamaDokter1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_NamaDokter1.setText("ADMIN");
 
         javax.swing.GroupLayout jPanel_fotoLayout = new javax.swing.GroupLayout(jPanel_foto);
         jPanel_foto.setLayout(jPanel_fotoLayout);
@@ -105,48 +116,39 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
         jButton_LogOut.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton_LogOut.setText("LogOut");
 
-        jLabel_NamaDokter1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_NamaDokter1.setText("ADMIN");
+        jLabel_MengelolaDataPasien.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_MengelolaDataPasien.setText("Mengelola Data Pasien");
 
-        jLabel_NamaDokter.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_NamaDokter.setText("Nama Admin");
-
-        jLabel_DataDokter.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel_DataDokter.setText("DATA DOKTER");
+        jButton_DeleteDataPasien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton_DeleteDataPasien.setText("Delete Data Pasien");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nama Dokter", "Shift", "Pasien"
+                "Kode Obat", "Nama Obat", "Jenis", "Harga"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel_MengelolaDataPasien.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_MengelolaDataPasien.setText("Mengelola Data Pasien");
+        jButton_EditDataPasien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton_EditDataPasien.setText("Edit Data Pasien");
+
+        jLabel_DataPAsien.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel_DataPAsien.setText("OBAT");
 
         jButton_ViewDataPasien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton_ViewDataPasien.setText("View Data Pasien");
 
-        jButton_EditDataPasien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_EditDataPasien.setText("Edit Data Pasien");
-
-        jButton_DeleteDataPasien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_DeleteDataPasien.setText("Delete Data Pasien");
-
-        jLabel_MengelolaDataPasien1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel_MengelolaDataPasien1.setText("Mengelola Jadwal");
+        jButton_MelihatJadwalPeriksa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton_MelihatJadwalPeriksa.setText("Melihat Jadwal Periksa");
 
         jButton_MengelolaShiftDokter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton_MengelolaShiftDokter.setText("Mengelola Shift Dokter");
 
-        jButton_MelihatShiftDokter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_MelihatShiftDokter.setText("Melihat Shift Dokter");
-
-        jButton_MelihatJadwalPeriksa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_MelihatJadwalPeriksa.setText("Melihat Jadwal Periksa");
+        jLabel_MengelolaDataPasien1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_MengelolaDataPasien1.setText("Mengelola Jadwal");
 
         jButton1_addobat.setText("Membuat Obat");
 
@@ -163,17 +165,10 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jPanel_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_NamaDokter)
-                                    .addComponent(jLabel_NamaDokter1)))
                             .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_ViewDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_DeleteDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,61 +177,67 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
                             .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel_MengelolaDataPasien1)
-                            .addComponent(jButton1_addobat)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3_viewobat, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                            .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_NamaDokter)
+                                    .addComponent(jLabel_NamaDokter1)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_DataDokter)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1013, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                            .addComponent(jLabel_DataPAsien)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 954, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3_viewobat)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1_addobat)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel_DataPAsien)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 78, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addComponent(jPanel_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel_MengelolaDataPasien)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_ViewDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton_DeleteDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel_MengelolaDataPasien1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(jLabel_DataDokter)
-                                .addGap(9, 9, 9))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel_NamaDokter1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel_NamaDokter)
-                                .addGap(122, 122, 122)
-                                .addComponent(jLabel_MengelolaDataPasien)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton_ViewDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton_EditDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_DeleteDataPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel_MengelolaDataPasien1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton_MengelolaShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton_MelihatShiftDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_MelihatJadwalPeriksa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1_addobat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3_viewobat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel_NamaDokter1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_NamaDokter)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3_viewobat)
+                    .addComponent(jButton1_addobat))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -270,12 +271,12 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
         return jButton_ViewDataPasien;
     }
 
-    public void setjLabel_NamaDokter(String jLabel_NamaDokter) {
-        this.jLabel_NamaDokter.setText(jLabel_NamaDokter);
-    }
-
     public JTable getjTable1() {
         return jTable1;
+    }
+
+    public void setjLabel_NamaDokter(String jLabel_NamaDokter) {
+        this.jLabel_NamaDokter.setText(jLabel_NamaDokter);
     }
 
     public JButton getjButton1_addobat() {
@@ -300,7 +301,7 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
     private javax.swing.JButton jButton_MengelolaShiftDokter;
     private javax.swing.JButton jButton_ViewDataPasien;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel_DataDokter;
+    private javax.swing.JLabel jLabel_DataPAsien;
     private javax.swing.JLabel jLabel_MengelolaDataPasien;
     private javax.swing.JLabel jLabel_MengelolaDataPasien1;
     private javax.swing.JLabel jLabel_NamaDokter;
@@ -355,5 +356,4 @@ public class halamanLiatShiftJadwalAdmin extends javax.swing.JFrame implements A
             this.dispose();
         }
     }
-
 }

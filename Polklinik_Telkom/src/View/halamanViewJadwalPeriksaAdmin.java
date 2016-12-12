@@ -96,6 +96,9 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
         jLabel_DataPAsien = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1_addobat = new javax.swing.JButton();
+        jButton3_viewobat = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,6 +159,16 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1_addobat.setText("Membuat Obat");
+
+        jButton3_viewobat.setText("Melihat Obat");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Mengelola Obat");
+        jLabel2.setMaximumSize(new java.awt.Dimension(138, 22));
+        jLabel2.setMinimumSize(new java.awt.Dimension(138, 22));
+        jLabel2.setPreferredSize(new java.awt.Dimension(138, 22));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +190,10 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel_NamaDokter)
-                            .addComponent(jLabel_NamaDokter1))))
+                            .addComponent(jLabel_NamaDokter1)))
+                    .addComponent(jButton1_addobat)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3_viewobat, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel_DataPAsien)
@@ -191,7 +207,7 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
                 .addComponent(jLabel_DataPAsien)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -220,7 +236,13 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
                         .addComponent(jLabel_NamaDokter1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel_NamaDokter)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1_addobat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3_viewobat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -262,8 +284,20 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
         return jTable1;
     }
 
+    public JButton getjButton1_addobat() {
+        return jButton1_addobat;
+    }
+
+    public JButton getjButton3_viewobat() {
+        return jButton3_viewobat;
+    }
+    
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1_addobat;
+    private javax.swing.JButton jButton3_viewobat;
     private javax.swing.JButton jButton_DeleteDataPasien;
     private javax.swing.JButton jButton_EditDataPasien;
     private javax.swing.JButton jButton_LogOut;
@@ -271,6 +305,7 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
     private javax.swing.JButton jButton_MelihatShiftDokter;
     private javax.swing.JButton jButton_MengelolaShiftDokter;
     private javax.swing.JButton jButton_ViewDataPasien;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_DataPAsien;
     private javax.swing.JLabel jLabel_MengelolaDataPasien;
     private javax.swing.JLabel jLabel_MengelolaDataPasien1;
@@ -289,6 +324,8 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
         jButton_MelihatShiftDokter.addActionListener(e);
         jButton_MengelolaShiftDokter.addActionListener(e);
         jButton_ViewDataPasien.addActionListener(e);
+        jButton1_addobat.addActionListener(e);
+        jButton3_viewobat.addActionListener(e);
     }
 
     @Override
@@ -315,6 +352,12 @@ public class halamanViewJadwalPeriksaAdmin extends javax.swing.JFrame implements
             this.dispose();
         } else if (source.equals(this.getjButton_ViewDataPasien())) {
             new viewDataPasien(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton1_addobat())) {
+            new halamanMembuatObat(model, admin);
+            this.dispose();
+        } else if (source.equals(this.getjButton3_viewobat())) {
+            new halamanViewObat(model, admin);
             this.dispose();
         }
     }

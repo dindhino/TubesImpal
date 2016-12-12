@@ -35,7 +35,7 @@ public class formInputObat2 extends javax.swing.JFrame implements ActionListener
         initComponents();
         this.model = model;
         this.dokter = dokter;
-        this.pasien = null;
+        this.pasien = pasien;
         this.setLocationRelativeTo(null);
         this.setTitle("Halaman Input Obat");
         this.setjLabel_NamaDokter(dokter.getNamaDokter());
